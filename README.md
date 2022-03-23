@@ -46,3 +46,37 @@ There's something interesting about this children prop that I want to show you h
 This also gives us the flexibility of creating additional React elements to be children. Here I could say React.createElement("span"). We could say we want no props for this span, and we want the children to be Hello and World. We have the type of span, the props are null, the children are an array of "Hello" and "World". If we expand this, we'll see props, children, and children is just another React element that itself has props. And that children is an array of two strings.
 
 In review, to create React elements and render them to the page, you need to include React and ReactDOM, React for creating the elements and ReactDOM for rendering those elements to the page. Then we still need to get access to some element that's on the page so we can render our elements to that DOM node. Then we create our React elements and we use ReactDOM.render to render our element to the root DOM node.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script type="text/javascript">
+    const rootElement = document.getElementById('root')
+    const element = React.createElement('div', {
+      children: React.createElement('span', null, 'Hello', ' World'),
+      className: 'container'
+      //children: ['Hello World', ', Welcome world']
+    }, /*'Hello World', ', Welcome world'*/)
+
+    console.log(element)
+    //Output
+    // $$typeof: Symbol(react.element)
+    // key: null
+    // props:
+    // children: (2) ['Hello World', ', Welcome world']
+    // className: "container"
+    // [[Prototype]]: Object
+    // ref: null
+    // type: "div"
+
+    ReactDOM.render(element, rootElement)
+
+    // const element = document.createElement('div')
+    // element.textContent = 'Hello World'
+    // element.className = 'container'
+    // rootElement.appendChild(element)
+  </script>
+</body>
+```

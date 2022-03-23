@@ -14,7 +14,7 @@ You can create a simple user interface on the web using HTML and CSS. But as soo
 
 In review, to create a user interface in JavaScript, you're going to need to have a place where you append your JavaScript-generated DOM elements. We're going to get access to that element from the document APIs. Then we'll create our own element. We'll add some properties onto that element. Then we'll append that element to our rootElement.
 
-```javascript
+```html
 <body>
   <div id="root"></div>
   <script type="text/javascript">

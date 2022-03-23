@@ -7,17 +7,18 @@
     const element = React.createElement('div', {
       //children: 'Hello World',
       className: 'container'
-    }, 'Hello World')
+    }, 'Hello World', ', Welcome world')
 
     console.log(element)
     //Output
     // $$typeof: Symbol(react.element)
     // key: null
-    // props: {children: 'Hello World', className: 'container'}
+    // props:
+    // children: (2) ['Hello World', ', Welcome world']
+    // className: "container"
+    // [[Prototype]]: Object
     // ref: null
     // type: "div"
-    // _owner: null
-    // _store:
 
     ReactDOM.render(element, rootElement)
 

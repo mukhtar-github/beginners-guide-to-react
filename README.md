@@ -24,4 +24,4 @@ If you’ve ever learned or used React before, you’re probably more familiar w
 
 To use React to create this user interface, we're going to need to have React on the page. We can get React from npm, but there's a service called unpackage that we're going to use. If I go to unpackage.com that will show me how to use unpackage to get any file that is distributed on npm. It has these files for React. If I go to that file, then I'll see a minified version of React.
 
-With React and ReactDOM both on the page, I can now create React elements and then use ReactDOM to render those elements to the page.
+With React and ReactDOM both on the page, I can now create React elements and then use ReactDOM to render those elements to the page. The API is not exactly the same as the one that we get with document. We do get to specify the type of element as the first argument, but instead of getting the element and attaching properties to it, we specify those properties on creation as an object.

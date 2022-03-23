@@ -5,9 +5,10 @@
   <script type="text/javascript">
     const rootElement = document.getElementById('root')
     const element = React.createElement('div', {
-      className: 'container',
+      children: React.createElement('span', null, 'Hello', 'World'),
+      className: 'container'
       //children: ['Hello World', ', Welcome world']
-    }, 'Hello World', ', Welcome world')
+    }, /*'Hello World', ', Welcome world'*/)
 
     console.log(element)
     //Output

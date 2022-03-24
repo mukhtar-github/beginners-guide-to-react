@@ -210,3 +210,5 @@ const element = /*#__PURE__*/React.createElement(
     /*#__PURE__*/React.createElement("strong", null, "World")
 );
 ```
+
+There's another useful JSX trick that I want to show you. Let's come back to our children: 'Hello World'. We'll just call this className. We'll change this to className. Then we'll interpolate children here. One important thing to remember is that children is just a special prop that we could provide right here. Children is children. With that it works exactly the same way as it did before, except now instead of being compiled to add additional arguments, it's just using the shortcut here as one of the props.

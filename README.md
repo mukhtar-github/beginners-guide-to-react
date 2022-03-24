@@ -186,3 +186,5 @@ const element = /*#__PURE__*/React.createElement("div", {
   className: myClassName
 }, myChildren, worldChild);
 ```
+
+This allows us to be expressive with the way that we're building our UI. If we want to add another React element in here, all we need to do is add a <span>Hello</span>. Then we could do a <strong>World</strong>. Then save that, and here we go. We get Hello World. Babel is managing, compiling that down to JavaScript that the browser can execute using React APIs.

@@ -161,3 +161,28 @@ const element = /*#__PURE__*/React.createElement("div", {
 ```
 
 You can see the compiled version of the code here in our script tag where you see we have our children as a variable, our className as a variable. Our element is an assignment to React.createElement with our div. Then our object where we have className being assigned to the variable className.
+
+We can rename this to whatever we want. We could say myClassName and then copy this and paste it in there. If we save this, we'll get a refresh. There it is, myClassName is being assigned to the className property of our object here. Then children is the same thing. We could say myChildren. Save that. We'll get a refresh and there it is, myChildren being passed as my children. When you use the curly braces, that's basically telling Babel, "Leave this alone and pass it directly as the property that you pass for the props here and for the children arguments here."
+
+```jsx
+const myChildren = 'Hello'
+const worldChild = ' World'
+const myClassName = "container"
+const element = (
+    <div className={myClassName}>
+        {myChildren}
+        {worldChild}
+    </div>
+)
+```
+
+Babel compilled
+
+```javascript
+const myChildren = 'Hello';
+const worldChild = ' World';
+const myClassName = "container";
+const element = /*#__PURE__*/React.createElement("div", {
+  className: myClassName
+}, myChildren, worldChild);
+```

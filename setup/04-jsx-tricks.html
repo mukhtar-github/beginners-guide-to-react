@@ -11,14 +11,19 @@
     // const className = "container"
     // const element = <div className={className}>{children}</div>
 
-    const myChildren = 'Hello'
-    const worldChild = ' World'
+    // const myChildren = 'Hello'
+    // const worldChild = ' World'
+    
     const myClassName = "container"
     const element = (
-      <div className={myClassName}>
-        {myChildren}
-        {worldChild}
+<div className={myClassName}>
+        <span>Hello</span> <strong>World</strong>
       </div>
+
+      // <div className={myClassName}>
+      //   {myChildren}
+      //   {worldChild}
+      // </div>
     )
 
     ReactDOM.render(element, rootElement)

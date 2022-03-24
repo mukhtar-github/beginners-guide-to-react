@@ -141,3 +141,23 @@ If we wanted to create a variable for 'Hello World' and we wanted to interpolate
 const children = 'Hello World'
 const element = <div className="container">{children}</div>
 ```
+
+We can do the same thing for our className. If I copy the container and make a className variable, and instead of the quotes here, we'll put curly braces to suggest to the Babel compiler that we want this value to be evaluated as an expression, then we'll pass the className variable. If we save this, then we'll get the exact same result as we had before.
+
+```jsx
+const children = 'Hello World'
+const className = "container"
+const element = <div className={className}>{children}</div>
+```
+
+Babel compilled
+
+```javascript
+const children = 'Hello World';
+const className = "container";
+const element = /*#__PURE__*/React.createElement("div", {
+  className: className
+}, children);
+```
+
+You can see the compiled version of the code here in our script tag where you see we have our children as a variable, our className as a variable. Our element is an assignment to React.createElement with our div. Then our object where we have className being assigned to the variable className.

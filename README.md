@@ -85,4 +85,10 @@ In review, to create React elements and render them to the page, you need to inc
 
 ### setup/03-jsx.html
 
-It’s awesome that we can interact directly with React’s createElement API to create React elements and then hand those off to React DOM to get them to show up on the screen. But it’s not the most ergonomic API to write our UI code in. It’s hard to track when one element starts and the next one ends.
+It’s awesome that we can interact directly with React’s createElement API to create React elements and then hand those off to ReactDOM to get them to show up on the screen. But it’s not the most ergonomic API to write our UI code in. It’s hard to track when one element starts and the next one ends.
+
+If I were to create this same React element using JSX, I would make it like this. We'll say element is a div. Our children are Hello World. Then we had a className, which is a prop. That'll go as an attribute on our div here, with className='container'.
+
+```javascript
+const element = <div className="container">Hello World</div>
+```

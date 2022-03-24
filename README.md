@@ -181,7 +181,7 @@ Babel compilled
 ```javascript
 const myChildren = 'Hello';
 const worldChild = ' World';
-const myClassName = "container";
+const myClassName = 'container';
 const element = /*#__PURE__*/React.createElement("div", {
   className: myClassName
 }, myChildren, worldChild);

@@ -80,3 +80,9 @@ In review, to create React elements and render them to the page, you need to inc
   </script>
 </body>
 ```
+
+## Create a User Interface with React’s JSX syntax
+
+### setup/03-jsx.html
+
+

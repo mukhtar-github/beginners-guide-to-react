@@ -229,3 +229,5 @@ const element = /*#__PURE__*/React.createElement("div", {
   children: children
 });
 ```
+
+In addition, because this is JSX and not HTML, we can have self-closing tags for divs. We can save that, and this is self-closing.

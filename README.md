@@ -243,7 +243,8 @@ Another thing we can do is if I make an object here where we have our props, we'
 ```jsx
 const children = 'Hello World'
 const className = "container"
-const element = <div className={className} children={children}></div>
+const props = { children, className }
+const element = <div {...props} />
 ```
 
 Babel compilled
@@ -251,8 +252,9 @@ Babel compilled
 ```javascript
 const children = 'Hello World';
 const className = "container";
-const element = /*#__PURE__*/React.createElement("div", {
-  className: className,
-  children: children
-});
+const props = {
+  children,
+  className
+};
+const element = /*#__PURE__*/React.createElement("div", props);
 ```

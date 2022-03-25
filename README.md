@@ -362,4 +362,12 @@ How do you put two variables side by side and pass them both as the first argume
 </body>
 ```
 
-Again, nobody wants to use the React.createElement API directly. Let's comment this out and see what this would look like if we wanted to do it with JSX.
+Again, nobody wants to use the React.createElement API directly. Let's comment this out and see what this would look like if we wanted to do it with JSX. Our root element is this React fragment. We'll do an open bracket and say React.Fragment. We'll close that off with React.Fragment. Then we'll want to create a span for hello, so <span>Hello</span>. Then we'll do a space and then <span>World and close that off. If we save this, we're going to get the exact same output, and we're using our React.Fragment element.
+
+```jsx
+const element = <React.Fragment>
+    <span>Hello</span> <span>World</span>
+</React.Fragment>
+
+ReactDOM.render(element, document.getElementById('root'))
+```

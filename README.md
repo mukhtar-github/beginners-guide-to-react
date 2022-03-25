@@ -259,7 +259,7 @@ const props = {
 const element = /*#__PURE__*/React.createElement("div", props);
 ```
 
-Then I can add additional props if I want to. I could say id="app-root", save that. Then in this case we're going to get the extends helper, which is basically object.assign. Then Babel is going to extend the props that we provided with the props that we're spreading. We get a single combined object for the second argument of the React.createElement call. Because of the way that object.assign works, if we wanted to override one of the properties in this props object, then we could do so simply by providing it after we spread those props in the props position for this element.
+Then I can add additional props if I want to. I could say id="app-root", save that. Then in this case we're going to get the extends helper, which is basically object.assign. Then Babel is going to extend the props that we provided with the props that we're spreading. We get a single combined object for the second argument of the React.createElement call. 
 
 ```jsx
 const children = 'Hello World'
@@ -282,4 +282,31 @@ const props = {
 const element = /*#__PURE__*/React.createElement("div", _extends({
   id: "app-root"
 }, props));
+```
+
+Because of the way that object.assign works, if we wanted to override one of the properties in this props object, then we could do so simply by providing it after we spread those props in the props position for this element.  We can say className="notContainer". Save that. Then if we look at the compiled version, we'll see our extends for the props that come before the spread. Then we'll see that object and then we'll see another object for the props that come after the spread.
+
+```jsx
+const children = 'Hello World'
+const className = "container"
+const props = { children, className }
+const element = <div id='app-root' {...props} className='not-container' />
+```
+
+Babel compilled
+
+```javascript
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+const children = 'Hello World';
+const className = "container";
+const props = {
+  children,
+  className
+};
+const element = /*#__PURE__*/React.createElement("div", _extends({
+  id: "app-root"
+}, props, {
+  className: "not-container"
+}));
 ```

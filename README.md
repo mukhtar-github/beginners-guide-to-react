@@ -364,10 +364,22 @@ How do you put two variables side by side and pass them both as the first argume
 
 Again, nobody wants to use the React.createElement API directly. Let's comment this out and see what this would look like if we wanted to do it with JSX. Our root element is this React fragment. We'll do an open bracket and say React.Fragment. We'll close that off with React.Fragment. Then we'll want to create a span for hello, so <span>Hello</span>. Then we'll do a space and then <span>World and close that off. If we save this, we're going to get the exact same output, and we're using our React.Fragment element.
 
+Let's take a look at the compiled JSX here. You notice that we get our element with React.createElement. It's just passing React.Fragment as a first argument to React.createElement, whereas this, the tag name, is being passed as a string. The React fragment allows us to put elements side by side without having to have some sort of container element like a div. This can be useful when you're creating things like tables that have a specific structure to them.
+
+Because this is so common to do, JSX has a special syntax for React fragments. That is to simply remove the React fragment and have an open and closing angle bracket. This is functionally equivalent to what we had before. This syntax is typically what I use whenever I need React fragments.
+
 ```jsx
-const element = <React.Fragment>
-      <span>Hello</span> <span>World</span>
+const element = (
+    <React.Fragment>
+        <span>Hello</span> <span>World</span>
     </React.Fragment>
+)
+//or
+const element = (
+    <>
+        <span>Hello</span> <span>World</span>
+    </>
+)
 ```
 
 Babel compilled

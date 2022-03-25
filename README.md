@@ -284,7 +284,7 @@ const element = /*#__PURE__*/React.createElement("div", _extends({
 }, props));
 ```
 
-Because of the way that object.assign works, if we wanted to override one of the properties in this props object, then we could do so simply by providing it after we spread those props in the props position for this element.  We can say className="notContainer". Save that. Then if we look at the compiled version, we'll see our extends for the props that come before the spread. Then we'll see that object and then we'll see another object for the props that come after the spread.
+Because of the way that object.assign works, if we wanted to override one of the properties in this props object, then we could do so simply by providing it after we spread those props in the props position for this element.  We can say className="not-Container". Save that. Then if we look at the compiled version, we'll see our extends for the props that come before the spread. Then we'll see that object and then we'll see another object for the props that come after the spread.
 
 ```jsx
 const children = 'Hello World'
@@ -309,4 +309,13 @@ const element = /*#__PURE__*/React.createElement("div", _extends({
 }, props, {
   className: "not-container"
 }));
+```
+
+Then if we look at the results under our root, we'll see we have the id of app-root and the class of not-Container. App-root because it's not getting overwritten, so it appears as is. We get the children as they are because the children are not being overwritten, but then we get the className of not-Container because we are overwriting the className that's in the props which comes before a this className. Whatever comes last is the winner in the event of a conflict like we have here.
+
+```javascript
+//The results under our root.
+<div id="root">
+    <div id="app-root" className="not-container">Hello World</div>
+</div>
 ```

@@ -361,3 +361,5 @@ How do you put two variables side by side and pass them both as the first argume
   </script>
 </body>
 ```
+
+Again, nobody wants to use the React.createElement API directly. Let's comment this out and see what this would look like if we wanted to do it with JSX.

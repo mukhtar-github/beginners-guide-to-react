@@ -325,3 +325,5 @@ In review, what we learned here is that we can interpolate values with these cur
 ## Render two elements side-by-side with React Fragments
 
 ### setup/05-fragments.html
+
+In React, you can’t render two React elements side-by-side (<span>Hello</span><span>World</span>). They have to be wrapped in another element (like a <div>). This may seem like an odd limitation, but when you think about the fact that JSX is compiled to React.createElement calls, it makes sense. In this lesson we’ll take a look at that and how to side-step this limitation with React Fragments.

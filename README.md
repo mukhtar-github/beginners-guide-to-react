@@ -321,3 +321,7 @@ Then if we look at the results under our root, we'll see we have the id of app-r
 ```
 
 In review, what we learned here is that we can interpolate values with these curly braces by putting any expression between the curly braces and have that expression passed along to the React.createElement API. We also learned that we can spread props in the props position of a JSX element and those props will be combined with the other props that are provided to that element in a declarative and deterministic way.
+
+## Render two elements side-by-side with React Fragments
+
+### setup/05-fragments.html

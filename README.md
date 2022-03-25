@@ -366,8 +366,16 @@ Again, nobody wants to use the React.createElement API directly. Let's comment t
 
 ```jsx
 const element = <React.Fragment>
-    <span>Hello</span> <span>World</span>
-</React.Fragment>
+      <span>Hello</span> <span>World</span>
+    </React.Fragment>
+```
 
-ReactDOM.render(element, document.getElementById('root'))
+Babel compilled
+
+```javascript
+const element = /*#__PURE__*/React.createElement(React.Fragment, null, 
+    /*#__PURE__*/React.createElement("span", null, "Hello"),
+    " ",
+    /*#__PURE__*/React.createElement("span", null, "World")
+);
 ```

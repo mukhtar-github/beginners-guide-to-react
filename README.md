@@ -231,3 +231,28 @@ const element = /*#__PURE__*/React.createElement("div", {
 ```
 
 In addition, because this is JSX and not HTML, we can have self-closing tags for divs. We can save that, and this is self-closing.
+
+```jsx
+const children = 'Hello World'
+const className = "container"
+const element = <div className={className} children={children} />
+```
+
+Another thing we can do is if I make an object here where we have our props, we're going to make children and className part of those props. Then I can come right here, remove all of those, and I can say, "Hey, Babel, I want you to take all of these props and pass them to the React.createElement call that you create for this div." Interpolate onto this div's prop's position a spread of that prop's object.
+
+```jsx
+const children = 'Hello World'
+const className = "container"
+const element = <div className={className} children={children}></div>
+```
+
+Babel compilled
+
+```javascript
+const children = 'Hello World';
+const className = "container";
+const element = /*#__PURE__*/React.createElement("div", {
+  className: className,
+  children: children
+});
+```

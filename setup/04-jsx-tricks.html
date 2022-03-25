@@ -9,7 +9,10 @@
 
     const children = 'Hello World'
     const className = "container"
-    const element = <div className={className} children={children} />
+    const props = { children, className }
+    const element = <div {...props} />
+
+    //const element = <div className={className} children={children} />
 
     // const myChildren = 'Hello'
     // const worldChild = ' World'

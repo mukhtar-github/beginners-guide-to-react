@@ -8,14 +8,14 @@
 
     //const element = <div className='container' >Hello World</div>
 
-    //HTML
-    // <div>
-    //   <span>Hello</span>
-    //   <span>World</span>
-    // </div>
-
-    const helloElement = React.creatElement('span', null, 'Hello')
-    const worldElement = React.creatElement('span', null, 'World')
+    const helloElement = React.createElement('span', null, 'Hello')
+    const worldElement = React.createElement('span', null, 'World')
+    const element = React.createElement(
+      React.Fragment,
+      null,
+      helloElement,
+      worldElement
+    )
 
     ReactDOM.render(element, document.getElementById('root'))
   </script>

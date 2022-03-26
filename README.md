@@ -671,3 +671,8 @@ ReactDOM.render(element, document.getElementById('root'));
 ```
 
 In review of what we did here was we had some code that was being duplicated, and we wanted to reuse that code in multiple places. So, we created our own custom function component which is a function that accepts a props object and returns more React elements. We had to make sure that our function component started with a capital letter so that Babel would compile this to pass the function itself to React.createElement rather than the string message to React.createElement. That way, when React renders our element, it knows what function to call.
+
+## Validate Custom React Component Props with PropTypes
+
+### setup/07-prop-types.html
+

@@ -526,3 +526,21 @@ Now, we're no longer getting that warning. If we look at our compiled code, we'r
     </div>
 </div>
 ```
+
+Now, let's take a look at what this Message element really is. It's console.log that Message element. We'll look at our console, and we'll see that it is a React element, and its type instead of being a div like we had before, let's take a look at that to compare, console.log div "Hello, World!" Save that and we'll get two console logs, so the first one being our div. The type is a string of div, whereas the type here is our Message function.
+
+```javascript
+//div
+$$typeof: Symbol(react.element)
+key: null
+props: {children: 'Hello World'}
+ref: null
+type: "div"
+
+//Message
+$$typeof: Symbol(react.element)
+key: null
+props: {children: 'Hello World'}
+ref: null
+type: ƒ Message(props)
+```

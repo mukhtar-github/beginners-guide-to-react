@@ -391,3 +391,9 @@ const element = /*#__PURE__*/React.createElement(React.Fragment, null,
     /*#__PURE__*/React.createElement("span", null, "World")
 );
 ```
+
+## Create a Simple Reusable React Component
+
+### setup/06-custom-component.html
+
+

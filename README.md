@@ -639,9 +639,11 @@ But honestly, one of those looks a little bit nicer to me, so I'm going to switc
 
     const element = (
       <div className='container'>
-        <Message>Hello World</Message>
-        <Message>Welcome World</Message>
-        <span>Hey there</span>
+        <Message>
+          Hello World
+          <Message>Welcome World</Message>
+          <span>Hey there</span>
+        </Message>
       </div>
     )
 
@@ -662,8 +664,10 @@ var Message = function Message(props) {
 
 var element = React.createElement("div", {
   className: "container"
-}, React.createElement(Message, null, "Hello World"), React.createElement(Message, null, "Welcome World"));
+}, React.createElement(Message, null, "Hello World", React.createElement(Message, null, "Welcome World"), React.createElement("span", null, "Hey there")));
 
 ReactDOM.render(element, document.getElementById('root'));
 </script>
 ```
+
+In review of what we did here was we had some code that was being duplicated, and we wanted to reuse that code in multiple places. So, we created our own custom function component which is a function that accepts a props object and returns more React elements. We had to make sure that our function component started with a capital letter so that Babel would compile this to pass the function itself to React.createElement rather than the string message to React.createElement. That way, when React renders our element, it knows what function to call.

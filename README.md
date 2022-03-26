@@ -531,6 +531,8 @@ Now, let's take a look at what this Message element really is. It's console.log 
 
 ```javascript
 //div
+console.log(<div>Hello World</div>)
+
 $$typeof: Symbol(react.element)
 key: null
 props: {children: 'Hello World'}
@@ -538,9 +540,13 @@ ref: null
 type: "div"
 
 //Message
+console.log(<Message>Hello World</Message>)
+
 $$typeof: Symbol(react.element)
 key: null
 props: {children: 'Hello World'}
 ref: null
 type: ƒ Message(props)
 ```
+
+Here we get the props of "Children, Hello, World!" and we have "Children, Hello, World!" in this one as well. So, when you give a capital letter in JSX, that's the same as calling React.createElement with the function that you're referencing. That allows you to create a custom component that you can use to reuse code over and over again.

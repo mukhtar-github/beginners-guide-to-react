@@ -5,13 +5,13 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
 
-    const message = (props) => <div className='message'>{props.msg}</div>
+    const Message = (props) => <div className='message'>{props.msg}</div>
 
     const element = (
       <div className='container'>
-        <message>Hello World</message>
-        {message({msg: 'Hello World'})}
-        {message({msg: 'Welcome World'})}
+        <Message>Hello World</Message>
+        {Message({msg: 'Hello World'})}
+        {Message({msg: 'Welcome World'})}
       </div>
     )
 

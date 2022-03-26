@@ -632,3 +632,37 @@ ReactDOM.render(element, document.getElementById('root'));
 
 But honestly, one of those looks a little bit nicer to me, so I'm going to switch both of these to use that syntax. What's cool about this is I'm also able to nest these together and pass anything that React can render, which includes the string here, or additional components here, or additional elements here.
 
+```html
+<script type="text/babel">
+
+    const Message = (props) => <div className='message'>{props.children}</div>
+
+    const element = (
+      <div className='container'>
+        <Message>Hello World</Message>
+        <Message>Welcome World</Message>
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
+Babel compilled
+
+```html
+<script>"use strict";
+
+var Message = function Message(props) {
+  return React.createElement("div", {
+    className: "message"
+  }, props.children);
+};
+
+var element = React.createElement("div", {
+  className: "container"
+}, React.createElement(Message, null, "Hello World"), React.createElement(Message, null, "Welcome World"));
+
+ReactDOM.render(element, document.getElementById('root'));
+</script>
+```

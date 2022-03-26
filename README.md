@@ -592,7 +592,7 @@ ReactDOM.render(element, document.getElementById('root'));
 </script>
 ```
 
-If we wanted to make it nice and declarative so that we could nest to these things as if it's the children prop, then, we just accept children for the name of the prop. Then we can rename this one to "children," and those two are functionally equivalent. If we save this, then we'll still get "Hello World!" and "Goodbye, World!" But honestly, one of those looks a little bit nicer to me, so I'm going to switch both of these to use that syntax.
+If we wanted to make it nice and declarative so that we could nest to these things as if it's the children prop, then, we just accept children for the name of the prop. Then we can rename this one to "children," and those two are functionally equivalent. If we save this, then we'll still get "Hello World!" and "Welcome World!"
 
 ```html
 <script type="text/babel">
@@ -629,3 +629,6 @@ var element = React.createElement("div", {
 ReactDOM.render(element, document.getElementById('root'));
 </script>
 ```
+
+But honestly, one of those looks a little bit nicer to me, so I'm going to switch both of these to use that syntax. What's cool about this is I'm also able to nest these together and pass anything that React can render, which includes the string here, or additional components here, or additional elements here.
+

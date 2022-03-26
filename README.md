@@ -396,6 +396,28 @@ const element = /*#__PURE__*/React.createElement(React.Fragment, null,
 
 ### setup/06-custom-component.html
 
-One of the biggest paradigm shifts that React offered to the UI ecosystem was the component model. It allows you to package up all the logic, styling, and layout of a unit of UI into a box that you can easily move around and reuse without exposing any of the implementation details of the component. You don’t have to understand how a component works internally to use it effectively. With idiomatic component architecture, rendering a component in one place won’t impact other parts of your app.
+One of the biggest paradigm shifts that React offered to the UI ecosystem was the component model. It allows you to package up all the logic, styling, and layout of a unit of UI into a box that you can easily move around and reuse without exposing any of the implementation details of the component. You don’t have to understand how a component works internally to use it effectively. With idiomatic component architecture, rendering a component in one place won’t impact other parts of your app. In this lesson we’ll learn how to create a React component and how to use it. You’ll learn why things work the way they do and how to use this to your advantage.
 
-In this lesson we’ll learn how to create a React component and how to use it. You’ll learn why things work the way they do and how to use this to your advantage.
+So, here we have this div with the class name "container," and we have this div with the class name "message" in here that says "Hello, World!" Let's say that I wanted to have, I don't know, maybe two of those. So now we have "Hello, World!" and "Hello, World!" and then I don't want to repeat myself. So I'm going to make a constant message here that is that "Hello, World!" and we'll put that in place of here "message," just interpolate that there. Now I'm not repeating myself, which is good.
+
+```jsx
+const message = <div className='message'>Hello World</div>
+
+const element = (
+    <div className='container'>
+        {message}
+        {message}
+    </div>
+)
+```
+
+Babel compilled
+
+```javascript
+const message = /*#__PURE__*/React.createElement("div", {
+  className: "message"
+}, "Hello World");
+const element = /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, message, message);
+```

@@ -5,12 +5,12 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
 
-    const message = <div className='message'>Hello World</div>
+    const message = (props) => <div className='message'>{props.msg}</div>
 
     const element = (
       <div className='container'>
-        {message}
-        {message}
+        {message({msg: 'Hello World'})}
+        {message({msg: 'Welcome World'})}
       </div>
     )
 

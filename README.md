@@ -515,4 +515,14 @@ const element = /*#__PURE__*/React.createElement("div", {
 }));
 ```
 
-Now, we're no longer getting that warning. If we look at our compiled code, we're going to see that capital "Message" here, and when we get past to React.createElement, we're going to get a capital Message right here, outside of a string.
+Now, we're no longer getting that warning. If we look at our compiled code, we're going to see that capital "Message" here, and when we get past to React.createElement, we're going to get a capital Message right here, outside of a string. So, we're passing a reference to the function directly into the React.createElement(). And then if we ultimately look at what's rendered to the DOM, we come down here, we see our ID of root, our container, and then we see a div with the class of message.
+
+```html
+<div id="root">
+    <div class="container">
+        <div class="message"></div>
+        <div class="message">Hello World</div>
+        <div class="message">Welcome World</div>
+    </div>
+</div>
+```

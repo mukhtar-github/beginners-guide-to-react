@@ -553,29 +553,41 @@ Here we get the props of "Children, Hello, World!" and we have "Children, Hello,
 
 Let's rewrite this using JSX. We'll say Message, and then use the msg prop, because that's what we're expecting. And then we'll come back here, save that, and everything's working without any errors. If we look at our compiled version of our code, then we'll see that we're calling React.createElement with that Message function.
 
-```jsx
-const Message = (props) => <div className='message'>{props.msg}</div>
+```html
+<script type="text/babel">
 
-const element = (
-    <div className='container'>
+    const Message = (props) => <div className='message'>{props.msg}</div>
+
+    const element = (
+      <div className='container'>
         <Message msg='Hello World' />
         <Message msg='Welcome World' />
-    </div>
-)
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+</script>
 ```
 
 Babel compilled
 
-```javascript
-const Message = props => /*#__PURE__*/React.createElement("div", {
-  className: "message"
-}, props.msg);
+```html
+<script>
+"use strict";
 
-const element = /*#__PURE__*/React.createElement("div", {
+var Message = function Message(props) {
+  return React.createElement("div", {
+    className: "message"
+  }, props.msg);
+};
+
+var element = React.createElement("div", {
   className: "container"
-}, /*#__PURE__*/React.createElement(Message, {
+}, React.createElement(Message, {
   msg: "Hello World"
-}), /*#__PURE__*/React.createElement(Message, {
+}), React.createElement(Message, {
   msg: "Welcome World"
 }));
+ReactDOM.render(element, document.getElementById('root'));
+</script>
 ```

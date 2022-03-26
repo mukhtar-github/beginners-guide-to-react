@@ -591,3 +591,41 @@ var element = React.createElement("div", {
 ReactDOM.render(element, document.getElementById('root'));
 </script>
 ```
+
+If we wanted to make it nice and declarative so that we could nest to these things as if it's the children prop, then, we just accept children for the name of the prop. Then we can rename this one to "children," and those two are functionally equivalent. If we save this, then we'll still get "Hello World!" and "Goodbye, World!" But honestly, one of those looks a little bit nicer to me, so I'm going to switch both of these to use that syntax.
+
+```html
+<script type="text/babel">
+
+    const Message = (props) => <div className='message'>{props.children}</div>
+
+    const element = (
+      <div className='container'>
+        <Message>Hello World</Message>
+        <Message children='Welcome World' />
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+  </script>
+```
+
+Babel compilled
+
+```html
+<script>"use strict";
+
+var Message = function Message(props) {
+  return React.createElement("div", {
+    className: "message"
+  }, props.children);
+};
+
+var element = React.createElement("div", {
+  className: "container"
+}, React.createElement(Message, null, "Hello World"), React.createElement(Message, {
+  children: "Welcome World"
+}));
+ReactDOM.render(element, document.getElementById('root'));
+</script>
+```

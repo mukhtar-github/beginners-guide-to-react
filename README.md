@@ -421,3 +421,34 @@ const element = /*#__PURE__*/React.createElement("div", {
   className: "container"
 }, message, message);
 ```
+
+But what if I wanted one of these to say, "Hello, World!" and the other to say, "Welcome World!" Well, we need to parameterize this somehow, and when we do that in JavaScript, we create a function. I'll make an arrow function here, and we'll accept an object. We'll call it "props," and then whatever that props.msg or props.message value is, is what we'll interpolate into the children prop for this div that we create.
+
+Now, instead of just putting "message" in there directly, we're going to call it with an object, and we'll use msg as "Hello, World!" and then we'll do this one msg "World, World!" Save that. And we get "Hello World!" and "Welcome World!" which is awesome.
+
+```jsx
+const message = (props) => <div className='message'>{props.msg}</div>
+
+const element = (
+    <div className='container'>
+        {message({msg: 'Hello World'})}
+        {message({msg: 'Welcome World'})}
+    </div>
+)
+```
+
+Babel compilled
+
+```javascript
+const message = props => /*#__PURE__*/React.createElement("div", {
+  className: "message"
+}, props.msg);
+
+const element = /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, message({
+  msg: 'Hello World'
+}), message({
+  msg: 'Welcome World'
+}));
+```

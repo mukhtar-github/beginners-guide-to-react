@@ -550,3 +550,32 @@ type: ƒ Message(props)
 ```
 
 Here we get the props of "Children, Hello, World!" and we have "Children, Hello, World!" in this one as well. So, when you give a capital letter in JSX, that's the same as calling React.createElement with the function that you're referencing. That allows you to create a custom component that you can use to reuse code over and over again.
+
+Let's rewrite this using JSX. We'll say Message, and then use the msg prop, because that's what we're expecting. And then we'll come back here, save that, and everything's working without any errors.
+
+```jsx
+const Message = (props) => <div className='message'>{props.msg}</div>
+
+const element = (
+    <div className='container'>
+        <Message msg='Hello World' />
+        <Message msg='Welcome World' />
+    </div>
+)
+```
+
+Babel compilled
+
+```javascript
+const Message = props => /*#__PURE__*/React.createElement("div", {
+  className: "message"
+}, props.msg);
+
+const element = /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, /*#__PURE__*/React.createElement(Message, {
+  msg: "Hello World"
+}), /*#__PURE__*/React.createElement(Message, {
+  msg: "Welcome World"
+}));
+```

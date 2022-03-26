@@ -486,3 +486,33 @@ const element = /*#__PURE__*/React.createElement("div", {
 If we look at the compiled version of our code, we're going to see our message function that's returning a React element, that's creating a div. And then if we come down here, we're going to see React.createElement message as a string. That's problematic because we don't want to have the message as a string to create a DOM element that is a message type element. We actually wanted to use this function, so that we can use this function to create additional React elements.
 
 So, as the warning suggests, we need to use an upper case letter, and so if instead, we say capital "Message," then we use capital "Message" here, and let's make sure we don't get errors here. So we'll say capital "Message" for these, and we can save that.
+
+```jsx
+const Message = (props) => <div className='message'>{props.msg}</div>
+
+const element = (
+    <div className='container'>
+        <Message>Hello World</Message>
+        {Message({msg: 'Hello World'})}
+        {Message({msg: 'Welcome World'})}
+    </div>
+)
+```
+
+Babel compilled
+
+```javascript
+const Message = props => /*#__PURE__*/React.createElement("div", {
+  className: "message"
+}, props.msg);
+
+const element = /*#__PURE__*/React.createElement("div", {
+  className: "container"
+}, /*#__PURE__*/React.createElement(Message, null, "Hello World"), Message({
+  msg: 'Hello World'
+}), Message({
+  msg: 'Welcome World'
+}));
+```
+
+Now, we're no longer getting that warning. If we look at our compiled code, we're going to see that capital "Message" here, and when we get past to React.createElement, we're going to get a capital Message right here, outside of a string.

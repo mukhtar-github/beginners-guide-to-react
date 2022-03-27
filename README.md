@@ -758,14 +758,6 @@ const element = (
     <CharacterCount text="" />
   </>
 )
-
-(
-  <div>
-    {`The text "${text}" has `}
-    {text.length ? <strong>{text.length}</strong> : 'No'}
-    {' characters'}
-  </div>
-)
 ```
 
 Let's go ahead and implement this. We already have our function component here. We're accepting the text prop and destructuring it right there. What we're going to do is I want to wrap this in a div, and then we want to say the text and text has text.length characters. That's for this first case. We need to interpolate some stuff here. For this text right here, I think it would be easiest to interpolate all of this as a template literal, so we'll do that. We'll put this inside of curly braces inside of that template literal. Then we'll put an extra space after this.
@@ -801,7 +793,7 @@ function CharacterCount({text}) {
 }
 ```
 
-Thanks to this curly braces allowing interpolation, we could take this whole expression, paste it directly into there, and get rid of that variable altogether. That will work just as well. Now let's say we don't want "no" to be inside of this strong. We only want this strong to be wrapped around an actual number. That will require us to change things up a little bit.
+Thanks to this curly braces allowing interpolation, we could take this whole expression, paste it directly into there, and get rid of that variable altogether. That will work just as well. Now let's say we don't want "no" to be inside of this strong. We only want this strong to be wrapped around an actual number. That will require us to change things up a little bit. I'll add that right here. We'll say text.length, so if there is a length, then we want that in a strong with text.length. Otherwise, we'll just use the string no. With that, let's go ahead and interpolate this character string as a string so we can have an explicit space right there. Then we'll save this. Now we get 11 as bolded, and "no" as not bolded.
 
 ```javascript
 // The text "hello world" has 11 characters
@@ -810,7 +802,7 @@ Thanks to this curly braces allowing interpolation, we could take this whole exp
 function CharacterCount({text}) {
   return (
     <div>
-      {`The text "${text}" has `}{' '}
+      {`The text "${text}" has `}
       {text.length ? <strong>{text.length}</strong> : 'No'}
       {' characters'}
     </div>

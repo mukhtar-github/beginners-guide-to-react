@@ -4,17 +4,22 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+
     const rootElement = document.getElementById('root')
 
     function tick() {
       const time = new Date().toLocaleTimeString()
-      const element = <div>{time}</div>
+      const element = (
+        <div>
+          <div>Hello</div>
+          {time}
+        </div>
+      )
 
       ReactDOM.render(element, rootElement)
     }
 
     tick()
-
     setInterval(tick, 1000)
     
   </script>

@@ -974,6 +974,34 @@ tick()
 setInterval(tick, 1000)
 ```
 
+The thing that I want to show you about the way that this is working is if we look in the body and then come down here to our app. We're going to see that update happening on our string right here. If I were to add something in here, like we put another div, hello, and another div right there, and then paste that time in there, then we're going to notice that the only thing that's updating is this clock time and not this div.
+
+```javascript
+const rootElement = document.getElementById('root')
+
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = (
+    <div>
+      <div>Hello</div>
+      {time}
+    </div>
+  )
+
+  ReactDOM.render(element, rootElement)
+}
+
+tick()
+setInterval(tick, 1000)
+
+<div id="root">
+  <div>
+    <div>Hello</div>
+    "12:27:20"
+  </div>
+</div>
+```
+
 ```javascript
 function tick() {
   const time = new Date().toLocaleTimeString()

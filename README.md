@@ -938,3 +938,37 @@ This type of interpolation is not unique to just JSX. In fact, we have a couple 
 ### setup/09-re-render.html
 
 Applications aren’t really applications if they don’t change over time to represent changes in the application over time. Normally in React you’ll use state to manage this, but before we get to that, we’ll just call ReactDOM.render on the same element so you get an understanding of what React is doing for you. So we’ll learn how React deals with the new elements you give it, compare it to the previous elements, and make surgical updates to the DOM to give you the fastest and best user experience possible (because updating the DOM is typically the slowest part in the whole process).
+
+We made a clock application. Here, it's rendering out the time and we get that time with new date toLocaleTimeString, and then we put that inside of a div and render that. The problem is that it gets out of date as soon as you refresh the page. Every time you refresh the page or get that updated, but you have to keep on refreshing the page, and what a pain that is.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootElement = document.getElementById('root')
+
+    const time = new Date().toLocaleTimeString()
+    const element = <div>{time}</div>
+
+    
+    ReactDOM.render(element, rootElement)
+  </script>
+</body>
+```
+
+```javascript
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = (
+    <>
+      <input value={time} />
+      <input value={time} />
+    </>
+  )
+  ReactDOM.render(element, rootElement)
+}
+setInterval(tick, 1000)
+```

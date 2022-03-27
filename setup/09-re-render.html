@@ -6,17 +6,10 @@
   <script type="text/babel">
     const rootElement = document.getElementById('root')
 
-    function tick() {
-      const time = new Date().toLocaleTimeString()
-      const element = (
-        <>
-          <input value={time} />
-          <input value={time} />
-        </>
-      )
-      ReactDOM.render(element, rootElement)
-    }
+    const time = new Date().toLocaleTimeString()
+    const element = <div>{time}</div>
 
-    setInterval(tick, 1000)
+    
+    ReactDOM.render(element, rootElement)
   </script>
 </body>

@@ -9,6 +9,7 @@
     // the text "" has no characters
 
     function CharacterCount({text}) {
+      const length = text.length ? text.length : 'No'
       return (
         <div>
           {`The text "${text}" has `} <strong>{text.length}</strong> characters

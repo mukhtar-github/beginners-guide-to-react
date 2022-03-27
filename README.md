@@ -823,7 +823,7 @@ function CharacterCount({text}) {
   return (
     //js
     <div /*Now we're in JSX land, and we have prop syntax here*/>
-      {/*we have children syntax*/}
+      {/*Between opening and closing of this div tag, we have children syntax*/}
       {/*Once we do an opening curly brace, we're now in JavaScript land again*/}
       {`The text "${text}" has `}
       {text.length ? <strong>{text.length}</strong> : 'No'}

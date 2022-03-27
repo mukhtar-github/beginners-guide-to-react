@@ -810,7 +810,9 @@ function CharacterCount({text}) {
 }
 ```
 
-The reason that I wanted to show you this was to demonstrate what it's like to go between JSX land and JavaScript land and back again. Let's follow the flow of this syntax. When we start in the function, this is JavaScript land. We can do JavaScript functions, if statements, all of that stuff. Then when we do the return and this open parentheses, that's still JavaScript land. We enter JSX land by doing this open-angle bracket with the tag. Now we're in JSX land, and we have prop syntax, we have children syntax, and then we have our closing tag, and we enter JavaScript land again. Inside of the opening and closing tag, we're in JSX land. Once we do an opening curly brace, we're now in JavaScript land again.
+The reason that I wanted to show you this was to demonstrate what it's like to go between JSX land and JavaScript land and back again. Let's follow the flow of this syntax. When we start in the function, this is JavaScript land. We can do JavaScript functions, if statements, all of that stuff. Then when we do the return and this open parentheses, that's still JavaScript land. We enter JSX land by doing this open-angle bracket with the tag. Now we're in JSX land, and we have prop syntax, we have children syntax, and then we have our closing tag, and we enter JavaScript land again. Inside of the opening and closing tag, we're in JSX land.
+
+Once we do an opening curly brace, we're now in JavaScript land again. This is a limited JavaScript land because we can only do expressions. We're not allowed to do things like for loops, if statements, or any of that. It has to be an expression of JavaScript that evaluates to some value. A string like this or a ternary like this, those are expressions, and those are allowed within the curly braces.
 
 If you want to comment something in JSX you need to use JavaScript comments inside of Curly braces like {/*comment here*/}.
 
@@ -825,6 +827,8 @@ function CharacterCount({text}) {
     <div /*Now we're in JSX land, and we have prop syntax here*/>
       {/*Between opening and closing of this div tag, we have children syntax*/}
       {/*Once we do an opening curly brace, we're now in JavaScript land again*/}
+      {/*This is a limited JavaScript land because we can only do expressions. We're not allowed to do things like for loops, if statements, or any of that*/}
+      {/*A string like this or a ternary like this, those are expressions, and those are allowed within the curly braces.*/}
       {`The text "${text}" has `}
       {text.length ? <strong>{text.length}</strong> : 'No'}
       {' characters'}

@@ -748,3 +748,14 @@ If you want to learn more about the prop-types that are available, you can go to
 ### setup/08-jsx-interpolation.html
 
 Now that we have a good foundation on React elements, JSX, custom elements, and props, let’s write a React component that has some conditional logic in it to explore the interpolation characteristics of JSX syntax. We’ll learn that interpolation is not unique to JSX and we’ll learn the limitations and capabilities of interpolation in JSX. With this knowledge, we’ll be more productive using JSX.
+
+Here we have a React element that is a React fragment. As its children, we have a character count with the text of "hello world," and a character count with the text of "empty string." Ultimately, we want this to render the text "hello world has 11 characters," and the text "empty string has no characters."
+
+```jsx
+const element = (
+  <>
+    <CharacterCount text="Hello World" />
+    <CharacterCount text="" />
+  </>
+)
+```

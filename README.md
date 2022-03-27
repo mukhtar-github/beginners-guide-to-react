@@ -1040,7 +1040,7 @@ tick()
 setInterval(tick, 1000)
 ```
 
-React doesn't have this problem. Let's go ahead and turn this back into JSX. Just take away that, take away that, and the closing quotes, and then we'll remove this and comment that out. Now we're back, and all that we're getting is an update to the values that actually matter for our application, which are the properties for both of these inputs.
+React doesn't have this problem. Let's go ahead and turn this back into JSX. Just take away the opening and closing brackets, and the closing quotes, and then we'll remove this and comment that out. Now we're back, and all that we're getting is an update to the values that actually matter for our application, which are the properties for both of these inputs.
 
 ```javascript
 const rootElement = document.getElementById('root')
@@ -1058,16 +1058,6 @@ tick()
 setInterval(tick, 1000)
 ```
 
-```javascript
-function tick() {
-  const time = new Date().toLocaleTimeString()
-  const element = (
-    <>
-      <input value={time} />
-      <input value={time} />
-    </>
-  )
-  ReactDOM.render(element, rootElement)
-}
-setInterval(tick, 1000)
-```
+This has great implications for the performance of our applications, as well as the accessibility, because React is keeping track of our focus for us. This isn't how you normally re-render new application. Typically, whenever state changes, you don't have to re-render your entire application, but I wanted to show you this so you have an understanding of what React is really doing for you.
+
+When you create these React elements, you give that to ReactDOM.render or you trigger a re-render of a component, and React is going to compare the elements that you returned this time with the elements that you returned last time. It's going to do a div of those two elements, and then it will update the DOM surgically to only update the things that were different between the last time and this time you returned JSX.

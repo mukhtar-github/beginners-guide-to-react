@@ -959,6 +959,21 @@ We made a clock application. Here, it's rendering out the time and we get that t
 </body>
 ```
 
+What I want to do instead is I'm going to put this into a function and have that function called every second. Let's go ahead and make that function called tick. We'll put all this inside of tick, and then we'll call tick. We just refactored, just put something in a function. That's a very normal thing to do. Now I'm going to say set interval, tick, every 1,000 milliseconds. I'm getting that update.
+
+```javascript
+const rootElement = document.getElementById('root')
+
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = <div>{time}</div>
+
+  ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
 ```javascript
 function tick() {
   const time = new Date().toLocaleTimeString()

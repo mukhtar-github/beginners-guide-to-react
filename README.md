@@ -1021,7 +1021,7 @@ tick()
 setInterval(tick, 1000)
 ```
 
-Let's take a look at an example. If I make an input and set the value to that time, and let's go ahead and we'll put two in here, then we'll save that, and now we have two of those, and they are updating every second, but as I click in here, my focus is going away. That's because the old elements that were the inputs there are getting totally removed from the DOM, and the new elements are getting put in their place. React doesn't have this problem.
+Let's take a look at an example. If I make an input and set the value to that time, and let's go ahead and we'll put two in here, then we'll save that, and now we have two of those, and they are updating every second, but as I click in here, my focus is going away. That's because the old elements that were the inputs there are getting totally removed from the DOM, and the new elements are getting put in their place.
 
 ```javascript
 const rootElement = document.getElementById('root')
@@ -1035,6 +1035,24 @@ function tick() {
   `
   rootElement.innerHTML = element
   //ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
+React doesn't have this problem. Let's go ahead and turn this back into JSX. Just take away that, take away that, and the closing quotes, and then we'll remove this and comment that out. Now we're back, and all that we're getting is an update to the values that actually matter for our application, which are the properties for both of these inputs.
+
+```javascript
+const rootElement = document.getElementById('root')
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = (
+    <div>
+      <input value={time} />
+      <input value={time} />
+    </div>
+  )
+  ReactDOM.render(element, rootElement)
 }
 tick()
 setInterval(tick, 1000)

@@ -16,27 +16,22 @@
       )
     }
 
-    const propTypes = {
-      string(props, propName, componentName) {
-        if (typeof props[propName] !== 'string') {
-          return new Error(
-            `Hey, the component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[
-              propName
-            ]}`,
-          )
-        }
-      }
-    }
+    // const propTypes = {
+    //   string(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error(
+    //         `Hey, the component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[
+    //           propName
+    //         ]}`,
+    //       )
+    //     }
+    //   }
+    // }
 
     SayHello.propTypes = {
-      firstName: PropTypes.string,
-      lastName: PropTypes.string
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
     }
-
-    // SayHello.propTypes = {
-    //   firstName: PropTypes.string.isRequired,
-    //   lastName: PropTypes.string.isRequired,
-    // }
 
     const element = <SayHello firstName={false} />
 

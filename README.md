@@ -990,10 +990,10 @@ function tick() {
 
   ReactDOM.render(element, rootElement)
 }
-
 tick()
 setInterval(tick, 1000)
 
+// app
 <div id="root">
   <div>
     <div>Hello</div>
@@ -1001,6 +1001,8 @@ setInterval(tick, 1000)
   </div>
 </div>
 ```
+
+Let's see how this differs if we were to just turn this into an HTML string, and we'll interpolate that. Then instead of ReactDOM.render, we're going to say root element.innerHTML equals that element. We're getting that same behavior that we had before, except the way that it works is it's updating the entire contents of our application every time, starting from this root element. That's not optimal, because it causes a couple of problems. Let's take a look at an example.
 
 ```javascript
 function tick() {

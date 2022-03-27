@@ -809,3 +809,27 @@ function CharacterCount({text}) {
   )
 }
 ```
+
+The reason that I wanted to show you this was to demonstrate what it's like to go between JSX land and JavaScript land and back again. Let's follow the flow of this syntax. When we start in the function, this is JavaScript land. We can do JavaScript functions, if statements, all of that stuff. Then when we do the return and this open parentheses, that's still JavaScript land. We enter JSX land by doing this open-angle bracket with the tag. Now we're in JSX land, and we have prop syntax, we have children syntax, and then we have our closing tag, and we enter JavaScript land again. Inside of the opening and closing tag, we're in JSX land. Once we do an opening curly brace, we're now in JavaScript land again.
+
+If you want to comment something in JSX you need to use JavaScript comments inside of Curly braces like {/*comment here*/}.
+
+```javascript
+// The text "hello world" has 11 characters
+// the text "" has no characters
+
+function CharacterCount({text}) {
+  // js - We can do JavaScript functions, if statements, all of that stuff.
+  return (
+    //js
+    <div /*Now we're in JSX land, and we have prop syntax here*/>
+      {/*we have children syntax*/}
+      {/*Once we do an opening curly brace, we're now in JavaScript land again*/}
+      {`The text "${text}" has `}
+      {text.length ? <strong>{text.length}</strong> : 'No'}
+      {' characters'}
+    </div>
+    // js
+  )
+}
+```

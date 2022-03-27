@@ -837,3 +837,53 @@ function CharacterCount({text}) {
   )
 }
 ```
+
+If you stop to consider what this JSX is compiled to, this should all make sense. Let's take a look at the JavaScript code that Babel generates for us. Here we have our character counter. We're calling react.createElement. We pass the div that's representing this div right here. It's not taking any props, so we get null. Then as the third argument, we get this string.
+
+```html
+<script type="text/babel">
+
+  // The text "hello world" has 11 characters
+  // the text "" has no characters
+
+  function CharacterCount({text}) {
+    return (
+      <div>
+        {`The text "${text}" has `}
+        {text.length ? <strong>{text.length}</strong> : 'No'}
+        {' characters'}
+      </div>
+    )
+  }
+
+  const element = (
+    <>
+      <CharacterCount text="Hello World" />
+      <CharacterCount text="" />
+    </>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
+Babel compilled
+
+```html
+<script>"use strict";
+
+// The text "hello world" has 11 characters
+// the text "" has no characters
+function CharacterCount(_ref) {
+  var text = _ref.text;
+  return React.createElement("div", null, "The text \"".concat(text, "\" has "), text.length ? React.createElement("strong", null, text.length) : 'No', ' characters');
+}
+
+var element = React.createElement(React.Fragment, null, React.createElement(CharacterCount, {
+  text: "Hello World"
+}), React.createElement(CharacterCount, {
+  text: ""
+}));
+ReactDOM.render(element, document.getElementById('root'));
+</script>
+```

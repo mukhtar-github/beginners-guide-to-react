@@ -1002,7 +1002,7 @@ setInterval(tick, 1000)
 </div>
 ```
 
-Let's see how this differs if we were to just turn this into an HTML string, and we'll interpolate that. Then instead of ReactDOM.render, we're going to say root element.innerHTML equals that element. We're getting that same behavior that we had before, except the way that it works is it's updating the entire contents of our application every time, starting from this root element. That's not optimal, because it causes a couple of problems. Let's take a look at an example.
+Let's see how this differs if we were to just turn this into an HTML string, and we'll interpolate that. Then instead of ReactDOM.render, we're going to say root element.innerHTML equals that element. We're getting that same behavior that we had before, except the way that it works is it's updating the entire contents of our application every time, starting from this root element. That's not optimal, because it causes a couple of problems.
 
 ```javascript
 const rootElement = document.getElementById('root')
@@ -1012,6 +1012,25 @@ function tick() {
     <div>
       <div>Hello</div>
         ${time}
+    </div>
+  `
+  rootElement.innerHTML = element
+  //ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
+Let's take a look at an example. If I make an input and set the value to that time, and let's go ahead and we'll put two in here, then we'll save that, and now we have two of those, and they are updating every second, but as I click in here, my focus is going away. That's because the old elements that were the inputs there are getting totally removed from the DOM, and the new elements are getting put in their place. React doesn't have this problem.
+
+```javascript
+const rootElement = document.getElementById('root')
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = `
+    <div>
+      <input value="${time}" />
+      <input value="${time}" />
     </div>
   `
   rootElement.innerHTML = element

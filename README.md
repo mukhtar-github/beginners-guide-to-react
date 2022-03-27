@@ -786,3 +786,17 @@ function CharacterCount({text}) {
 ```
 
 We don't want to say text length for zero characters. We want it to say no characters. Let's go ahead and say our length is equal to, if there is a text length, then we'll say the text length. Otherwise, we'll say no. Then we can interpolate that directly into here. Now we're getting 11 characters and no characters.
+
+```javascript
+// The text "hello world" has 11 characters
+// the text "" has no characters
+
+function CharacterCount({text}) {
+  const length = text.length ? text.length : 'No'
+  return (
+    <div>
+      {`The text "${text}" has `} {length} characters
+    </div>
+  )
+}
+```

@@ -800,3 +800,19 @@ function CharacterCount({text}) {
   )
 }
 ```
+
+Thanks to this curly braces allowing interpolation, we could take this whole expression, paste it directly into there, and get rid of that variable altogether. That will work just as well. Now let's say we don't want "no" to be inside of this strong. We only want this strong to be wrapped around an actual number. That will require us to change things up a little bit.
+
+```javascript
+// The text "hello world" has 11 characters
+// the text "" has no characters
+
+function CharacterCount({text}) {
+  const length = text.length ? text.length : 'No'
+  return (
+    <div>
+      {`The text "${text}" has `} {length} characters
+    </div>
+  )
+}
+```

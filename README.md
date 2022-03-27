@@ -678,4 +678,3 @@ In review of what we did here was we had some code that was being duplicated, an
 
 When you create reusable React components, you want to make sure that people use them correctly. The best way to do this is to use TypeScript in your codebase to give you compile-time checking of your code. But if you’re not using TypeScript, you can still use PropTypes to get runtime validation. In this lesson we’ll learn how PropTypes work, why they’re not enabled in production, and how to use the pre-built prop-types package from the React team.
 
- <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>

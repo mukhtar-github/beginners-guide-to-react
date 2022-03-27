@@ -838,34 +838,7 @@ function CharacterCount({text}) {
 }
 ```
 
-If you stop to consider what this JSX is compiled to, this should all make sense. Let's take a look at the JavaScript code that Babel generates for us. Here we have our character counter. We're calling react.createElement. We pass the div that's representing this div right here. It's not taking any props, so we get null. Then as the third argument, we get this string.
-
-```html
-<script type="text/babel">
-
-  // The text "hello world" has 11 characters
-  // the text "" has no characters
-
-  function CharacterCount({text}) {
-    return (
-      <div>
-        {`The text "${text}" has `}
-        {text.length ? <strong>{text.length}</strong> : 'No'}
-        {' characters'}
-      </div>
-    )
-  }
-
-  const element = (
-    <>
-      <CharacterCount text="Hello World" />
-      <CharacterCount text="" />
-    </>
-  )
-
-  ReactDOM.render(element, document.getElementById('root'))
-</script>
-```
+If you stop to consider what this JSX is compiled to, this should all make sense. Let's take a look at the JavaScript code that Babel generates for us. Here we have our character counter. We're calling react.createElement. We pass the div that's representing this div right here. It's not taking any props, so we get null.
 
 Babel compilled
 
@@ -885,5 +858,35 @@ var element = React.createElement(React.Fragment, null, React.createElement(Char
   text: ""
 }));
 ReactDOM.render(element, document.getElementById('root'));
+</script>
+```
+
+Then as the third argument, we get this string. Let's go ahead and write this over here. We have react.createElement div, null for the props, and then the string, the text, and so on. If we wanted to, instead of passing this string, do some sort of if statement, that wouldn't work at all. It doesn't make any sense to pass a statement as an argument to a function. For the same reason, you can't use statements inside of the curly braces of JSX because the curly braces basically are saying, "Hey, Babel, as you get to this part, I want you to take everything between these two curly braces and then just stick it in this argument of the createElement call." Having a good understanding of how Babel is compiling your JSX will help you use JSX more effectively.
+
+```html
+<script type="text/babel">
+
+  // The text "hello world" has 11 characters
+  // the text "" has no characters
+
+  function CharacterCount({text}) {
+    React.createElement("div", null, if (statement) {})
+    return (
+      <div>
+        {`The text "${text}" has `}
+        {text.length ? <strong>{text.length}</strong> : 'No'}
+        {' characters'}
+      </div>
+    )
+  }
+
+  const element = (
+    <>
+      <CharacterCount text="Hello World" />
+      <CharacterCount text="" />
+    </>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
 </script>
 ```

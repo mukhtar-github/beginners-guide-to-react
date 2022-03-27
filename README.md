@@ -678,3 +678,47 @@ In review of what we did here was we had some code that was being duplicated, an
 
 When you create reusable React components, you want to make sure that people use them correctly. The best way to do this is to use TypeScript in your codebase to give you compile-time checking of your code. But if you’re not using TypeScript, you can still use PropTypes to get runtime validation. In this lesson we’ll learn how PropTypes work, why they’re not enabled in production, and how to use the pre-built prop-types package from the React team.
 
+When you start creating custom function components, you're going to have people using those function components and they may not use it quite right. For example, here, we have this, "Say Hello!" that's accepting a props object we're destructuring right here.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+  <script type="text/babel">
+    
+    const rootElement = document.getElementById('root')
+
+    function SayHello({firstName, lastName}) {
+      return (
+        <div>
+          Hello {firstName} {lastName}!
+        </div>
+      )
+    }
+
+    // const propTypes = {
+    //   string(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error(
+    //         `Hey, the component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[
+    //           propName
+    //         ]}`,
+    //       )
+    //     }
+    //   }
+    // }
+
+    SayHello.propTypes = {
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+    }
+
+    const element = <SayHello firstName={false} />
+
+    ReactDOM.render(element, rootElement)
+  </script>
+</body>
+```

@@ -808,10 +808,11 @@ Thanks to this curly braces allowing interpolation, we could take this whole exp
 // the text "" has no characters
 
 function CharacterCount({text}) {
-  const length = text.length ? text.length : 'No'
   return (
     <div>
-      {`The text "${text}" has `} {length} characters
+      {`The text "${text}" has `}{' '}
+      {text.length ? <strong>{text.length}</strong> : 'No'}
+      {' characters'}
     </div>
   )
 }

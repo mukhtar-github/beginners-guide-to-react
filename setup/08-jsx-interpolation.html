@@ -12,7 +12,8 @@
       return (
         <div>
           {`The text "${text}" has `}{' '}
-          <strong>{text.length ? text.length : 'No'}</strong> characters
+          {text.length ? <strong>{text.length}</strong> : 'No'}
+          {' characters'}
         </div>
       )
     }

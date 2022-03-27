@@ -758,6 +758,14 @@ const element = (
     <CharacterCount text="" />
   </>
 )
+
+(
+  <div>
+    {`The text "${text}" has `}
+    {text.length ? <strong>{text.length}</strong> : 'No'}
+    {' characters'}
+  </div>
+)
 ```
 
 > Ultimately, we want this to render the text "hello world has 11 characters," and the text "empty string has no characters."

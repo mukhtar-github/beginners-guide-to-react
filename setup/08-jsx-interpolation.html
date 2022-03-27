@@ -5,8 +5,15 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
 
+    // The text "hello world" has 11 characters
+    // the text "" has no characters
+
     function CharacterCount({text}) {
-      return null
+      return (
+        <div>
+          {`The text "${text}" has `} {text.length} characters
+        </div>
+      )
     }
 
     const element = (

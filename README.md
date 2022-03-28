@@ -1070,7 +1070,18 @@ Application layout is only one part of the user interface equation. Another part
 
 We have a bunch of CSS in our HTML document, and we want to style this div with that CSS. To apply that CSS, we're going to add a className of Box to get that box around this small, light-blue box. Because we want it to be small, let's also add a box--small, and we'll save that.
 
-```html
+```javascript
+ function Box({style, size, className = '', ...rest}) {
+      const sizeClassName = size ? `box--${size}` : ''
+      return (
+        <div
+          className={`box ${className} ${sizeClassName}`}
+          style={{fontStyle: 'italic', ...style}}
+          {...rest}
+        />
+      )
+    }
+
 <Box size="small" style={{backgroundColor: 'lightblue'}}>
           small lightblue box
         </Box>

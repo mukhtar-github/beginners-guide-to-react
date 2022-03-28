@@ -1291,6 +1291,18 @@ const element = (
 )
 ```
 
+You might notice we no longer have that font style of italic. The reason that's happening is the exact same as with the className. If I move this rest up here before the style, now we're going to get the italic, but we won't get the custom styles that the user of our box component is trying to specify.
+
+```javascript
+function Box({className='', ...rest}) {
+  return (
+    <div  className={`box ${className}`}
+      {...rest}
+      style={{fontStyle: 'italic'}}
+    />
+  )
+}
+```
 
 ```javascript
  function Box({style, size, className = '', ...rest}) {

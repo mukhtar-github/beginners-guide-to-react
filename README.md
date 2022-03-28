@@ -1263,6 +1263,8 @@ One problem here is that if I take off the className on one of these boxes, then
 
 I don't think that's a big deal, so we'll get rid of that. Let's restore this small box to its former glory. The other thing that's common across all these boxes is the font style italic. Let's have that be provided here. We'll say style fontStyle italic. With that, we can now remove the font style from all of these. We'll save that, and we've made things a lot more terse for users of this box component.
 
+> Like vanilla JS functios, custom components are how you reduce repetition in your code.
+
 ```javascript
 function Box({className='', ...rest}) {
   return (
@@ -1318,6 +1320,8 @@ function Box({className='', style, ...rest}) {
 ```
 
 One useful feature of creating components like this is we can use it to separate our user code from the styling concerns of our specific component. Rather than a className, it would actually be better to accept a size prop. We could say the size is small, medium, or large.
+
+> This applies to more than styling. It is a great example of creating versatile components through abstraction.
 
 ```javascript
  function Box({style, size, className = '', ...rest}) {

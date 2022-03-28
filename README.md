@@ -1223,7 +1223,7 @@ What we can do is combine the classNames into a single className that will work 
 </script>
 ```
 
-One problem here is that if I take off the className on one of these boxes, then I'm going to get "box undefined." That's probably not areally big issue, but it's pretty simple to fix by adding a default value for this className to be an empty string. Now we get Box with a space. I'm not as worried about the space. If you were, then you could add a .trim right here, and that would get rid of our space. I don't think that's a big deal, so we'll get rid of that. Let's restore this small box to its former glory.
+One problem here is that if I take off the className on one of these boxes, then I'm going to get "box undefined." That's probably not areally big issue, but it's pretty simple to fix by adding a default value for this className to be an empty string. Now we get Box with a space. I'm not as worried about the space. If you were, then you could add a .trim right here, and that would get rid of our space.
 
 ```html
 <script type="text/babel">
@@ -1260,6 +1260,8 @@ One problem here is that if I take off the className on one of these boxes, then
 </div>
 </script>
 ```
+
+I don't think that's a big deal, so we'll get rid of that. Let's restore this small box to its former glory. The other thing that's common across all these boxes is the font style italic. Let's have that be provided here. We'll say style fontStyle italic. With that, we can now remove the font style from all of these. We'll save that, and we've made things a lot more terse for users of this box component.
 
 
 ```javascript

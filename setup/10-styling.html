@@ -26,7 +26,8 @@
   </style>
   <script type="text/babel">
 
-    function Box({className='', style, ...rest}) {
+    function Box({className='', size, style, ...rest}) {
+      const sizeClassName = size ? `box--${size}` : ''
       return (
         <div  className={`box ${className}`}
           style={{fontStyle: 'italic', ...style}}
@@ -38,7 +39,7 @@
     const element = (
       <div>
         <Box 
-          className='box--small' 
+          size='small' 
           style={{backgroundColor: 'lightblue'}}
         >small lightblue box</Box>
         <Box 

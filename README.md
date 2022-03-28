@@ -1263,6 +1263,34 @@ One problem here is that if I take off the className on one of these boxes, then
 
 I don't think that's a big deal, so we'll get rid of that. Let's restore this small box to its former glory. The other thing that's common across all these boxes is the font style italic. Let's have that be provided here. We'll say style fontStyle italic. With that, we can now remove the font style from all of these. We'll save that, and we've made things a lot more terse for users of this box component.
 
+```javascript
+function Box({className='', ...rest}) {
+  return (
+    <div  className={`box ${className}`}
+      style={{fontStyle: 'italic'}}
+      {...rest}
+    />
+  )
+}
+
+const element = (
+  <div>
+    <Box 
+      className='box--small' 
+      style={{backgroundColor: 'lightblue'}}
+    >small lightblue box</Box>
+    <Box 
+      className='box--medium' 
+      style={{backgroundColor: 'pink'}}
+    >medium pink box</Box>
+    <Box
+    className='box--large'
+      style={{backgroundColor: 'orange'}}
+    >large orange box</Box>
+  </div>
+)
+```
+
 
 ```javascript
  function Box({style, size, className = '', ...rest}) {

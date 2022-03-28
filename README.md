@@ -1162,6 +1162,8 @@ There's a fair amount of duplication in these, so what I'm going to do is make a
 </script>
 ```
 
+Now, let's make this box a little bit more useful by taking the repetition from each one of these and putting it within the Box component. First off, we have a className, and then it has a box--, but then the size is different. Let's go ahead and just take the className Box. We'll put className Box, we'll save that.
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

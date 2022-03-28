@@ -26,8 +26,8 @@
   </style>
   <script type="text/babel">
 
-    function Box(props) {
-      return <div className='box' {...props} />
+    function Box({className, ...rest}) {
+      return <div  className={`box ${className}`} {...rest} />
     }
 
     const element = (

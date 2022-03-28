@@ -1162,7 +1162,67 @@ There's a fair amount of duplication in these, so what I'm going to do is make a
 </script>
 ```
 
-Now, let's make this box a little bit more useful by taking the repetition from each one of these and putting it within the Box component. First off, we have a className, and then it has a box--, but then the size is different. Let's go ahead and just take the className Box. We'll put className Box, we'll save that.
+Now, let's make this box a little bit more useful by taking the repetition from each one of these and putting it within the Box component. First off, we have a className, and then it has a box--, but then the size is different. Let's go ahead and just take the className Box. We'll put className Box, we'll save that. Once we save that -- and we can get rid of these as well -- then we'll notice that the Box className is no longer being applied because we're not getting that border. We can verify that by inspecting this, looking our application. We see class Box small, but we don't see the Box className here. Think for a moment why that might be.
+
+```html
+<script type="text/babel">
+ function Box(props) {
+    return <div className='box' {...props} />
+  }
+
+  const element = (
+    <div>
+      <Box className='box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>small lightblue box</Box>
+      <Box className='box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</Box>
+      <Box className='box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</Box>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
+The reason might be a little more clear if I take this spread of props and put it on the other side of the className. We save that, and now we get the opposite problem where we have the border the className Box provides, but we don't have the small, medium, or large classNames applies. The reason is, because of this spread of props, we're getting an override of the className prop that's being provided to the Box component.
+
+```html
+<script type="text/babel">
+ function Box(props) {
+    return <div  {...props} className='box' />
+  }
+
+  const element = (
+    <div>
+      <Box className='box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>small lightblue box</Box>
+      <Box className='box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</Box>
+      <Box className='box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</Box>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
+What we can do is combine the classNames into a single className that will work for all of our boxes. Instead of just taking the props object as it is, I'm going to destructure it in-place, and we'll take the className out of here. Then I'll put a ...rest to say that these are the rest of the props. Then we'll remove this, and we'll put the spread at the end. Then we'll manually combine the className that we want to provide for boxes in general with the className that's provided to us through the props. We'll make a template literal here. We'll say box, and then we'll put className. We'll save that, and now everything's working as it should be. One problem here is that if I take off the className on one of these boxes, then I'm going to get "box undefined."
+
+```html
+<script type="text/babel">
+
+ function Box({className, ...rest}) {
+    return <div  className={`box ${className}`} {...rest} />
+  }
+
+  const element = (
+    <div>
+      <Box className='box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>small lightblue box</Box>
+      <Box className='box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</Box>
+      <Box className='box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</Box>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
 
 ```javascript
  function Box({style, size, className = '', ...rest}) {

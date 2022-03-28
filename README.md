@@ -1304,6 +1304,19 @@ function Box({className='', ...rest}) {
 }
 ```
 
+Again, we do need to compose these manually. I'm going to pluck off the style prop from our props here, and we'll combine the style prop from those with the style prop that we specify by using object spread syntax. Then I'm going to put rest at the bottom here again. We'll save that, and we get our italics and we get our special color, which is exactly what we're looking for. Now anyone that wants to have a box can use this component, and it will have the Box className and italics applied automatically for them.
+
+```javascript
+function Box({className='', style, ...rest}) {
+  return (
+    <div  className={`box ${className}`}
+      style={{fontStyle: 'italic', ...style}}
+      {...rest}
+    />
+  )
+}
+```
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

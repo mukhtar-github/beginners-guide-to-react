@@ -26,11 +26,11 @@
   </style>
   <script type="text/babel">
 
-    function Box({className='', ...rest}) {
+    function Box({className='', style, ...rest}) {
       return (
         <div  className={`box ${className}`}
+          style={{fontStyle: 'italic', ...style}}
           {...rest}
-          style={{fontStyle: 'italic'}}
         />
       )
     }

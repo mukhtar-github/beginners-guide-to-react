@@ -1142,6 +1142,26 @@ We also have CSS for large and medium boxes, so let's go ahead and create some m
 </script>
 ```
 
+There's a fair amount of duplication in these, so what I'm going to do is make a new function component called Box. This is going to take some props, and then will return a div, and we'll spread all the props. Right now, this Box component basically functions as a div. We could replace all of these divs, with multiple cursors here, with a box. We save that, and we get the exact same result.
+
+```html
+<script type="text/babel">
+ function Box(props) {
+    return <div {...props} />
+  }
+
+  const element = (
+    <div>
+      <Box className='box box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>small lightblue box</Box>
+      <Box className='box box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</Box>
+      <Box className='box box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</Box>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

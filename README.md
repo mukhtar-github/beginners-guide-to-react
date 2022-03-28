@@ -1110,14 +1110,14 @@ We have a bunch of CSS in our HTML document, and we want to style this div with 
 </body>
 ```
 
-Then, I want it to be light blue, but we don't have any CSS for light blue. We could add it, but I want to show you the style prop which accepts an object rather than a string of styles. We're going to pass this object, and it will be the same property names that you get if you use getComputedStyle for this element, that is, CSS properties that are camel-cased instead of kebab-cased.
+Then, I want it to be light blue, but we don't have any CSS for light blue. We could add it, but I want to show you the style prop which accepts an object rather than a string of styles. We're going to pass this object, and it will be the same property names that you get if you use getComputedStyle for this element, that is, CSS properties that are camel-cased instead of kebab-cased. For us to get a background color, we're going to say background color, and then we want lightblue. With that, we get a small, light-blue box. Let's also add a font style italic right there. Now we have a small, light-blue box in italics.
 
 ```html
 <script type="text/babel">
 
   const element = (
     <div>
-      <div className='box box--small' style={{backgroundColor: 'lightblue'}}>Small lightblue box</div>
+      <div className='box box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>Small lightblue box</div>
     </div>
   )
 

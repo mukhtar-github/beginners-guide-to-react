@@ -27,29 +27,31 @@
   <script type="text/babel">
 
     function Box({className='', ...rest}) {
-      return <div  className={`box ${className}`.trim()} {...rest} />
+      return (
+        <div  className={`box ${className}`}
+          style={{fontStyle: 'italic'}}
+          {...rest}
+        />
+      )
     }
 
     const element = (
       <div>
         <Box 
-          //className='box--small' 
-          style={{fontStyle: 'italic',
-          backgroundColor: 'lightblue'}}
+          className='box--small' 
+          style={{backgroundColor: 'lightblue'}}
         >
           small lightblue box
         </Box>
         <Box 
           className='box--medium' 
-          style={{fontStyle: 'italic',
-          backgroundColor: 'pink'}}
+          style={{backgroundColor: 'pink'}}
         >
           medium pink box
         </Box>
         <Box
           className='box--large'
-          style={{fontStyle: 'italic',
-          backgroundColor: 'orange'}}
+          style={{backgroundColor: 'orange'}}
         >
           large orange box
         </Box>

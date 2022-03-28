@@ -1112,6 +1112,19 @@ We have a bunch of CSS in our HTML document, and we want to style this div with 
 
 Then, I want it to be light blue, but we don't have any CSS for light blue. We could add it, but I want to show you the style prop which accepts an object rather than a string of styles. We're going to pass this object, and it will be the same property names that you get if you use getComputedStyle for this element, that is, CSS properties that are camel-cased instead of kebab-cased.
 
+```html
+<script type="text/babel">
+
+  const element = (
+    <div>
+      <div className='box box--small' style={{backgroundColor: 'lightblue'}}>Small lightblue box</div>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

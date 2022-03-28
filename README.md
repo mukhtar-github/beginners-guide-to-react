@@ -1125,6 +1125,23 @@ Then, I want it to be light blue, but we don't have any CSS for light blue. We c
 </script>
 ```
 
+We also have CSS for large and medium boxes, so let's go ahead and create some more of these boxes. We'll make this one be medium, and using our multiple cursors here, we'll use large for that one. Instead of light blue for our medium, let's do pink. Instead of the light blue of our large, we'll use orange. We'll save that, and we have this stack of boxes.
+
+```html
+<script type="text/babel">
+
+  const element = (
+    <div>
+      <div className='box box--small' style={{fontStyle: 'italic', backgroundColor: 'lightblue'}}>small lightblue box</div>
+      <div className='box box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</div>
+      <div className='box box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</div>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

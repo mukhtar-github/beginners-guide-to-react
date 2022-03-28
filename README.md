@@ -1202,7 +1202,7 @@ The reason might be a little more clear if I take this spread of props and put i
 </script>
 ```
 
-What we can do is combine the classNames into a single className that will work for all of our boxes. Instead of just taking the props object as it is, I'm going to destructure it in-place, and we'll take the className out of here. Then I'll put a ...rest to say that these are the rest of the props. Then we'll remove this, and we'll put the spread at the end. Then we'll manually combine the className that we want to provide for boxes in general with the className that's provided to us through the props. We'll make a template literal here. We'll say box, and then we'll put className. We'll save that, and now everything's working as it should be. One problem here is that if I take off the className on one of these boxes, then I'm going to get "box undefined."
+What we can do is combine the classNames into a single className that will work for all of our boxes. Instead of just taking the props object as it is, I'm going to destructure it in-place, and we'll take the className out of here. Then I'll put a ...rest to say that these are the rest of the props. Then we'll remove this, and we'll put the spread at the end. Then we'll manually combine the className that we want to provide for boxes in general with the className that's provided to us through the props. We'll make a template literal here. We'll say box, and then we'll put className. We'll save that, and now everything's working as it should be.
 
 ```html
 <script type="text/babel">
@@ -1220,6 +1220,44 @@ What we can do is combine the classNames into a single className that will work 
   )
 
   ReactDOM.render(element, document.getElementById('root'))
+</script>
+```
+
+One problem here is that if I take off the className on one of these boxes, then I'm going to get "box undefined." That's probably not areally big issue, but it's pretty simple to fix by adding a default value for this className to be an empty string. Now we get Box with a space. I'm not as worried about the space. If you were, then you could add a .trim right here, and that would get rid of our space. I don't think that's a big deal, so we'll get rid of that. Let's restore this small box to its former glory.
+
+```html
+<script type="text/babel">
+
+ function Box({className, ...rest}) {
+    return <div  className={`box ${className}`.trim()} {...rest} />
+  }
+
+  const element = (
+    <div>
+      <Box 
+        //className='box--small' 
+        style={{fontStyle: 'italic',
+        backgroundColor: 'lightblue'}}
+      >
+        small lightblue box
+      </Box>
+      <Box className='box--medium' style={{fontStyle: 'italic', backgroundColor: 'pink'}}>medium pink box</Box>
+      <Box className='box--large' style={{fontStyle: 'italic', backgroundColor: 'orange'}}>large orange box</Box>
+    </div>
+  )
+
+  ReactDOM.render(element, document.getElementById('root'))
+
+// Console app
+<div id="root">
+  <div>
+    {/*<div class="box undefined" style="font-style: italic; background-color: lightblue;">small lightblue box</div>*/}
+    {/*<div class="box " style="font-style: italic; background-color: lightblue;">small lightblue box</div>*/}
+    <div class="box" style="font-style: italic; background-color: lightblue;">small lightblue box</div>
+    <div class="box box--medium" style="font-style: italic; background-color: pink;">medium pink box</div>
+    <div class="box box--large" style="font-style: italic; background-color: orange;">large orange box</div>
+  </div>
+</div>
 </script>
 ```
 

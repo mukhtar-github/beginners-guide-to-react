@@ -26,8 +26,8 @@
   </style>
   <script type="text/babel">
 
-    function Box({className, ...rest}) {
-      return <div  className={`box ${className}`} {...rest} />
+    function Box({className='', ...rest}) {
+      return <div  className={`box ${className}`.trim()} {...rest} />
     }
 
     const element = (

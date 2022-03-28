@@ -1067,3 +1067,18 @@ When you create these React elements, you give that to ReactDOM.render or you tr
 ### setup/10-styling.html
 
 Application layout is only one part of the user interface equation. Another part is styling. In this lesson we’ll explore the className and style prop for styling our components. This lesson goes much deeper than that. We’ll learn why className is className and not class (like it is in HTML), and we’ll learn why the style prop accepts an object of camelCase styles rather than a string of css (like it does in HTML). We’ll take it even further by creating a reusable component that encapsulates these styles and composes the given className and style prop together. You’re going to love this one. Finally, when you actually build a full application, a tool you’ll find invaluable is Tailwind.css.
+
+We have a bunch of CSS in our HTML document, and we want to style this div with that CSS. To apply that CSS, we're going to add a className of Box to get that box around this small, light-blue box. Because we want it to be small, let's also add a box--small, and we'll save that.
+
+```html
+<Box size="small" style={{backgroundColor: 'lightblue'}}>
+          small lightblue box
+        </Box>
+        <Box size="medium" style={{backgroundColor: 'pink'}}>
+          medium pink box
+        </Box>
+        <Box size="large" style={{backgroundColor: 'orange'}}>
+          large orange box
+        </Box>
+        <Box>sizeless box</Box>
+```

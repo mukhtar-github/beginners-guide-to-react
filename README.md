@@ -1385,3 +1385,15 @@ function Box({style, size, className = '', ...rest}) {
 </Box>
 <Box>sizeless box</Box>
 ```
+
+If we wanted to extract this and use shorthand syntax here, then we'd make it class variable. This wouldn't work because class is a reserved word. In addition, if we wanted to leave this here and then destructure the class property from the props, then this also wouldn't work because class is a reserved keyword as well. For that reason and others, it is the className prop rather than the class prop.
+
+One thing that I really like about this style prop being an object of styles rather than a string of styles is because it's a lot easier to combine objects of styles. With className, we have a string. I don't mind that because the order in which I apply these classNames has no bearing on which one of these is going to be applied. However, the order in which I apply these styles does have a bearing in what's going to be applied. If I were to apply ...style first, then there'd be no way for me, as a user of the box component, to override that to control what styles are actually going to be applied.
+
+```javascript
+const props = {
+  className: `box ${className} ${sizeClassName}`,
+  style: {fontStyle: 'italic', ...style},
+  ...rest
+}
+```

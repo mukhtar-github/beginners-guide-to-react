@@ -12,6 +12,12 @@
       function handleClick() {
         setState({eventCount: state.eventCount + 1})
       }
+
+      function handleChange(event) {
+        console.log(event)
+        setState({username: event.target.value})
+      }
+
       return (
         <div>
           <p>There have been {state.eventCount} events.</p>
@@ -21,7 +27,7 @@
           <p>You typed: {state.username}</p>
           <p>
             {/*<input onBlur={event => setState({username: event.target.value})}/>*/}
-            <input onChange={event => setState({username: event.target.value})}/>
+            <input onChange={handleChange}/>
           </p>
         </div>
       )

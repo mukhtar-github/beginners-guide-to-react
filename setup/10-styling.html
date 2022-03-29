@@ -29,7 +29,7 @@
     function Box({className='', size, style, ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''
       return (
-        <div  className={`box ${className}`}
+        <div  className={`box ${className} ${sizeClassName}`}
           style={{fontStyle: 'italic', ...style}}
           {...rest}
         />
@@ -43,11 +43,11 @@
           style={{backgroundColor: 'lightblue'}}
         >small lightblue box</Box>
         <Box 
-          className='box--medium' 
+          size='medium' 
           style={{backgroundColor: 'pink'}}
         >medium pink box</Box>
         <Box
-          className='box--large'
+          size='large'
           style={{backgroundColor: 'orange'}}
         >large orange box</Box>
       </div>

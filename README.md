@@ -1323,6 +1323,8 @@ One useful feature of creating components like this is we can use it to separate
 
 > This applies to more than styling. It is a great example of creating versatile components through abstraction.
 
+Let's make that work. I'll remove the className here. We'll save this. Let's scroll up to the top, and we'll see that our small, light-blue box is no longer small. Now I'm going to take the size prop, and we're going to generate a size className. If the size prop is specified, then we'll say box--size. Otherwise, we'll do an empty string. Then we can put that size className inside of our className list here. If we save that, then we get a small, light-blue box, and users of our box component no longer need to concern themselves with the className that needs to be applied to create a small box.
+
 ```javascript
  function Box({style, size, className = '', ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''

@@ -1527,6 +1527,8 @@ const state = {eventCount: 0, username: ''}
     renderApp()
 ```
 
+Let's go ahead and pull this onChange handler out. We'll say handleChange. We'll bring it up here. Function handleChange will take the event. Let's go ahead and take a look at that event. We'll say console.log(event), save that. We'll pop open our Dev Tools here, look at the console, and then type in one character. We'll notice we get a synthetic event object here. That's not the native event. The native event is this property nativeEvent input event. React does some serious performance optimizations for our events and that's what this synthetic event thing is all about.
+
 ```html
 <body>
   <div id="root"></div>

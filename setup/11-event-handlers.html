@@ -20,7 +20,7 @@
           </p>
           <p>You typed: {state.username}</p>
           <p>
-            <input />
+            <input onBlur={event => setState({username: event.target.value})}/>
           </p>
         </div>
       )

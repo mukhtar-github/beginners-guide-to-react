@@ -1327,6 +1327,8 @@ Let's make that work. I'll remove the className here. We'll save this. Let's scr
 
 This Box component can deal with the implementation details of what it takes to make a small box. This means that we could change the classNames that we use. We could use a third-party CSS library, and we could change that CSS library. Any component that's using the box just needs to follow the API that the box creates for it. We can separate our components from the classNames used to style them. That said, we can still apply our own classNames if we want to, and we can apply our styles if we want to because those are going to be combined with whatever is happening in the box. Let's go ahead and update the classNames for both of these because I like the size prop better.
 
+We'll save that, and now we have a small, light-blue box, a medium pink box, and a large orange box with a reusable Box component that merges the className, the style prop, forwards along all of the props, like the children prop that we're passing for each one of these, and accepts a special size prop so that you can size the box appropriately.
+
 ```javascript
 function Box({style, size, className = '', ...rest}) {
   const sizeClassName = size ? `box--${size}` : ''
@@ -1350,3 +1352,13 @@ function Box({style, size, className = '', ...rest}) {
 </Box>
 <Box>sizeless box</Box>
 ```
+
+One thing that I want to note here about the className prop in HTML. We would normally use class instead of className. ClassName is the dom property that you use to access the class attribute on dom nodes. If we go here and say $0 which will access the element that we have currently selected in our elements tab, then we can say .className, and that will give us that className list.
+
+```javascript
+// console
+$0.className
+'box  box--small'
+```
+
+In addition, if we were to take all of our props and make a props object here, we just move all of this right here, convert it to JavaScript rather than JSX syntax, and then spread those props. That will work just as well. Then let's say that this were class instead of className.

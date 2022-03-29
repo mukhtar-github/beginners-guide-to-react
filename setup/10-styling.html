@@ -28,11 +28,13 @@
 
     function Box({className='', size, style, ...rest}) {
       const sizeClassName = size ? `box--${size}` : ''
+      const props = {
+        className: `box ${className} ${sizeClassName}`,
+        style: {fontStyle: 'italic', ...style},
+        ...rest
+      }
       return (
-        <div  className={`box ${className} ${sizeClassName}`}
-          style={{fontStyle: 'italic', ...style}}
-          {...rest}
-        />
+        <div {...props} />
       )
     }
 

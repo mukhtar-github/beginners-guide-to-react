@@ -1491,7 +1491,7 @@ const state = {eventCount: 0, username: ''}
     renderApp()
 ```
 
-Then let's take a look at this input. We want this you typed to get updated when we enter some new username. I'm going to say onBlur and we'll say setState('username'). Then we need to specify a value here. What we need is to get the value of the input that is receiving the onBlur event. As an argument to the event handler, we receive the event. Then we can use that event to get the target of the event, which will be our input. Then we'll get that value from the input. If we save that, then we can type in Kent C Dodds and then blur. Our state gets updated.
+Then let's take a look at this input. We want this you typed to get updated when we enter some new username. I'm going to say onBlur and we'll say setState('username'). Then we need to specify a value here. What we need is to get the value of the input that is receiving the onBlur event. As an argument to the event handler, we receive the event. Then we can use that event to get the target of the event, which will be our input. Then we'll get that value from the input. If we save that, then we can type in Kent C Dodds and then blur. Our state gets updated. If we want this to get updated as we're typing, then we can change this to onChange. As the user types in this input, we'll get that update to our state and we'll re-render the application.
 
 ```javascript
 const state = {eventCount: 0, username: ''}
@@ -1508,7 +1508,8 @@ const state = {eventCount: 0, username: ''}
           </p>
           <p>You typed: {state.username}</p>
           <p>
-            <input onBlur={event => setState({username: event.target.value})}/>
+            {/*<input onBlur={event => setState({username: event.target.value})}/>*/}
+            <input onChange={event => setState({username: event.target.value})}/>
           </p>
         </div>
       )
@@ -1525,8 +1526,6 @@ const state = {eventCount: 0, username: ''}
 
     renderApp()
 ```
-
-If we want this to get updated as we're typing, then we can change this to onChange. As the user types in this input, we'll get that update to our state and we'll re-render the application.
 
 ```html
 <body>

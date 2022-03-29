@@ -1362,3 +1362,26 @@ $0.className
 ```
 
 In addition, if we were to take all of our props and make a props object here, we just move all of this right here, convert it to JavaScript rather than JSX syntax, and then spread those props. That will work just as well. Then let's say that this were class instead of className.
+
+```javascript
+function Box({style, size, className = '', ...rest}) {
+  const sizeClassName = size ? `box--${size}` : ''
+  const props = {
+    className: `box ${className} ${sizeClassName}`,
+    style: {fontStyle: 'italic', ...style},
+    ...rest
+  }
+  return <div {...props} />
+}
+
+<Box size="small" style={{backgroundColor: 'lightblue'}}>
+  small lightblue box
+</Box>
+<Box size="medium" style={{backgroundColor: 'pink'}}>
+  medium pink box
+</Box>
+<Box size="large" style={{backgroundColor: 'orange'}}>
+  large orange box
+</Box>
+<Box>sizeless box</Box>
+```

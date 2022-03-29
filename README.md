@@ -1409,3 +1409,51 @@ Also accepting a size prop to separate the code for the users of the Box compone
 Application’s can be laid out and styled pretty, but if they don’t respond to interactions from the user then they’re just web pages, not apps. Let’s get an introduction to event handlers with React. There are a ton of supported events that you can find on the docs. We still haven’t gotten to state yet, so we’ve implemented our own little way of managing state and re-rendering our component so we can play around with event handlers.
 
 One thing you’ll want to know is that events with React are very similar to working with events in regular DOM. React does have an optimization implementation on top of the event system called SyntheticEvents, but most of the time you won’t observe any difference with those events from regular DOM events (and you can always get access to the native event using the nativeEvent property).
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootElement = document.getElementById('root')
+
+    const state = {eventCount: 0, username: ''}
+
+    function App() {
+      function handleClick() {
+        setState({eventCount: state.eventCount + 1})
+      }
+
+      function handleChange(event) {
+        setState({username: event.target.value})
+      }
+
+      return (
+        <div>
+          <p>There have been {state.eventCount} events.</p>
+          <p>
+            <button onClick={handleClick}>Click Me</button>
+          </p>
+          <p>You typed: {state.username}</p>
+          <p>
+            <input onChange={handleChange} />
+          </p>
+        </div>
+      )
+    }
+
+    function setState(newState) {
+      Object.assign(state, newState)
+      renderApp()
+    }
+
+    function renderApp() {
+      ReactDOM.render(<App />, document.getElementById('root'))
+    }
+
+    renderApp()
+  </script>
+</body>
+```

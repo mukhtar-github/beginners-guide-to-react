@@ -9,14 +9,6 @@
     const state = {eventCount: 0, username: ''}
 
     function App() {
-      function handleClick() {
-        setState({eventCount: state.eventCount + 1})
-      }
-
-      function handleChange(event) {
-        setState({username: event.target.value})
-      }
-
       return (
         <div>
           <p>There have been {state.eventCount} events.</p>

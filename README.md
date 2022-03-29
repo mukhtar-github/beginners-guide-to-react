@@ -1410,6 +1410,48 @@ Application’s can be laid out and styled pretty, but if they don’t respond t
 
 One thing you’ll want to know is that events with React are very similar to working with events in regular DOM. React does have an optimization implementation on top of the event system called SyntheticEvents, but most of the time you won’t observe any difference with those events from regular DOM events (and you can always get access to the native event using the nativeEvent property).
 
+Here we have an app component that is rendering some JSX here for there have been events, click me, you typed, and then an input here. We have some state that is running this application component. If I update the event count to 10, then we're going to see there have been 10 events. If I update the username to 'Hello there' and save that, then we're going to see you typed Hello there. The value of the input isn't getting updated and there have actually not been 10 events, so let's go ahead and wire up things so we can update our state and re-render the app.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootElement = document.getElementById('root')
+
+    const state = {eventCount: 10, username: 'hellothere'}
+
+    function App() {
+      return (
+        <div>
+          <p>There have been {state.eventCount} events.</p>
+          <p>
+            <button>Click Me</button>
+          </p>
+          <p>You typed: {state.username}</p>
+          <p>
+            <input />
+          </p>
+        </div>
+      )
+    }
+
+    function setState(newState) {
+      Object.assign(state, newState)
+      renderApp()
+    }
+
+    function renderApp() {
+      ReactDOM.render(<App />, document.getElementById('root'))
+    }
+
+    renderApp()
+  </script>
+</body>
+```
+
 ```html
 <body>
   <div id="root"></div>

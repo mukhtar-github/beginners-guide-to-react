@@ -1508,7 +1508,7 @@ const state = {eventCount: 0, username: ''}
           </p>
           <p>You typed: {state.username}</p>
           <p>
-            <input onBlur={event => setState({event.target.value})}/>
+            <input onBlur={event => setState({username: event.target.value})}/>
           </p>
         </div>
       )

@@ -1323,28 +1323,30 @@ One useful feature of creating components like this is we can use it to separate
 
 > This applies to more than styling. It is a great example of creating versatile components through abstraction.
 
-Let's make that work. I'll remove the className here. We'll save this. Let's scroll up to the top, and we'll see that our small, light-blue box is no longer small. Now I'm going to take the size prop, and we're going to generate a size className. If the size prop is specified, then we'll say box--size. Otherwise, we'll do an empty string. Then we can put that size className inside of our className list here. If we save that, then we get a small, light-blue box, and users of our box component no longer need to concern themselves with the className that needs to be applied to create a small box.
+Let's make that work. I'll remove the className here. We'll save this. Let's scroll up to the top, and we'll see that our small, light-blue box is no longer small. Now I'm going to take the size prop, and we're going to generate a size className. *If the size prop is specified, then we'll say box--size. Otherwise, we'll do an empty string.* Then we can put that size className inside of our className list here. If we save that, then we get a small, light-blue box, and users of our box component no longer need to concern themselves with the className that needs to be applied to create a small box.
+
+This Box component can deal with the implementation details of what it takes to make a small box. This means that we could change the classNames that we use. We could use a third-party CSS library, and we could change that CSS library. Any component that's using the box just needs to follow the API that the box creates for it. We can separate our components from the classNames used to style them. That said, we can still apply our own classNames if we want to, and we can apply our styles if we want to because those are going to be combined with whatever is happening in the box. Let's go ahead and update the classNames for both of these because I like the size prop better.
 
 ```javascript
- function Box({style, size, className = '', ...rest}) {
-      const sizeClassName = size ? `box--${size}` : ''
-      return (
-        <div
-          className={`box ${className} ${sizeClassName}`}
-          style={{fontStyle: 'italic', ...style}}
-          {...rest}
-        />
-      )
-    }
+function Box({style, size, className = '', ...rest}) {
+  const sizeClassName = size ? `box--${size}` : ''
+  return (
+    <div
+      className={`box ${className} ${sizeClassName}`}
+      style={{fontStyle: 'italic', ...style}}
+      {...rest}
+    />
+  )
+}
 
 <Box size="small" style={{backgroundColor: 'lightblue'}}>
-          small lightblue box
-        </Box>
-        <Box size="medium" style={{backgroundColor: 'pink'}}>
-          medium pink box
-        </Box>
-        <Box size="large" style={{backgroundColor: 'orange'}}>
-          large orange box
-        </Box>
-        <Box>sizeless box</Box>
+  small lightblue box
+</Box>
+<Box size="medium" style={{backgroundColor: 'pink'}}>
+  medium pink box
+</Box>
+<Box size="large" style={{backgroundColor: 'orange'}}>
+  large orange box
+</Box>
+<Box>sizeless box</Box>
 ```

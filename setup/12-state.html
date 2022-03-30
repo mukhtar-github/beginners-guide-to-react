@@ -6,8 +6,12 @@
   <script type="text/babel">
 
     function Greeting() {
-      const name = ''
-      const handleChange = event => name = event.target.value
+      // const stateArray = React.useState('')
+      // const name = stateArray[0]
+      // const setName = stateArray[1]
+      const [name, setName] = React.useState('')
+
+      const handleChange = event => setName(event.target.value)
       return (
         <div>
           <form>

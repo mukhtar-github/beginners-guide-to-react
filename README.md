@@ -1640,6 +1640,25 @@ function Greeting() {
 ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```
 
+Now, we're going to have some state here for the name. If there is a name, then we'll have it say strong, "Hello, Name!" Otherwise we'll have it say, "Please type your name." Great. Then if we say Kent, save that. It will say, "Hello, Kent!" By default it doesn't say anything.
+
+```javascript
+function Greeting() {
+  const name = ''
+  return (
+    <div>
+      <form>
+        <label htmlFor='name'>Name: </label>
+        <input id='name' />
+      </form>
+      {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+    </div>
+  )  
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
+
 ```html
 <body>
   <div id="root"></div>

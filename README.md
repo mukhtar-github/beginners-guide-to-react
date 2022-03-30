@@ -1604,6 +1604,24 @@ function Greeting() {
 ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```
 
+Then we'll have this message, "Please type your name." Then we want to associate this label to this input so that it's properly associated and you can tell that by clicking on the label. If it doesn't focus the input, then it's not properly labeled.
+
+```javascript
+function Greeting() {
+  return (
+    <div>
+      <form>
+        <label>Name: </label>
+        <input />
+      </form>
+      Please type your name
+    </div>
+  )  
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
+
 ```html
 <body>
   <div id="root"></div>

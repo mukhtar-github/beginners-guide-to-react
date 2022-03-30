@@ -1622,6 +1622,24 @@ function Greeting() {
 ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```
 
+Let's add an ID to our input of name and an htmlFor of name. htmlFor is like the for attribute in HTML but in JSX you need to use htmlFor. That's one of the few differences between JSX and regular HTML. Let's save that, come back here. When I click on name, it now focuses the input. Great.
+
+```javascript
+function Greeting() {
+  return (
+    <div>
+      <form>
+        <label htmlFor='name'>Name: </label>
+        <input id='name' />
+      </form>
+      Please type your name
+    </div>
+  )  
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
+
 ```html
 <body>
   <div id="root"></div>

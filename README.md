@@ -1589,6 +1589,21 @@ In React, state is associated to components and when the state changes, the comp
 
 Let's start by making our form. Here we'll have our div and then we'll make a form. Then we'll have a label with the name and our input and we'll save that. We get that form.
 
+```javascript
+function Greeting() {
+  return (
+    <div>
+      <form>
+        <label>Name: </label>
+        <input />
+      </form>
+    </div>
+  )  
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
+
 ```html
 <body>
   <div id="root"></div>

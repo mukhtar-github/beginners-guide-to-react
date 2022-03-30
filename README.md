@@ -1659,6 +1659,28 @@ function Greeting() {
 ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```
 
+Now, let's wire up an onchange handler for this input. We'll call that handle change. I'll bring that up here and say handle change is an arrow function that accepts an event and it needs to update the state of the name. We need to have some way to update that and we can't simply say name = event.target.value. That's not going to work because that won't trigger a re-render and, even if it were to trigger a re-render, this whole function would be recalled. Then the name that we would be setting would get garbage collected and we'd create a new name variable.
+
+```javascript
+function Greeting() {
+  const name = ''
+  const handleChange = event => name = event.target.value
+  return (
+    <div>
+      <form>
+        <label htmlFor='name'>Name: </label>
+        <input onChange={handleChange} id='name' />
+      </form>
+      {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+    </div>
+  )  
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
+
+Instead, React has what's called a React hook for maintaining state for a component. We're going to use that with react.useState. We'll pass it the default value of an empty string and react.useState returns an array, we'll call this our state array, and we'll get our name from state array at index zero and our set name from state array at index one.
+
 ```html
 <body>
   <div id="root"></div>

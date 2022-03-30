@@ -1587,6 +1587,8 @@ An application that responds to user input is valuable, but what do we do with t
 
 In React, state is associated to components and when the state changes, the component is updated. To get access to this state and to update it, we use what is called a “React Hook” which allows us to call into React from within our component and let it know that we need to manage some state. In this lesson, you’ll learn how to use the useState hook to do this.
 
+Let's start by making our form. Here we'll have our div and then we'll make a form. Then we'll have a label with the name and our input and we'll save that. We get that form.
+
 ```html
 <body>
   <div id="root"></div>

@@ -1704,4 +1704,52 @@ function Greeting() {
 ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```
 
-Woo! React rocks! In review, to use state in a React function component, you use the useState hook from React. The useState hook accepts the initial value, so when this greeting component is initially rendered, that is going to be the value of our name variable.
+Woo! React rocks! In review, to use state in a React function component, you use the *useState hook from React*. The useState hook accepts the initial value, so when this greeting component is initially rendered, that is going to be the value of our name variable. Any time we call this second element of the array, our updater function will trigger a re-render of this entire function component. When React useState is called again, it will ignore the initial value and instead give us the current value of that name.
+
+> useState's updater function triggers a rerendering. Use this with events to easily update your application.
+
+Because React keeps track of the order in which these are called, we could add a second one. Here we'll call this name two and set name two. We'll make another handle change to handle change two. We'll have that call set name two. Then we'll just duplicate all this stuff, put that inside of another div here, and then we'll reference name two and name two. This will be handle change two.
+
+Now we can say Kent 1 and Kent 2. Those states are managed independently of one another because React keeps track of the order in which these are going to be called, allowing you to use state as much as you need for your component. The values in here can be anything. You can make it a Boolean or you can make it a number or you can make it an object or an array -- whatever makes sense for the state that you're trying to manage.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+
+    function Greeting() {
+      // const stateArray = React.useState('')
+      // const name = stateArray[0]
+      // const setName = stateArray[1]
+      const [name, setName] = React.useState('')
+      const [name2, setName2] = React.useState('')
+
+      const handleChange = event => setName(event.target.value)
+      const handleChange2 = event => setName2(event.target.value)
+      return (
+        <div>
+          <div>
+            <form>
+              <label htmlFor='name'>Name: </label>
+              <input onChange={handleChange} id='name' />
+            </form>
+            {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+          </div>
+          <div>
+            <form>
+              <label htmlFor='name'>Name2: </label>
+              <input onChange={handleChange2} id='name' />
+            </form>
+            {name2 ? <strong>Hello {name2}</strong> : 'Please type your name'}
+          </div>
+        </div>
+      )  
+    }
+
+    ReactDOM.render(<Greeting />, document.getElementById('root'))
+  </script>
+</body>
+```

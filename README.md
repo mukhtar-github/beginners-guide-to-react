@@ -1706,7 +1706,7 @@ ReactDOM.render(<Greeting />, document.getElementById('root'))
 
 Woo! React rocks! In review, to use state in a React function component, you use the *useState hook from React*. The useState hook accepts the initial value, so when this greeting component is initially rendered, that is going to be the value of our name variable. Any time we call this second element of the array, our updater function will trigger a re-render of this entire function component. When React useState is called again, it will ignore the initial value and instead give us the current value of that name.
 
-> useState's updater function triggers a rerendering. Use this with events to easily update your application.
+> useState's updater function triggers a re-rendering. Use this with events to easily update your application.
 
 Because React keeps track of the order in which these are called, we could add a second one. Here we'll call this name two and set name two. We'll make another handle change to handle change two. We'll have that call set name two. Then we'll just duplicate all this stuff, put that inside of another div here, and then we'll reference name two and name two. This will be handle change two.
 
@@ -1747,6 +1747,48 @@ Now we can say Kent 1 and Kent 2. Those states are managed independently of one 
           </div>
         </div>
       )  
+    }
+
+    ReactDOM.render(<Greeting />, document.getElementById('root'))
+  </script>
+</body>
+```
+
+## Manage side-effects in a React Component with the useEffect hook
+
+### setup/13-side-effects.html
+
+Another piece to the web application puzzle is managing side-effects of our user’s interactions. In this lesson we’ll be interacting with the browser’s localStorage API, but this same thing would apply if we’re interacting with a backend server, or the geolocation API, or anything else that needs to happen when the state of our component changes. You’ll learn how to use React’s useEffect hook to manage the side-effect of saving state into localStorage, and also how to re-synchronize our application with the stored value in localStorage. Learn more about viewing localStorage in the Chrome DevTools.
+
+I want to be able to type in here some value and have that saved in localStorage so that when I refresh the page, that value will be retrieved from localStorage and be loaded into the input.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    function Greeting() {
+      const [name, setName] = React.useState(
+        window.localStorage.getItem('name') || '',
+      )
+
+      React.useEffect(() => {
+        window.localStorage.setItem('name', name)
+      })
+
+      const handleChange = event => setName(event.target.value)
+
+      return (
+        <div>
+          <form>
+            <label htmlFor="name">Name: </label>
+            <input value={name} onChange={handleChange} id="name" />
+          </form>
+          {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+        </div>
+      )
     }
 
     ReactDOM.render(<Greeting />, document.getElementById('root'))

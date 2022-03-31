@@ -1871,3 +1871,5 @@ Something that’s really important to know about React’s useEffect hook is th
 In this lesson we’ll observe that our effect callback is getting called more than it needs to be, and you’ll learn how to add a dependency array so it is updated only when the state it relies on changes. And in real applications, you’ll want to make sure you have and follow the rules from the ESLint plugin: eslint-plugin-react-hooks (many tools like Create React App have this installed and configured by default).
 
 We've added a little bit here to simulate another optimization that we want to make. Here now we have a count state, and that's just being rendered into this button. Every time we click on the button, it re-renders our app component, which triggers a re-render of our greeting component. Every time our greeting component re-renders, this useEffect is going to be called. If we console.log('greeting useEffect'), we'll save that. Open up our DevTools. We see we get the greeting useEffect for the initial render. Every time I click this, we'll get another greeting useEffect.
+
+

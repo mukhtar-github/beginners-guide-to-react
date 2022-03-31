@@ -1931,3 +1931,13 @@ In review, the problem that we were solving here is our effect callback was bein
   </script>
 </body>
 ```
+
+## Create reusable custom hooks
+
+### setup/16-custom-hooks.html
+
+One of the things we love about programming is the ability to take code, place it in a function, and reuse it in other places in the software. Let’s imagine a scenario where we want to share our localStorage code with other components so other components could synchronize state with localStorage (or we could even do it with different variables in the same component). Take a step back from React specifically and considering how code reuse works in JavaScript in general, we can simply make a function, put our relevant code in that function, and then call it from the original location. That process works exactly the same with React hooks code, so let’s do that!
+
+In the process, we’ll learn a few of the conventions for doing this and we’ll learn about some additional challenges that come with generalizing our code. As always, follow AHA programming practices!
+
+The logic that we have here for storing some state into localStorage and keeping it synchronized could be useful in other areas of our application. Thankfully, React Hooks are pretty Vanilla JavaScript, and sharing that logic is just as straightforward as sharing any other logic in JavaScript. What we're going to do is make a function. We'll call that useLocalStorageState(), and then we'll move these lines of code into that function, and we'll replace them with a call to that function.

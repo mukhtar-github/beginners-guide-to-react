@@ -1760,7 +1760,9 @@ Now we can say Kent 1 and Kent 2. Those states are managed independently of one 
 
 Another piece to the web application puzzle is managing side-effects of our user’s interactions. In this lesson we’ll be interacting with the browser’s localStorage API, but this same thing would apply if we’re interacting with a backend server, or the geolocation API, or anything else that needs to happen when the state of our component changes. You’ll learn how to use React’s useEffect hook to manage the side-effect of saving state into localStorage, and also how to re-synchronize our application with the stored value in localStorage. Learn more about viewing localStorage in the Chrome DevTools.
 
-I want to be able to type in here some value and have that saved in localStorage so that when I refresh the page, that value will be retrieved from localStorage and be loaded into the input.
+I want to be able to type in here some value and have that saved in localStorage so that when I refresh the page, that value will be retrieved from localStorage and be loaded into the input. This is called a side effect, and in react, to do this, you use react useEffect. This is another hook, like useState. This function will be called every time the greeting component is rendered.
+
+Anytime the greeting component is rendered, we're going to say window.localStorage.setItem -- we'll call it name in localStorage, and we'll set it to the value of name. If we save that, and then open our dev tools and in the application tab here, we can go to localStorage, and we'll see that there's nothing in there. Then we can type a name, and we'll see that the name gets updated in localStorage with whatever the current value for that name variable is.
 
 ```html
 <body>

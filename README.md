@@ -1768,6 +1768,10 @@ You'll notice that if I refresh here, I'm not getting that name value loaded int
 
 Here we'll say window.localStorage.getItem(name), and if that returns null because there's nothing in there, then we'll default that to an empty string. We save that. We type a name. We hit refresh, and we notice that the value in localStorage is still consistent. We notice the value right here is correct, but the name input does not have the name in there. We need to specify what the value for the input should be. We specify a value of name.
 
+Now when we save this, we'll get a refresh, and now the value is the same value that's in localStorage and in memory for the state of our react component. We'll notice that as we change this and refresh, we always get that value from localStorage, and we keep that value updated in localStorage as well.
+
+In review, to make all this work, we first used react useEffect to set the name value in localStorage to the name value in our state in memory. Then, to have our state in memory be initialized from localStorage, we used Window.localStorage.getItem(name), and if there is nothing in there, then we'll initialize it to an empty string as a default. Then, to make sure that the input is showing the same value for the name as a name in memory, we specified a value prop, changing this input from an uncontrolled to a controlled input.
+
 ```html
 <body>
   <div id="root"></div>

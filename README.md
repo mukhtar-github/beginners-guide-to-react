@@ -1764,6 +1764,10 @@ I want to be able to type in here some value and have that saved in localStorage
 
 Anytime the greeting component is rendered, we're going to say window.localStorage.setItem -- we'll call it name in localStorage, and we'll set it to the value of name. If we save that, and then open our dev tools and in the application tab here, we can go to localStorage, and we'll see that there's nothing in there. Then we can type a name, and we'll see that the name gets updated in localStorage with whatever the current value for that name variable is.
 
+You'll notice that if I refresh here, I'm not getting that name value loaded into my input, and the value in localStorage is getting cleared. This is because we initialize our state to an empty string, and we don't take the localStorage value into account. Then, because we've rendered, we run this callback, updating the localStorage item for name to that new empty string name. We need to initialize that value to whatever's in localStorage if it's there, and an empty string if it's not.
+
+Here we'll say window.localStorage.getItem(name), and if that returns null because there's nothing in there, then we'll default that to an empty string. We save that. We type a name. We hit refresh, and we notice that the value in localStorage is still consistent. We notice the value right here is correct, but the name input does not have the name in there. We need to specify what the value for the input should be. We specify a value of name.
+
 ```html
 <body>
   <div id="root"></div>

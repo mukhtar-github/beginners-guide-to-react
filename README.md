@@ -1815,3 +1815,49 @@ Something that’s important to recognize is that every time you call the state 
 In our case, we’re reading into localStorage to initialize our state value for the first render of our Greeting component. But after that first render, we don’t need to read into localStorage anymore because we’re managing that state in memory now (specifically in that name variable that React gives us each render). So reading into localStorage every render after the first one is unnecessary. So React allows us to specify a function instead of an actual value, and then it will only call that function when it needs to–on the initial render. In this lesson, I’ll show you how to do this and demonstrate how it works.
 
 One thing that's important to know about the useState Hook is that the initial value you provide here is really important for the initial render of our component, but then it's ignored for renders of our component thereafter. That's normally not a problem, especially if you have just an empty string here, but here we're reading into localStorage every time our greeting component is re-rendered. We can add a console.log('rendered') right here to see how often that is.
+
+We open up our console and we'll see that we already have a rendered here for our initial render of the greeting component. As we type, we get a render every time we type a character. We only need it to read into localStorage for the initialization of our state. We don't need to have it read into localStorage for every single time we re-render. This isn't really a huge deal here because reading into localStorage is pretty fast and we're not parsing anything, but if we were parsing a big JSON object, then this could be a problem.
+
+To combat this, React.useState has a lazy initialization feature. You can provide a function as the initial value, and that function will be called to retrieve the initial value. That function will only be called when it's absolutely necessary to retrieve the initial value. If we turn this into an arrow function, which simply returns that initial value, then we save this, we'll notice that we're still getting our renders, but this function is not getting called, except on the initial value retrieval.
+
+We can prove this by making this a multiline arrow function, returning that value and console.log('hello') in here. Now we get that hello, and then we get that rendered, and that's an important note, is that this function is called synchronously, and it's expected to be synchronous. As we type hello, you'll see that we do not get that console.log('hello'). We save ourselves the expense of reading into local storage on every render.
+
+In review, the problem that we're solving here is that reading into localStorage is not necessary, except for the initial render of our component. We turn our initial value argument here into a function so that React will call it only when it's necessary to get that initial value, which is only on the first render.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+
+    function Greeting() {
+      const [name, setName] = React.useState(() => {
+        console.log('hello')
+        return window.localStorage.getItem('name') || ''
+      })
+
+      console.log('rendered')
+
+      React.useEffect(() => {
+        window.localStorage.setItem('name', name)
+      })
+
+      const handleChange = event => setName(event.target.value)
+
+      return (
+        <div>
+          <form>
+            <label htmlFor="name">Name: </label>
+            <input value={name} onChange={handleChange} id="name" />
+          </form>
+          {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+        </div>
+      )
+    }
+
+    ReactDOM.render(<Greeting />, document.getElementById('root'))
+  </script>
+</body>
+```

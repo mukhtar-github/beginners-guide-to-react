@@ -1878,3 +1878,56 @@ React useEffect accepts a second argument as an optimization to combat this prob
 
 If we save that, then we'll notice that we get that greeting useEffect called initially, and that's because useEffect is always going to be called on the initial mount. Hereafter, when we click on this button, we're not going to get the greeting useEffect. Then when we update the name value, we're going to get greeting useEffect called because the name has changed, and the state of the world is now out of sync with the state of our application. React is going to call our useEffect callback.
 
+It's very important that you keep this dependency array accurate according to the dependencies that your callback function relies on. For example, we rely on name. That's why it's important that we keep this dependency list in here. If you don't keep this list accurate, then you could be missing out on synchronizing the state of the world with state changes that happen in your app, and your users could lose saved work.
+
+For example, if I were to remove the name from this array and save that, then we'll get that greeting useEffect called. As I type in here, we'll notice that the state of my application is being kept updated, but I'm not getting any console.logs. If I refresh, I'm going to be back to where I was before. I, as the user of this application, have lost work, because my code was not properly synchronizing the state of my application with the state of the world outside my application.
+
+In an effort to help you avoid making mistakes here, the React team has created an ESLint plugin called eslint-plugin-react-hooks which you can use to not only ensure that the dependency array is kept up-to-date, but keep it up-to-date automatically for you using ESLint's fix feature. The rule that will help you with this is the exhaustive-deps rule, and I strongly advise that you use this tool and follow that rule.
+
+In review, the problem that we were solving here is our effect callback was being called more than it needed to be. I want to make a special note here, that just because it was being called more than it needed to be didn't mean we had a bug in our application, so this is just an optimization to make our application run a little faster. A dependency array may not be necessary in all cases, but in our case, we could simply add this dependency array with the one dependency that our effect callback relied on. This callback is only called when necessary.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+
+    function Greeting() {
+      const [name, setName] = React.useState(
+        () => window.localStorage.getItem('name') || '',
+      )
+
+      React.useEffect(() => {
+        console.log('greeting useEffect')
+        window.localStorage.setItem('name', name)
+      }, [name])
+
+      const handleChange = event => setName(event.target.value)
+
+      return (
+        <div>
+          <form>
+            <label htmlFor="name">Name: </label>
+            <input value={name} onChange={handleChange} id="name" />
+          </form>
+          {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+        </div>
+      )
+    }
+
+    function App() {
+      const [count, setCount] = React.useState(0)
+      return (
+        <>
+          <button onClick={() => setCount(c => c + 1)}>{count}</button>
+          <Greeting />
+        </>
+      )
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+  </script>
+</body>
+```

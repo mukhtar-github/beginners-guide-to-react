@@ -1942,6 +1942,8 @@ In the process, we’ll learn a few of the conventions for doing this and we’l
 
 The logic that we have here for storing some state into localStorage and keeping it synchronized could be useful in other areas of our application. Thankfully, React Hooks are pretty Vanilla JavaScript, and sharing that logic is just as straightforward as sharing any other logic in JavaScript. What we're going to do is make a function. We'll call that useLocalStorageState(), and then we'll move these lines of code into that function, and we'll replace them with a call to that function.
 
+We need to generalize the code that's in our function. Instead of a name, it might make more sense to call this state and setState. Instead of getting the item with the string name, it might make more sense for the user of this function to provide us a key for localStorage, so we'll accept a parameter called key.
+
 ```html
 <body>
   <div id="root"></div>

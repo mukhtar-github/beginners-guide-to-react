@@ -2037,6 +2037,8 @@ function Tilt({children}) {
 }
 ```
 
+We need React to give us the DOM node that creates for this particular React element so we can wire up vanilla-tilt to it. To do this, we're going to use a ref prop and we need to pass a ref which is an object that has a mutable current property. Let's go ahead and use the React.useRef hook. From that we'll get our tiltRef and then we can copy that, paste it here to our ref. Then the tiltRef is an object that has a current property. That current property is the current value for this ref object.
+
 ```html
 <body>
   <div id="root"></div>

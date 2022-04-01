@@ -2024,3 +2024,5 @@ React is really good at creating and updating DOM elements, but sometimes you ne
 
 You create a ref object with the useRef hook and that object’s current property is the current value of the ref. It can be anything, but if you pass that ref object to a component as a prop called ref, then React will set the current property to the DOM element it creates so you can reference it and manipulate it in your useEffect hook. In this lesson we’ll get to see how that works with a cool library called vanilla-tilt.
 
+We have a function component called Tilt. Thanks to use some handy class names and some handier CSS, we have it styled in this fancy-looking way but we can make it do something fancy by using a library that I've included called vanilla-tilt. Vanilla-tilt takes a DOM node and makes it react to when the user mouses over that DOM node.
+

@@ -1942,45 +1942,64 @@ In the process, we’ll learn a few of the conventions for doing this and we’l
 
 The logic that we have here for storing some state into localStorage and keeping it synchronized could be useful in other areas of our application. Thankfully, React Hooks are pretty Vanilla JavaScript, and sharing that logic is just as straightforward as sharing any other logic in JavaScript. What we're going to do is make a function. We'll call that useLocalStorageState(), and then we'll move these lines of code into that function, and we'll replace them with a call to that function.
 
-We need to generalize the code that's in our function. Instead of a name, it might make more sense to call this state and setState. Instead of getting the item with the string name, it might make more sense for the user of this function to provide us a key for localStorage, so we'll accept a parameter called key.
+```javascript
+function Greeting() {
+  const [name, setName] = React.useState(
+    () => window.localStorage.getItem('name') || '',
+  )
 
-```html
-<body>
-  <div id="root"></div>
-  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
-  <script type="text/babel">
-    
-    function useLocalStorageState(key, defaultValue = '') {
-      const [state, setState] = React.useState(
-        () => window.localStorage.getItem(key) || defaultValue,
-      )
+  React.useEffect(() => {
+    window.localStorage.setItem('name', name)
+  }, [name])
 
-      React.useEffect(() => {
-        window.localStorage.setItem(key, state)
-      }, [key, state])
+  const handleChange = event => setName(event.target.value)
 
-      return [state, setState]
-    }
+  return (
+    <div>
+      <form>
+        <label htmlFor="name">Name: </label>
+        <input value={name} onChange={handleChange} id="name" />
+      </form>
+      {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+    </div>
+  )
+}
 
-    function Greeting() {
-      const [name, setName] = useLocalStorageState('name')
+ReactDOM.render(<Greeting />, document.getElementById('root'))
+```
 
-      const handleChange = event => setName(event.target.value)
+We need to generalize the code that's in our function. Instead of a name, it might make more sense to call this state and setState. Instead of getting the item with the string name, it might make more sense for the user of this function to provide us a key for localStorage, so we'll accept a parameter called key. Instead of this as a default value, it might make sense for people to provide us their own default value. We'll accept that as another parameter. We can default that to an empty string just in case they don't want to provide it.
 
-      return (
-        <div>
-          <form>
-            <label htmlFor="name">Name: </label>
-            <input value={name} onChange={handleChange} id="name" />
-          </form>
-          {name ? <strong>Hello {name}</strong> : 'Please type your name'}
-        </div>
-      )
-    }
+Then we'll replace that with the default value. We'll replace the string name with a parameter that we accept called key. Then let's make sure we update these two references to that old state value as well.
 
-    ReactDOM.render(<Greeting />, document.getElementById('root'))
-  </script>
-</body>
+```javascript
+function useLocalStorageState(key, defaultValue = '') {
+  const [state, setState] = React.useState(
+    () => window.localStorage.getItem(key) || defaultValue,
+  )
+
+  React.useEffect(() => {
+    window.localStorage.setItem(key, state)
+  }, [key, state])
+
+  return [state, setState]
+}
+
+function Greeting() {
+  const [name, setName] = useLocalStorageState('name')
+
+  const handleChange = event => setName(event.target.value)
+
+  return (
+    <div>
+      <form>
+        <label htmlFor="name">Name: </label>
+        <input value={name} onChange={handleChange} id="name" />
+      </form>
+      {name ? <strong>Hello {name}</strong> : 'Please type your name'}
+    </div>
+  )
+}
+
+ReactDOM.render(<Greeting />, document.getElementById('root'))
 ```

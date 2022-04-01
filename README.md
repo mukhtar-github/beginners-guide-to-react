@@ -1970,7 +1970,13 @@ ReactDOM.render(<Greeting />, document.getElementById('root'))
 
 We need to generalize the code that's in our function. Instead of a name, it might make more sense to call this state and setState. Instead of getting the item with the string name, it might make more sense for the user of this function to provide us a key for localStorage, so we'll accept a parameter called key. Instead of this as a default value, it might make sense for people to provide us their own default value. We'll accept that as another parameter. We can default that to an empty string just in case they don't want to provide it.
 
-Then we'll replace that with the default value. We'll replace the string name with a parameter that we accept called key. Then let's make sure we update these two references to that old state value as well.
+Then we'll replace that with the default value. We'll replace the string name with a parameter that we accept called key. Then let's make sure we update these two references to that old state value as well. Then when we call useLocalStorageState, we're going to need to get access to that stateUpdater function and to the state value itself. Let's return state and setState. We can make our custom Hook have a similar API to useState so it's familiar to people who are used to the useState Hook.
+
+Then we can come down here. We can get our name and our setName from useLocalStorageState. We'll specify our key as name. Then we're done. That's a pretty straight-up refactor from the code that we had before into a custom function. If we type in here Chuck and then refresh, we'll see that Chuck is still in there. One thing I want to call out here is that we prefaced our function with the word use. That's a convention and not required. We could change this to whateverWeWant. Save that. Things will work just as well. We can hit refresh. There we have it.
+
+The reason that we follow this convention is because the eslint-plugin-react-hooks is able to enforce some of the same recommendations and rules on our custom Hooks as it is on the built-in Hooks because it acts under the assumption that functions that begin with use are custom Hooks.
+
+In review, what we did here is we took some code that was in our function component. We moved it into its own function and then called it from our function component. This was no different from any other regular JavaScript refactor, which makes it easy to share logic across components and even make open source libraries that expose custom Hooks like this.
 
 ```javascript
 function useLocalStorageState(key, defaultValue = '') {

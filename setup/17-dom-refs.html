@@ -46,6 +46,7 @@
 
     function Tilt({children}) {
       const tiltRef=React.useRef()
+      console.log(tiltRef.current)
       return (
         <div ref={tiltRef} className="tilt-root">
           <div className="tilt-child">{children}</div>

@@ -5,19 +5,21 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
 
-    function useLocalStorageState() {
-      const [name, setName] = React.useState(
-        () => window.localStorage.getItem('name') || '',
+    function useLocalStorageState(key, defaultValue = '') {
+      const [state, setState] = React.useState(
+        () => window.localStorage.getItem(key) || defaultValue,
       )
 
       React.useEffect(() => {
         console.log('greeting useEffect')
-        window.localStorage.setItem('name', name)
-      }, [name])
+        window.localStorage.setItem(key, state)
+      }, [state])
+
+      return [state, setState]
     }
 
     function Greeting() {
-      
+      const [name, setName] = useLocalStorageState('name')
 
       const handleChange = event => setName(event.target.value)
 

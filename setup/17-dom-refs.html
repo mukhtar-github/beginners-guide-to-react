@@ -47,7 +47,7 @@
     function Tilt({children}) {
 
       const tiltRef=React.useRef('here')
-      React.useRef(() => {
+      React.useEffect(() => {
         console.log(tiltRef.current)
       })
       

@@ -2081,6 +2081,8 @@ function Tilt({children}) {
 }
 ```
 
+Here, how do we get the DOM node so we can initialize vanilla-tilt on it? We need to have some code that runs after React has updated the DOM and set our tiltRef.current property. Interacting with the DOM is a side effect. The logical place for this would be in a React.useEffect hook.
+
 ```html
 <body>
   <div id="root"></div>

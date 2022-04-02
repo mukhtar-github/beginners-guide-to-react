@@ -2309,3 +2309,130 @@ Sometimes it could be useful to understand the order in which your code is going
 The way that this works is we have a child component here that's maintaining a countState, and then that has a whole bunch of useEffects here, which are simply logging to the console when the callback is called and logging to the console in a cleanup function that it provides. Then we create our React element for rendering to the page, and then we log to the console that our render is finished and then we return that React element we created.
 
 We do the same thing for our App component, except here we're maintaining a showChild Boolean state. We have all those useEffects, and then we render a few React elements here for rendering this UI. Let's go ahead and take a look at what happens when we initially load this page. I'm going to refresh, I'll open up our DevTools, and I'll scroll down here to the app, so we can follow along in the code with what we're seeing in the console.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    // https://github.com/donavon/hook-flow
+
+    function Child() {
+      console.log('%c    Child: render start', 'color: MediumSpringGreen')
+
+      const [count, setCount] = React.useState(() => {
+        console.log('%c    Child: useState callback', 'color: tomato')
+        return 0
+      })
+
+      React.useEffect(() => {
+        console.log('%c    Child: useEffect no deps', 'color: LightCoral')
+        return () => {
+          console.log(
+            '%c    Child: useEffect no deps cleanup',
+            'color: LightCoral',
+          )
+        }
+      })
+
+      React.useEffect(() => {
+        console.log(
+          '%c    Child: useEffect empty deps',
+          'color: MediumTurquoise',
+        )
+        return () => {
+          console.log(
+            '%c    Child: useEffect empty deps cleanup',
+            'color: MediumTurquoise',
+          )
+        }
+      }, [])
+
+      React.useEffect(() => {
+        console.log('%c    Child: useEffect with dep', 'color: HotPink')
+        return () => {
+          console.log(
+            '%c    Child: useEffect with dep cleanup',
+            'color: HotPink',
+          )
+        }
+      }, [count])
+
+      const element = (
+        <button onClick={() => setCount(previousCount => previousCount + 1)}>
+          {count}
+        </button>
+      )
+
+      console.log('%c    Child: render end', 'color: MediumSpringGreen')
+
+      return element
+    }
+
+    function App() {
+      console.log('%cApp: render start', 'color: MediumSpringGreen')
+
+      const [showChild, setShowChild] = React.useState(() => {
+        console.log('%cApp: useState callback', 'color: tomato')
+        return false
+      })
+
+      React.useEffect(() => {
+        console.log('%cApp: useEffect no deps', 'color: LightCoral')
+        return () => {
+          console.log('%cApp: useEffect no deps cleanup', 'color: LightCoral')
+        }
+      })
+
+      React.useEffect(() => {
+        console.log('%cApp: useEffect empty deps', 'color: MediumTurquoise')
+        return () => {
+          console.log(
+            '%cApp: useEffect empty deps cleanup',
+            'color: MediumTurquoise',
+          )
+        }
+      }, [])
+
+      React.useEffect(() => {
+        console.log('%cApp: useEffect with dep', 'color: HotPink')
+        return () => {
+          console.log('%cApp: useEffect with dep cleanup', 'color: HotPink')
+        }
+      }, [showChild])
+
+      const element = (
+        <>
+          <label>
+            <input
+              type="checkbox"
+              checked={showChild}
+              onChange={e => setShowChild(e.target.checked)}
+            />{' '}
+            show child
+          </label>
+          <div
+            style={{
+              padding: 10,
+              margin: 10,
+              height: 30,
+              width: 30,
+              border: 'solid',
+            }}
+          >
+            {showChild ? <Child /> : null}
+          </div>
+        </>
+      )
+
+      console.log('%cApp: render end', 'color: MediumSpringGreen')
+
+      return element
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+  </script>
+</body>
+```

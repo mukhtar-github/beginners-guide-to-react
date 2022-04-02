@@ -2136,7 +2136,33 @@ function Tilt({children}) {
 
 Now, if we hover, we get that really cool effect. If we unclick the show tilt checkbox, that will unmount the tilt component from the page removing the DOM node from the page. However, there's still a bunch of event handlers on that DOM node and several references to that DOM node from within the vanilla tilt library. That means that the DOM node itself may not exist on the page but it does still exist in memory because there're references to it in vanilla-tilt. Unfortunately, this could lead to a memory leak. If we keep on mounting and unmounting this over and over and over again, then we're going to have a bunch of DOM node sitting around in memory that really aren't needed by the user anymore.
 
-To combat this problem, we can return a function which will be called for every update of our tilt component. In this function, we can say tiltNode.vanillaTilt which is a property that vanilla-tilt is adding to our DOM node .destroy. This will remove all references of our DOM node from vanilla-tilt and remove all event handlers so that we can avoid memory leaks with our tilt component. What you can't see is that that DOM node has actually been garbage collected properly. We don't need to worry about memory leaks anymore.
+To combat this problem, we can return a function which will be called for every update of our tilt component. In this function, we can say tiltNode.vanillaTilt which is a property that vanilla-tilt is adding to our DOM node .destroy(). This will remove all references of our DOM node from vanilla-tilt and remove all event handlers so that we can avoid memory leaks with our tilt component. What you can't see is that that DOM node has actually been garbage collected properly. We don't need to worry about memory leaks anymore.
+
+```javascript
+function Tilt({children}) {
+
+  const tiltRef=React.useRef('here')
+  React.useEffect(() => {
+    const tiltNode = tiltRef.current
+    const vanillaTiltOptions = {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.5
+    }
+    VanillaTilt.init(tiltNode, vanillaTiltOptions)
+    return () => {
+      tiltNode.vanillaTilt.destroy()
+    }
+  })
+      
+  return (
+    <div ref={tiltRef} className="tilt-root">
+      <div className="tilt-child">{children}</div>
+    </div>
+  )
+}
+```
 
 ```html
 <body>

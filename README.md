@@ -2072,7 +2072,7 @@ In our case, because we're passing this ref to a div with a ref prop, that curre
 ```javascript
 function Tilt({children}) {
   const tiltRef=React.useRef()
-  console.log(tiltRef.current)
+  console.log(tiltRef.current) // output = undefined
   return (
     <div ref={tiltRef} className="tilt-root">
       <div className="tilt-child">{children}</div>

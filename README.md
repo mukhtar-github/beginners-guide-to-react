@@ -2164,6 +2164,42 @@ function Tilt({children}) {
 }
 ```
 
+ Another thing we should do here is recognize that useEffect is going to be called on every re-render of our tilt component. That's not going to lead to any bugs but it is sub-optimal, because what that means is that we'll call destroy with vanilla-tilt and then we'll call init with vanilla-tilt between every render of our component. We don't need to do that because none of the things in this function can change with re-renders of our tilt component. We're going to add a dependency array here with all the dependencies of our function and because none of the variables in our useEffect callback can change, we don't need to list any dependencies here.
+
+ ```javascript
+function Tilt({children}) {
+
+  const tiltRef=React.useRef('here')
+  React.useEffect(() => {
+    const tiltNode = tiltRef.current
+    const vanillaTiltOptions = {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.5
+    }
+    VanillaTilt.init(tiltNode, vanillaTiltOptions)
+    return () => {
+      tiltNode.vanillaTilt.destroy()
+    }
+  }, [])
+      
+  return (
+    <div ref={tiltRef} className="tilt-root">
+      <div className="tilt-child">{children}</div>
+    </div>
+  )
+}
+```
+
+ What this is effectively saying is I want to run all the code in the useEffect when the component is initially mounted to the page and then I want to run the return function which will be called for every update of our tilt component, when the component is unmounted from the page. That's another useful optimization we can make for this case.
+
+ In review, the thing that we wanted to do is make this DOM node do some fancy stuff and we included vanilla-tilt on the page so that we could do that. We also included some CSS from the vanilla-tilt author to make our DOM nodes look really fancy. To get access to the DOM nodes so we can initialize vanilla-tilt on it, we're using this ref prop on the div and we pass the thing that we did back from a React useRef call. That ref has a current property that we can use to access the current value of this object.
+
+ The reason that useRef is an object that has a current property is so that we can mutate the current property to be whatever we want without triggering a re-render of our component. We can use refs for more than just DOM nodes like we're using here. We can use it for any value that we want to keep track of and mutate over time without triggering a re-render of our component.
+
+ After a component has been mounted, our useEffect callback is going to be called. We get the tilt node from our tilt ref current property. We create some vanilla-tilt options and pass those to the initialization for our tilt node with vanilla-tilt. Then we return a cleanup function so that we can remove all references of our DOM node in vanilla-tilt and remove all the event listeners that vanilla-tilt put on our DOM node.
+
 ```html
 <body>
   <div id="root"></div>

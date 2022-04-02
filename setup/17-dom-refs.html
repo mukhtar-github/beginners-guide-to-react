@@ -59,7 +59,7 @@
         return () => {
           tiltNode.VanillaTilt.destroy()
         }
-      })
+      }, [])
       
       return (
         <div ref={tiltRef} className="tilt-root">

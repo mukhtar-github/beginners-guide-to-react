@@ -2306,9 +2306,7 @@ I recommend you watch this one slowly and watch it as many times as you need to.
 
 Sometimes it could be useful to understand the order in which your code is going to be run when you're using React Hooks. I've made this little app that has a checkbox for showing a child, and inside of this box this will be rendered when that checkbox is checked. When you click on this button, it's going to increment the count.
 
-The way that this works is we have a child component here that's maintaining a countState, and then that has a whole bunch of useEffects here, which are simply logging to the console when the callback is called and logging to the console in a cleanup function that it provides. Then we create our React element for rendering to the page, and then we log to the console that our render is finished and then we return that React element we created.
-
-We do the same thing for our App component, except here we're maintaining a showChild Boolean state. We have all those useEffects, and then we render a few React elements here for rendering this UI. Let's go ahead and take a look at what happens when we initially load this page. I'm going to refresh, I'll open up our DevTools, and I'll scroll down here to the app, so we can follow along in the code with what we're seeing in the console.
+The way that this works is we have a child component here that's maintaining a countState, and then that has a whole bunch of useEffects here, which are simply logging to the console when the callback is called and logging to the console in a cleanup function that it provides. Then we create our React element for rendering to the page, and then we log to the console that our render is finished and then we return that React element we created. We do the same thing for our App component, except here we're maintaining a showChild Boolean state. We have all those useEffects, and then we render a few React elements here for rendering this UI.
 
 ```html
 <body>
@@ -2435,4 +2433,53 @@ We do the same thing for our App component, except here we're maintaining a show
     ReactDOM.render(<App />, document.getElementById('root'))
   </script>
 </body>
+```
+
+Let's go ahead and take a look at what happens when we initially load this page. I'm going to refresh, I'll open up our DevTools, and I'll scroll down here to the app, so we can follow along in the code with what we're seeing in the console. The first thing that we see is this app render start. That's the first thing that happens when we call ReactDom.render our app. It calls our app Function Component. The next thing that happens is we call react.useState and immediately React is going to call this function to retrieve the initial state for our show child state. That's why we're getting this app useState callback called.
+
+```javascript
+function App() {
+  console.log('%cApp: render start', 'color: MediumSpringGreen')
+  // console output - App: render start
+}
+
+const [showChild, setShowChild] = React.useState(() => {
+  console.log('%cApp: useState callback', 'color: tomato')
+  return false
+  // console output - App: useState callback
+})
+```
+
+Then, we call all these React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create this element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called.
+
+```javascript
+const element = ()
+console.log('%cApp: render end', 'color: MediumSpringGreen')
+return element
+// console output - App: render end
+
+const [showChild, setShowChild] = React.useState(() => {
+  console.log('%cApp: useState callback', 'color: tomato')
+  return false
+  // console output - App: useState callback
+})
+
+App: render end
+App: useEffect no deps
+App: useEffect empty deps
+App: useEffect with dep
+```
+
+We come up here to the top, mostly, app useEffect to no deps is the first one that appears. We don't get our cleanup because there's no cleanup necessary yet, because right now, we're just mounting the component, and we haven't had any updates yet. Next, we get our useEffects empty deps, right here. We have an empty list of dependencies there and then useEffect with dep. That's our show child's state. That's the next thing that gets called here.
+
+```javascript
+const [showChild, setShowChild] = React.useState(() => {
+  console.log('%cApp: useState callback', 'color: tomato')
+  return false
+  // console output - App: useState callback
+})
+
+App: useEffect no deps
+App: useEffect empty deps
+App: useEffect with dep
 ```

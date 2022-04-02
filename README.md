@@ -2111,6 +2111,29 @@ function Tilt({children}) {
 
 We can specify how we want vanilla-tilt to treat this DOM node. We'll say max 25, speed 400, glare true, and max glare 0.5. With that now, we can say VanillaTilt.init on that tiltNode and with the vanillaTiltOptions. If we save that, we get a refresh. This code runs after React has rendered to the DOM and updated the tiltRef.current property so that we can get access to the tiltNode and initialize vanilla-tilt.
 
+```javascript
+function Tilt({children}) {
+
+  const tiltRef=React.useRef('here')
+  React.useEffect(() => {
+    const tiltNode = tiltRef.current
+    const vanillaTiltOptions = {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.5
+    }
+    VanillaTilt.init(tiltNode, vanillaTiltOptions)
+  })
+      
+  return (
+    <div ref={tiltRef} className="tilt-root">
+      <div className="tilt-child">{children}</div>
+    </div>
+  )
+}
+```
+
 ```html
 <body>
   <div id="root"></div>

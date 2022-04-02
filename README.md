@@ -2463,23 +2463,23 @@ const [showChild, setShowChild] = React.useState(() => {
   return false
   // console output - App: useState callback
 })
-
-App: render end
-App: useEffect no deps
-App: useEffect empty deps
-App: useEffect with dep
 ```
 
 We come up here to the top, mostly, app useEffect to no deps is the first one that appears. We don't get our cleanup because there's no cleanup necessary yet, because right now, we're just mounting the component, and we haven't had any updates yet. Next, we get our useEffects empty deps, right here. We have an empty list of dependencies there and then useEffect with dep. That's our show child's state. That's the next thing that gets called here.
 
 ```javascript
-const [showChild, setShowChild] = React.useState(() => {
-  console.log('%cApp: useState callback', 'color: tomato')
-  return false
-  // console output - App: useState callback
-})
+React.useEffect(() => {
+  console.log('%cApp: useEffect no deps', 'color: LightCoral')
+  // console output - App: useEffect no deps
+}
 
-App: useEffect no deps
-App: useEffect empty deps
-App: useEffect with dep
+React.useEffect(() => {
+  console.log('%cApp: useEffect empty deps', 'color: MediumTurquoise')
+  // console output - App: useEffect empty deps
+}
+
+React.useEffect(() => {
+  console.log('%cApp: useEffect with dep', 'color: HotPink')
+  // console output - App: useEffect with dep
+}
 ```

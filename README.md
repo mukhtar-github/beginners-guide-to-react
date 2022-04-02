@@ -2024,6 +2024,34 @@ React is really good at creating and updating DOM elements, but sometimes you ne
 
 You create a ref object with the useRef hook and that object’s current property is the current value of the ref. It can be anything, but if you pass that ref object to a component as a prop called ref, then React will set the current property to the DOM element it creates so you can reference it and manipulate it in your useEffect hook. In this lesson we’ll get to see how that works with a cool library called vanilla-tilt.
 
+Accessing DOM Elements - In general, we want to let React handle all DOM manipulation. But there are some instances where useRef can be used without causing issues. In React, we can add a ref attribute to an element to access it directly in the DOM.
+
+useRef() only returns one item. It returns an Object called current. When we initialize useRef we set the initial value: useRef(0). It's like doing this: const count = {current: 0}. We can access the count by using count.current.
+
+```javascript
+// Example:
+// Use useRef to focus the input:
+import { useRef } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const inputElement = useRef();
+
+  const focusInput = () => {
+    inputElement.current.focus();
+  };
+
+  return (
+    <>
+      <input type="text" ref={inputElement} />
+      <button onClick={focusInput}>Focus Input</button>
+    </>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
 We have a function component called Tilt. Thanks to use some handy class names and some handier CSS, we have it styled in this fancy-looking way but we can make it do something fancy by using a library that I've included called vanilla-tilt. Vanilla-tilt takes a DOM node and makes it react to when the user mouses over that DOM node. The DOM node we want to give it is the DOM node that's created for this element, the tilt root. Remember this is a React element, not a DOM node and React takes that React element and renders it to the DOM.
 
 ```javascript
@@ -2039,7 +2067,19 @@ function Tilt({children}) {
 
 So we need React to give us the DOM node that it creates for this particular React element, so we can wire up vanilla-tilt to it. To do this, we're going to use a ref prop and we need to pass a ref which is an object that has a mutable current property. Let's go ahead and use the React.useRef hook. From that we'll get our tiltRef and then we can copy that, paste it here to our ref. Then the tiltRef is an object that has a current property. That current property is the current value for this ref object.
 
-In our case, because we're passing this ref to a div with a ref prop, that current property will be the DOM node that React creates for this div. If we console.log tiltRef.current, and we save that then we should be seeing the DOM node.
+In our case, because we're passing this ref to a div with a ref prop, that current property will be the DOM node that React creates for this div. If we console.log tiltRef.current, and we save that then we should be seeing the DOM node. We actually see undefined. The reason we see that is because at the time that this function runs, React has not created the DOM node for this div, so the tiltRef.current is currently undefined. In fact, you can initialize that current value by passing an argument to their useRef hook.
+
+```javascript
+function Tilt({children}) {
+  const tiltRef=React.useRef()
+  console.log(tiltRef.current)
+  return (
+    <div ref={tiltRef} className="tilt-root">
+      <div className="tilt-child">{children}</div>
+    </div>
+  )
+}
+```
 
 ```html
 <body>

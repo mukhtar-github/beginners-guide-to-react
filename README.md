@@ -2109,7 +2109,7 @@ function Tilt({children}) {
 }
 ```
 
-We can specify how we want vanilla-tilt to treat this DOM node. We'll say max 25, speed 400, glare true, and max glare 0.5. With that now, we can say VanillaTilt.init on that tiltNode and with the vanillaTiltOptions. If we save that, we get a refresh. This code runs after React has rendered to the DOM and updated the tiltRef.current property so that we can get access to the tiltNode and initialize vanilla-tilt.
+We can specify how we want vanilla-tilt to treat this DOM node. We'll say max 25, speed 400, glare true, and max glare 0.5. With that now, we can say VanillaTilt.init() on that tiltNode and with the vanillaTiltOptions. If we save that, we get a refresh. This code runs after React has rendered to the DOM and updated the tiltRef.current property so that we can get access to the tiltNode and initialize vanilla-tilt.
 
 ```javascript
 function Tilt({children}) {
@@ -2133,6 +2133,8 @@ function Tilt({children}) {
   )
 }
 ```
+
+Now, if we hover, we get that really cool effect. If we unclick the show tilt checkbox, that will unmount the tilt component from the page removing the DOM node from the page. However, there's still a bunch of event handlers on that DOM node and several references to that DOM node from within the vanilla tilt library. That means that the DOM node itself may not exist on the page but it does still exist in memory because there're references to it in vanilla-tilt. Unfortunately, this could lead to a memory leak. If we keep on mounting and unmounting this over and over and over again, then we're going to have a bunch of DOM node sitting around in memory that really aren't needed by the user anymore.
 
 ```html
 <body>

@@ -2506,7 +2506,7 @@ return element
 // console output - App: render end
 ```
 
-Then React calls our child to start rendering of that child. *One thing that I want to stress here is that we're creating our element which includes creating the child right here.* You'll notice that we get to this - *console.log('%cApp: render end', 'color: MediumSpringGreen')* line of code before we start rendering the child. *The important thing to remember here is that just because you create a React element, doesn't mean that React element's function is going to get called, because you're not calling the function, React is. React will only call that function when that component is actually going to be rendered.*
+Then React calls our child to start rendering of that child. *One thing that I want to stress here is that we're creating our element which includes creating the child right here.* You'll notice that we get to this - *console.log('%cApp: render end', 'color: MediumSpringGreen')* line of code before we start rendering the child. *The important thing to remember here is that just because you create a React element, doesn't mean that React element's function is going to get called, because you're not calling the function, React is. React will only call that function when that component is actually going to be rendered.* Let's go ahead and scroll up to the child render start here, and then we get our useState callback, because this is the first time that this useState is going to be called, so it needs to retrieve the initial value of zero.
 
 ```javascript
 const element = (
@@ -2530,13 +2530,12 @@ function Child() {
   // console output - Child: render start
 })
 
-      function Child() {
-      console.log('%c    Child: render start', 'color: MediumSpringGreen')
-
-      const [count, setCount] = React.useState(() => {
-        console.log('%c    Child: useState callback', 'color: tomato')
-        return 0
-      })
+function Child() {
+  const [count, setCount] = React.useState(() => {
+  console.log('%c    Child: useState callback', 'color: tomato')
+  return 0
+  // console output - Child: useState callback
+})
 
 function App() {
   console.log('%cApp: render start', 'color: MediumSpringGreen')
@@ -2554,7 +2553,7 @@ React.useEffect(() => {
 }
 
   
-  Child: useState callback
+  
   Child: render end
   Child: useEffect no deps
   Child: useEffect empty deps

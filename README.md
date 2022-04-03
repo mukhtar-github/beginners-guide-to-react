@@ -2484,9 +2484,9 @@ React.useEffect(() => {
 }
 ```
 
-Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers the onChange to set show child to the checked value of our check box input.
+Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers the onChange to set show child to the checked value of our check box input. The setShowChild is going to trigger a re-render of our app, which is why we get our app render start. Come up here to the top again.
 
-The setShowChild is going to trigger a re-render of our app, which is why we get our app render start. Come up here to the top again. We'll say app render start, and we'll go through all of the code just like we had at the previous render, except this time you'll notice we don't have an app useState callback, we go straight from app render start to app render end.  This is because React has already retrieved the initial state value for our show child state, and it doesn't need to retrieve that value again. *Any time you use a function callback for useState, that function is only going to be called when this component is initially rendered for the rest of the lifetime of that component.* We go through all those useEffect cause again, we create our element, and then we lock to the console that the app render has finished.
+We'll say app render start, and we'll go through all of the code just like we had at the previous render, except this time you'll notice we don't have an app useState callback, we go straight from app render start to app render end.  This is because React has already retrieved the initial state value for our show child state, and it doesn't need to retrieve that value again. *Any time you use a function callback for useState, that function is only going to be called when this component is initially rendered for the rest of the lifetime of that component.* We go through all those useEffect cause again, we create our element, and then we lock to the console that the app render has finished.
 
 ```javascript
 <input
@@ -2538,24 +2538,27 @@ function Child() {
 })
 ```
 
-Then we call all of these useEffects, just like in an app -[We call all those React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create the element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. *Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called. useEffect is called after React finishes rendering.*], we create an element, and then we get a log for this render end. Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component.
+Then we call all of these useEffects, just like in an app -[We call all those React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create the element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. *Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called. useEffect is called after React finishes rendering.*], we create an element, and then we get a log for this render end.
 
 ```javascript
 const element = (
-  <>
-    <div
-      style={{
-      padding: 10,
-      margin: 10,
-      height: 30,
-      width: 30,
-      border: 'solid',
-      }}
-    >
-      {showChild ? <Child /> : null}
-    </div>
-  </>
+  <button onClick={() => setCount(previousCount => previousCount + 1)}>{count}</button>
 )
+console.log('%c    Child: render end', 'color: MediumSpringGreen')
+return element
+// console output - Child: render end
+```
+
+Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component.
+
+```javascript
+const element = (
+  <button onClick={() => setCount(previousCount => previousCount + 1)}>{count}</button>
+)
+console.log('%c    Child: render end', 'color: MediumSpringGreen')
+return element
+// console output - Child: render end
+
 
 function Child() {
   console.log('%c    Child: render start', 'color: MediumSpringGreen')
@@ -2583,10 +2586,6 @@ React.useEffect(() => {
   console.log('%cApp: useEffect with dep', 'color: HotPink')
   // console output - App: useEffect with dep - [showChild]
 }
-
-  
-  
-  Child: render end
   Child: useEffect no deps
   Child: useEffect empty deps
   Child: useEffect with dep

@@ -2506,14 +2506,37 @@ return element
 // console output - App: render end
 ```
 
-Then React calls our child to start rendering of that child. One thing that I want to stress here is that we're creating our element which includes creating the child right here.
+Then React calls our child to start rendering of that child. *One thing that I want to stress here is that we're creating our element which includes creating the child right here.*
 
 ```javascript
-<input
-  type="checkbox"
-  checked={showChild}
-  onChange={e => setShowChild(e.target.checked)}
-/>
+const element = (
+  <>
+    <div
+      style={{
+      padding: 10,
+      margin: 10,
+      height: 30,
+      width: 30,
+      border: 'solid',
+      }}
+    >
+      {showChild ? <Child /> : null}
+    </div>
+  </>
+)
+
+function Child() {
+  console.log('%c    Child: render start', 'color: MediumSpringGreen')
+  // console output - Child: render start
+})
+
+      function Child() {
+      console.log('%c    Child: render start', 'color: MediumSpringGreen')
+
+      const [count, setCount] = React.useState(() => {
+        console.log('%c    Child: useState callback', 'color: tomato')
+        return 0
+      })
 
 function App() {
   console.log('%cApp: render start', 'color: MediumSpringGreen')
@@ -2530,7 +2553,7 @@ React.useEffect(() => {
   // console output - App: useEffect with dep - [showChild]
 }
 
-  Child: render start
+  
   Child: useState callback
   Child: render end
   Child: useEffect no deps

@@ -2549,7 +2549,26 @@ return element
 // console output - Child: render end
 ```
 
-Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our [count] value. Then we're going to start calling the app useEffect callbacks.
+Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our [count] value.
+
+```javascript
+React.useEffect(() => {
+  console.log('%c    Child: useEffect no deps', 'color: LightCoral')
+  // console output - Child: useEffect no deps
+})
+
+React.useEffect(() => {
+  console.log('%c    Child: useEffect empty deps', 'color: MediumTurquoise')
+  // console output - Child: useEffect empty deps
+  }, [])
+
+React.useEffect(() => {
+  console.log('%c    Child: useEffect with dep', 'color: HotPink')
+  // console output - Child: useEffect with dep
+}, [count])
+```
+
+Then we're going to start calling the app useEffect callbacks. You'll notice that we actually call the cleanup first, and then we call the setup. Here we have the cleanup and then the setup. We also do the same for the cleanup when we have a dependency, and then the setup when we have a dependency. You'll notice that the cleanup for both of these is called before the setup for both of these, and the cleanups are both called in the order in which the appear, just like the setups.
 
 ```javascript
 React.useEffect(() => {

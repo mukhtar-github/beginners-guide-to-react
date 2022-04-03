@@ -2576,15 +2576,15 @@ Then we're going to start calling the app useEffect callbacks. You'll notice tha
 React.useEffect(() => {
   return () => {
     console.log('%cApp: useEffect no deps cleanup', 'color: LightCoral')
-    // console output - App: useEffect no deps cleanup
   }
+  // console output - App: useEffect no deps cleanup
 })
 
 React.useEffect(() => {
   return () => {
     console.log('%cApp: useEffect with dep cleanup', 'color: HotPink')
-    // console output - App: useEffect with dep cleanup
   }
+  // console output - App: useEffect with dep cleanup
 }, [showChild])
 
 React.useEffect(() => {
@@ -2619,7 +2619,7 @@ const element = (
 )
 ```
 
-Let's follow the console.logs. First we start with this child render start. We call this again, and we don't get a log for our useState callback, because this component's already been rendered, and we already retrieved the initial value and we no longer need that initial value, so React doesn't bother calling this function anymore. Then we call all these useEffect hooks. We create our React element for our UI, and then we call this child render end. Then our useEffect cleanups are called in order if those particular useEffects need to be rerun. In this case, we haven't listed any dependencies, so this will be rerun on every render of this component, so we'll get the cleanup there.
+Let's follow the console.logs. First we start with this child render start. We call this again, and we don't get a log for our useState callback, because this component's already been rendered, and we already retrieved the initial value and we no longer need that initial value, so React doesn't bother calling this function anymore. Then we call all these useEffect hooks. We create our React element for our UI, and then we call the child render end.
 
 ```javascript
 function Child() {
@@ -2632,9 +2632,36 @@ function Child() {
   return element
   // console output - Child: render end
 }
+```
 
-Child: useEffect no deps cleanup
-Child: useEffect with dep cleanup
-Child: useEffect no deps
-Child: useEffect with dep
+Then our useEffect cleanups are called in order if those particular useEffects need to be rerun. In this case, we haven't listed any dependencies, so this will be rerun on every render of this component, so we'll get the cleanup there. This one - [React.useEffect(() => {}, [])] is listing a dependency array, and there are no dependencies that can change, so it's not going to be called. This one does have a dependency array, and that dependency did change, so the cleanup is called here.
+
+```javascript
+React.useEffect(() => {
+  return () => {
+    console.log('%c    Child: useEffect no deps cleanup', 'color: LightCoral')
+  }
+  // console output - Child: useEffect no deps cleanup
+})
+
+React.useEffect(() => {
+  return () => {
+    console.log('%c    Child: useEffect with dep cleanup', 'color: HotPink')
+  }
+  // console output - Child: useEffect with dep cleanup
+}, [count])
+```
+
+Then we start with the setups for the useEffect that has no dependencies and the useEffect that has a dependency that changed. This is the last one that was called. If we click this again, we'll see the exact same order of calls, and then if we uncheck show child...Let's go ahead and highlight that, so we know which one was the last that we called, and then we uncheck show child.
+
+```javascript
+React.useEffect(() => {
+  console.log('%c    Child: useEffect no deps', 'color: LightCoral')
+  // console output - Child: useEffect no deps
+})
+
+React.useEffect(() => {
+  console.log('%c    Child: useEffect with dep', 'color: HotPink')
+  // console output - Child: useEffect with dep
+}, [count])
 ```

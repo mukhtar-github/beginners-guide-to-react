@@ -2465,7 +2465,7 @@ const [showChild, setShowChild] = React.useState(() => {
 })
 ```
 
-We come up here to the top, mostly, app useEffect to no deps is the first one that appears. We don't get our cleanup because there's no cleanup necessary yet, because right now, we're just mounting the component, and we haven't had any updates yet. Next, we get our useEffects empty deps, right here. We have an empty list of dependencies there and then useEffect with dep. That's our show child's state. That's the next thing that gets called here.
+We come up here to the top, mostly, app useEffect to no deps is the first one that appears. We don't get our cleanup because there's no cleanup necessary yet, because right now, we're just mounting the component, and we haven't had any updates yet. Next, we get our useEffects empty deps, right here. We have an empty list of dependencies there and then useEffect with dependency - [showChild]. That's our show child's state. That's the next thing that gets called here.
 
 ```javascript
 React.useEffect(() => {
@@ -2480,6 +2480,38 @@ React.useEffect(() => {
 
 React.useEffect(() => {
   console.log('%cApp: useEffect with dep', 'color: HotPink')
-  // console output - App: useEffect with dep
+  // console output - App: useEffect with dep - [showChild]
 }
+```
+
+Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers this on change to set show child to the checked value of our check box input.
+
+```javascript
+React.useEffect(() => {
+  console.log('%cApp: useEffect no deps', 'color: LightCoral')
+  // console output - App: useEffect no deps
+}
+
+React.useEffect(() => {
+  console.log('%cApp: useEffect empty deps', 'color: MediumTurquoise')
+  // console output - App: useEffect empty deps
+}
+
+React.useEffect(() => {
+  console.log('%cApp: useEffect with dep', 'color: HotPink')
+  // console output - App: useEffect with dep - [showChild]
+}
+
+App: render start
+App: render end
+  Child: render start
+  Child: useState callback
+  Child: render end
+  Child: useEffect no deps
+  Child: useEffect empty deps
+  Child: useEffect with dep
+App: useEffect no deps cleanup
+App: useEffect with dep cleanup
+App: useEffect no deps
+App: useEffect with dep
 ```

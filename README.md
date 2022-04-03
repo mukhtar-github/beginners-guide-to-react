@@ -2652,7 +2652,7 @@ React.useEffect(() => {
 }, [count])
 ```
 
-Then we start with the setups for the useEffect that has no dependencies and the useEffect that has a dependency that changed. This is the last one that was called. If we click this again, we'll see the exact same order of calls, and then if we uncheck show child...Let's go ahead and highlight that, so we know which one was the last that we called, and then we uncheck show child.
+Then we start with the setups for the useEffect that has no dependencies and the useEffect that has a dependency that changed. This is the last one that was called. If we click this again, we'll see the exact same order of calls.
 
 ```javascript
 React.useEffect(() => {
@@ -2672,4 +2672,19 @@ Child: useEffect no deps cleanup
 Child: useEffect with dep cleanup
 Child: useEffect no deps
 Child: useEffect with dep
+```
+
+Then we uncheck show child. That's going to trigger a re-render of our app component, because we changed that showChildState using setShowChild. That triggers a render start here. We go through all of the code, again skipping the useState callback. We come down here, create our elements, and then render end right here. Then we're doing a cleanup on all of the children, because the child is being removed from the page, so we're now rendering null.
+
+```javascript
+// unchecked show child
+App: render start
+App: render end
+  Child: useEffect no deps cleanup
+  Child: useEffect empty deps cleanup
+  Child: useEffect with dep cleanup
+App: useEffect no deps cleanup
+App: useEffect with dep cleanup
+App: useEffect no deps
+App: useEffect with dep
 ```

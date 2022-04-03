@@ -6,8 +6,12 @@
   <script type="text/babel">
 
     function UsernameForm() {
+      const handleSubmit= () => {
+        console.log(handleSubmit)
+      }
+
       return (
-        <form>
+        <form unSubmit={handleSubmit}>
           <div>
             <label>Username:</label>
             <input type='text' />

@@ -2737,9 +2737,10 @@ function UsernameForm() {
   )
 }
 
-    
 ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 ```
+
+We could put an onClick handler on our submit button here, and that would work OK when we click on this button. Forms are actually automatically submitted when you hit enter in an input within the form. People are typically used to that user experience.
 
 ```html
 <body>

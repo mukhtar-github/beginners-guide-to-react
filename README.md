@@ -2620,12 +2620,6 @@ const element = (
 Let's follow the console.logs. First we start with this child render start. We call this again, and we don't get a log for our useState callback, because this component's already been rendered, and we already retrieved the initial value and we no longer need that initial value, so React doesn't bother calling this function anymore. Then we call all these useEffect hooks. We create our React element for our UI, and then we call this child render end. Then our useEffect cleanups are called in order if those particular useEffects need to be rerun. In this case, we haven't listed any dependencies, so this will be rerun on every render of this component, so we'll get the cleanup there.
 
 ```javascript
-const element = (
-  <button onClick={() => setCount(previousCount => previousCount + 1)}>
-    {count}
-  </button>
-)
-
 function Child() {
   console.log('%c    Child: render start', 'color: MediumSpringGreen')
   // console output - Child: render start

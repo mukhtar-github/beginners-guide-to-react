@@ -2541,12 +2541,14 @@ function Child() {
 Then we call all of these useEffects, just like in an app -[We call all those React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create the element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. *Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called. useEffect is called after React finishes rendering.*], we create an element, and then we get a log for this render end.
 
 ```javascript
-const element = (
-  <button onClick={() => setCount(previousCount => previousCount + 1)}>{count}</button>
-)
-console.log('%c    Child: render end', 'color: MediumSpringGreen')
-return element
-// console output - Child: render end
+function Child() {
+  const element = (
+    <button onClick={() => setCount(previousCount => previousCount + 1)}>{count}</button>
+  )
+  console.log('%c    Child: render end', 'color: MediumSpringGreen')
+  return element
+  // console output - Child: render end
+}
 ```
 
 Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our [count] value.
@@ -2625,8 +2627,12 @@ function Child() {
   // console output - Child: render start
 })
 
-Child: render start
-Child: render end
+function Child() {
+  console.log('%c    Child: render end', 'color: MediumSpringGreen')
+  return element
+  // console output - Child: render end
+}
+
 Child: useEffect no deps cleanup
 Child: useEffect with dep cleanup
 Child: useEffect no deps

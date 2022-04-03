@@ -2536,6 +2536,38 @@ function Child() {
   return 0
   // console output - Child: useState callback
 })
+```
+
+Then we call all of these useEffects, just like in an app -[We call all those React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create the element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. *Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called. useEffect is called after React finishes rendering.*], we create an element, and then we get a log for this render end. Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component.
+
+```javascript
+const element = (
+  <>
+    <div
+      style={{
+      padding: 10,
+      margin: 10,
+      height: 30,
+      width: 30,
+      border: 'solid',
+      }}
+    >
+      {showChild ? <Child /> : null}
+    </div>
+  </>
+)
+
+function Child() {
+  console.log('%c    Child: render start', 'color: MediumSpringGreen')
+  // console output - Child: render start
+})
+
+function Child() {
+  const [count, setCount] = React.useState(() => {
+  console.log('%c    Child: useState callback', 'color: tomato')
+  return 0
+  // console output - Child: useState callback
+})
 
 function App() {
   console.log('%cApp: render start', 'color: MediumSpringGreen')

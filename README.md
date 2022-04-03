@@ -2562,6 +2562,11 @@ React.useEffect(() => {
   // console output - Child: useEffect empty deps
   }, [])
 
+  React.useEffect(() => {
+    console.log('%c    Child: useEffect with dep', 'color: HotPink')
+    // console output - Child: useEffect with dep
+  }, [count])
+
 
 
 function App() {
@@ -2580,7 +2585,6 @@ React.useEffect(() => {
 }
   
   
-  Child: useEffect with dep
 App: useEffect no deps cleanup
 App: useEffect with dep cleanup
 App: useEffect no deps

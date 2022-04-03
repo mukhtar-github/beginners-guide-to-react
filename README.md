@@ -2572,26 +2572,11 @@ Then we're going to start calling the app useEffect callbacks. You'll notice tha
 
 ```javascript
 React.useEffect(() => {
-  console.log('%c    Child: useEffect no deps', 'color: LightCoral')
-  // console output - Child: useEffect no deps
+  return () => {
+    console.log('%cApp: useEffect no deps cleanup', 'color: LightCoral')
+    // console output - App: useEffect no deps cleanup
+  }
 })
-
-React.useEffect(() => {
-  console.log('%c    Child: useEffect empty deps', 'color: MediumTurquoise')
-  // console output - Child: useEffect empty deps
-  }, [])
-
-  React.useEffect(() => {
-    console.log('%c    Child: useEffect with dep', 'color: HotPink')
-    // console output - Child: useEffect with dep
-  }, [count])
-
-
-
-function App() {
-  console.log('%cApp: render start', 'color: MediumSpringGreen')
-  // console output - App: render start
-}
 
 const element = ()
 console.log('%cApp: render end', 'color: MediumSpringGreen')
@@ -2604,7 +2589,7 @@ React.useEffect(() => {
 }
   
   
-App: useEffect no deps cleanup
+
 App: useEffect with dep cleanup
 App: useEffect no deps
 App: useEffect with dep

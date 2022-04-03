@@ -7,11 +7,11 @@
 
     function UsernameForm() {
       const handleSubmit= () => {
-        console.log(handleSubmit)
+        console.log('submitted')
       }
 
       return (
-        <form unSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>Username:</label>
             <input type='text' />

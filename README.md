@@ -2486,7 +2486,27 @@ React.useEffect(() => {
 
 Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers the onChange to set show child to the checked value of our check box input.
 
-The setShowChild is going to trigger a re-render of our app, which is why we get our app render start. Come up here to the top again. We'll say app render start, and we'll go through all of the code just like we had at the previous render, except this time you'll notice we don't have an app useState callback, we go straight from app render start to app render end.  This is because React has already retrieved the initial state value for our show child state, and it doesn't need to retrieve that value again. *Any time you use a function callback for useState, that function is only going to be called when this component is initially rendered for the rest of the lifetime of that component.*
+The setShowChild is going to trigger a re-render of our app, which is why we get our app render start. Come up here to the top again. We'll say app render start, and we'll go through all of the code just like we had at the previous render, except this time you'll notice we don't have an app useState callback, we go straight from app render start to app render end.  This is because React has already retrieved the initial state value for our show child state, and it doesn't need to retrieve that value again. *Any time you use a function callback for useState, that function is only going to be called when this component is initially rendered for the rest of the lifetime of that component.* We go through all those useEffect cause again, we create our element, and then we lock to the console that the app render has finished.
+
+```javascript
+<input
+  type="checkbox"
+  checked={showChild}
+  onChange={e => setShowChild(e.target.checked)}
+/>
+
+function App() {
+  console.log('%cApp: render start', 'color: MediumSpringGreen')
+  // console output - App: render start
+}
+
+const element = ()
+console.log('%cApp: render end', 'color: MediumSpringGreen')
+return element
+// console output - App: render end
+```
+
+Then React calls our child to start rendering of that child. One thing that I want to stress here is that we're creating our element which includes creating the child right here.
 
 ```javascript
 <input

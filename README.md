@@ -2450,7 +2450,7 @@ const [showChild, setShowChild] = React.useState(() => {
 })
 ```
 
-Then, we call all these React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create this element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called.
+Then, we call all these React useEffects, but you'll notice that the logs in those are not the next thing that appear in our console. Instead, we actually create this element and then we get a log to the console for app render end. Once that happens, React actually is updating the DOM. *Then, asynchronously later, it's going to call our useEffect callbacks, one at a time in the order in which they were called. useEffect is called after React finishes rendering.*
 
 ```javascript
 const element = ()

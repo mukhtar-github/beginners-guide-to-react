@@ -2578,19 +2578,15 @@ React.useEffect(() => {
   }
 })
 
-const element = ()
-console.log('%cApp: render end', 'color: MediumSpringGreen')
-return element
-// console output - App: render end
-
 React.useEffect(() => {
-  console.log('%cApp: useEffect with dep', 'color: HotPink')
-  // console output - App: useEffect with dep - [showChild]
-}
-  
+  return () => {
+    console.log('%cApp: useEffect with dep cleanup', 'color: HotPink')
+    // console output - App: useEffect with dep cleanup
+  }
+}, [showChild])
   
 
-App: useEffect with dep cleanup
+
 App: useEffect no deps
 App: useEffect with dep
 ```

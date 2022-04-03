@@ -2595,3 +2595,14 @@ React.useEffect(() => {
   // console output - App: useEffect with dep - [showChild]
 }
 ```
+
+You'll also notice that this useEffect callback and its cleanup were not called. That's because useEffect callbacks are only called if they have no dependency listed or if they have a dependency listed, and one of those dependencies is changed.
+
+```javascript
+React.useEffect(() => {
+  console.log('%cApp: useEffect empty deps', 'color: MediumTurquoise')
+  return () => {
+    console.log('%cApp: useEffect empty deps cleanup', 'color: MediumTurquoise')
+  }
+}, [])
+```

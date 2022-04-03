@@ -6,9 +6,17 @@
   <script type="text/babel">
 
     function UsernameForm() {
-      return 'TODO'
+      return (
+        <form>
+          <div>
+            <label>Username:</label>
+            <input type='text' />
+          </div>
+          <button type='submit'>Submit</button>
+        </form>
+      )
     }
-    
+
     ReactDOM.render(<UsernameForm />, document.getElementById('root'))
   </script>
 </body>

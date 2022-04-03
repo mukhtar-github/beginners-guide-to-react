@@ -2549,28 +2549,20 @@ return element
 // console output - Child: render end
 ```
 
-Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component.
+Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our count value. Then we're going to start calling the app useEffect callbacks.
 
 ```javascript
-const element = (
-  <button onClick={() => setCount(previousCount => previousCount + 1)}>{count}</button>
-)
-console.log('%c    Child: render end', 'color: MediumSpringGreen')
-return element
-// console output - Child: render end
-
-
-function Child() {
-  console.log('%c    Child: render start', 'color: MediumSpringGreen')
-  // console output - Child: render start
+React.useEffect(() => {
+  console.log('%c    Child: useEffect no deps', 'color: LightCoral')
+  // console output - Child: useEffect no deps
 })
 
-function Child() {
-  const [count, setCount] = React.useState(() => {
-  console.log('%c    Child: useState callback', 'color: tomato')
-  return 0
-  // console output - Child: useState callback
-})
+React.useEffect(() => {
+  console.log('%c    Child: useEffect empty deps', 'color: MediumTurquoise')
+  // console output - Child: useEffect empty deps
+  }, [])
+
+
 
 function App() {
   console.log('%cApp: render start', 'color: MediumSpringGreen')
@@ -2586,8 +2578,8 @@ React.useEffect(() => {
   console.log('%cApp: useEffect with dep', 'color: HotPink')
   // console output - App: useEffect with dep - [showChild]
 }
-  Child: useEffect no deps
-  Child: useEffect empty deps
+  
+  
   Child: useEffect with dep
 App: useEffect no deps cleanup
 App: useEffect with dep cleanup

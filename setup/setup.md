@@ -2705,3 +2705,9 @@ React also has a useLayoutEffect hook that will be run here. That operates prett
 When there's a state update, we get our render called, our lazy initializers are not called. React is going to update the DOM, we get a cleanup of layout effects and then our layout effects are run. Browser updates the screen and then we get a cleanup of our effects and then our effects are run. When the component is unmounted, we get the cleanup of all of our effects.
 
 Having a firm understanding on the order in which these things are called is not totally necessary for you to be effective with React. It can help you in some situations, so I encourage you to play around with this.
+
+## Make Basic Forms with React
+
+### setup/19-basic-forms.html
+
+Forms are a basic building block of the web. Every web application uses form elements as a way to accept input from the user. There are a few things to keep in mind with how forms work on the web and in this lesson we’ll learn about those as well as various ways you can retrieve values from elements in the form as well as a few best practices you should consider when working with form elements on the web. You can learn more about basic forms in the React documentation about Uncontrolled Components.

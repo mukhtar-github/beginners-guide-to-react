@@ -2762,6 +2762,8 @@ function UsernameForm() {
 }
 ```
 
+Now, the reason that this is happening is because when you submit a form in the browser, it automatically makes a post request to the current URL with the form data. We could see that if we looked at our network tab. If you want to do some JavaScript stuff based on the user's submitted form, then we don't want the full page refresh. Instead, we can do our own JavaScript stuff.
+
 ```html
 <body>
   <div id="root"></div>

@@ -6,7 +6,8 @@
   <script type="text/babel">
 
     function UsernameForm() {
-      const handleSubmit= () => {
+      const handleSubmit = (e) => {
+        e.preventDefault()
         console.log('submitted')
       }
 

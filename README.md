@@ -2584,9 +2584,14 @@ React.useEffect(() => {
     // console output - App: useEffect with dep cleanup
   }
 }, [showChild])
-  
 
+React.useEffect(() => {
+  console.log('%cApp: useEffect no deps', 'color: LightCoral')
+  // console output - App: useEffect no deps
+}
 
-App: useEffect no deps
-App: useEffect with dep
+React.useEffect(() => {
+  console.log('%cApp: useEffect with dep', 'color: HotPink')
+  // console output - App: useEffect with dep - [showChild]
+}
 ```

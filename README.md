@@ -2596,7 +2596,7 @@ React.useEffect(() => {
 }
 ```
 
-You'll also notice that this useEffect callback and its cleanup were not called. That's because useEffect callbacks are only called if they have no dependency listed or if they have a dependency listed, and one of those dependencies is changed.
+You'll also notice that this useEffect callback and its cleanup were not called. That's because useEffect callbacks are only called if they have no dependency listed or if they have a dependency listed, and one of those dependencies is changed. We have a dependency list, but it's empty, and so therefore, none of the dependency is changed, because it doesn't have any dependencies. *This useEffect callback and its cleanup will not be called on updates.*
 
 ```javascript
 React.useEffect(() => {
@@ -2605,4 +2605,14 @@ React.useEffect(() => {
     console.log('%cApp: useEffect empty deps cleanup', 'color: MediumTurquoise')
   }
 }, [])
+```
+
+Let's go ahead and click on the count button. We'll remember that this [App: useEffect with dep - [showChild]] is the last log that we saw for that last update. When I click on the button, we're going to call setCount, and we're providing a function updater function where we take the previous value of the state and return the new value of our state. Here, we're just going to take the previous count and add 1 to it. This is going to trigger a re-render. Let's take a look at what happens here. I click on that. You'll notice that the app has none of its logs called. That's because the state update actually only resides within this component, so React knows that this component is the only one that needs to be re-rendered.
+
+```javascript
+const element = (
+  <button onClick={() => setCount(previousCount => previousCount + 1)}>
+    {count}
+  </button>
+)
 ```

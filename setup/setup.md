@@ -2742,6 +2742,26 @@ ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 
 We could put an onClick handler on our submit button here, and that would work OK when we click on this button. Forms are actually automatically submitted when you hit enter in an input within the form. People are typically used to that user experience. What I'm going to do instead is add an onSubmit handler here, and if somebody clicks on the submit button, or if they hit enter in this input, then our onSubmit handler is going to be called.
 
+Let's make a function called handleSubmit. Then, we'll put that handleSubmit right in the onSubmit and we'll console.log('submitted). Let's save that, get a refresh, say, Joe, hit submit and...Huh. That's interesting, it goes away. Actually, if you watch closely, you'll see that it does log but then we get a full page refresh. We can prove that by turning on preserve log. We say Joe again, hit submit, we get submitted and then navigated to that page.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit= () => {
+    console.log('submitted')
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
+
 ```html
 <body>
   <div id="root"></div>

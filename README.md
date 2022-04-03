@@ -2484,25 +2484,32 @@ React.useEffect(() => {
 }
 ```
 
-Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers this on change to set show child to the checked value of our check box input.
+Now, let's take a look at what happens when we click on show child. Remember that *App: useEffect with dep,* is the last console log that we saw when we initially mounted the component. If I click show child, then we're going to get an app render start. When we click show child, that triggers the onChange to set show child to the checked value of our check box input.
+
+The setShowChild is going to trigger a re-render of our app, which is why we get our app render start. Come up here to the top again. We'll say app render start, and we'll go through all of the code just like we had at the previous render, except this time you'll notice we don't have an app useState callback, we go straight from app render start to app render end.
 
 ```javascript
-React.useEffect(() => {
-  console.log('%cApp: useEffect no deps', 'color: LightCoral')
-  // console output - App: useEffect no deps
+<input
+  type="checkbox"
+  checked={showChild}
+  onChange={e => setShowChild(e.target.checked)}
+/>
+
+function App() {
+  console.log('%cApp: render start', 'color: MediumSpringGreen')
+  // console output - App: render start
 }
 
-React.useEffect(() => {
-  console.log('%cApp: useEffect empty deps', 'color: MediumTurquoise')
-  // console output - App: useEffect empty deps
-}
+const element = ()
+console.log('%cApp: render end', 'color: MediumSpringGreen')
+return element
+// console output - App: render end
 
 React.useEffect(() => {
   console.log('%cApp: useEffect with dep', 'color: HotPink')
   // console output - App: useEffect with dep - [showChild]
 }
 
-App: render start
 App: render end
   Child: render start
   Child: useState callback

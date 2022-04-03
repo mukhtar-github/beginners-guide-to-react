@@ -2506,7 +2506,9 @@ return element
 // console output - App: render end
 ```
 
-Then React calls our child to start rendering of that child. *One thing that I want to stress here is that we're creating our element which includes creating the child right here.* You'll notice that we get to this - *console.log('%cApp: render end', 'color: MediumSpringGreen')* line of code before we start rendering the child. *The important thing to remember here is that just because you create a React element, doesn't mean that React element's function is going to get called, because you're not calling the function, React is.*
+Then React calls our child to start rendering of that child. *One thing that I want to stress here is that we're creating our element which includes creating the child right here.* You'll notice that we get to this - *console.log('%cApp: render end', 'color: MediumSpringGreen')* line of code before we start rendering the child. *The important thing to remember here is that just because you create a React element, doesn't mean that React element's function is going to get called, because you're not calling the function, React is. React will only call that function when that component is actually going to be rendered.*
+
+That's really important because you could say Const UI I will not render, and render a whole bunch of these all day long, and unless those things are added to some UI that's actually going to get rendered, all that you're creating is a bunch of React element objects, and you won't actually be calling into that child function.
 
 ```javascript
 const element = (

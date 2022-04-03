@@ -2549,7 +2549,7 @@ return element
 // console output - Child: render end
 ```
 
-Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our count value. Then we're going to start calling the app useEffect callbacks.
+Then after the entire DOM has been updated, React is going to start calling our useEffects. It calls then in the order in which they are called, but starting at the child component. We get child useEffect no deps is called, we get the child useEffect empty deps is called, and then we get the child effect with dep is called, and the dep here is our [count] value. Then we're going to start calling the app useEffect callbacks.
 
 ```javascript
 React.useEffect(() => {

@@ -2674,7 +2674,11 @@ Child: useEffect no deps
 Child: useEffect with dep
 ```
 
-Then we uncheck show child. That's going to trigger a re-render of our app component, because we changed that showChildState using setShowChild. That triggers a render start here. We go through all of the code, again skipping the useState callback. We come down here, create our elements, and then render end right here. Then we're doing a cleanup on all of the children, because the child is being removed from the page, so we're now rendering null.
+Then we uncheck show child. That's going to trigger a re-render of our app component, because we changed that showChildState using setShowChild. That triggers a render start here. We go through all of the code, again skipping the useState callback. We come down here, create our elements, and then render end right here. Then we're doing a cleanup on all of the children, because the child is being removed from the page, so we're now rendering [null].
+
+React notices the previous JSX that you gave me included the child, and this next JSX that you gave me does not include the child. That means I need to remove the child from the page, and so I'm going to unmount the component and call all of the cleanups for all of the useEffects that that child had going.
+
+Let's come up here, and we'll see that that happens in the order in which they appear in the code. We see our no deps cleanup runs. We'll see our empty deps cleanup run. Even though we have listed dependencies but none of them changed because we have no dependencies, our cleanup is going to run, because we're unmounting this component, and then we get a cleanup of the effect with dependencies. Even though the count value didn't change, it's going to be called, because this component is getting unmounted.
 
 ```javascript
 // unchecked show child
@@ -2683,6 +2687,11 @@ App: render end
   Child: useEffect no deps cleanup
   Child: useEffect empty deps cleanup
   Child: useEffect with dep cleanup
+```
+
+Then because our state changed, in the app, we're going to run some cleanups for the useEffects that are relevant. Here, we have this cleanup is getting called, because it has no dependencies. This cleanup is not getting called, because it has an empty dependency array. Then this cleanup is getting called, because the dependency that it has has changed. Then we go ahead and run the effects that are relevant, the useEffect with no dependencies and the useEffect with a dependency that changed.
+
+```javascript
 App: useEffect no deps cleanup
 App: useEffect with dep cleanup
 App: useEffect no deps

@@ -2664,4 +2664,12 @@ React.useEffect(() => {
   console.log('%c    Child: useEffect with dep', 'color: HotPink')
   // console output - Child: useEffect with dep
 }, [count])
+
+// clicked again
+Child: render start
+Child: render end
+Child: useEffect no deps cleanup
+Child: useEffect with dep cleanup
+Child: useEffect no deps
+Child: useEffect with dep
 ```

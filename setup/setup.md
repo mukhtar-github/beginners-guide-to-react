@@ -2783,7 +2783,29 @@ function UsernameForm() {
 }
 ```
 
-Our next step is to get the value out of this input because we want to alert the value that the user entered. We need to get our username equals something and we'll say alert, "You entered username." We can get rid of that console log here. We can say Joe and you entered the we get '??' question mark. How are we going to get that username value? Well, one way we could do this, we could say document.querySelectorInput.value, save that. We say Joe, submit that and here we go, we get Joe. That's not going to work very well. It won't scale super well in the real world because the page could have multiple inputs.
+Our next step is to get the value out of this input because we want to alert the value that the user entered. We need to get our username equals something and we'll say alert, "You entered username." We can get rid of that console log here. We can say Joe and you entered the we get '??' question mark.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const username = '??'
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
+
+How are we going to get that username value? Well, one way we could do this, we could say document.querySelectorInput.value, save that. We say Joe, submit that and here we go, we get Joe. That's not going to work very well. It won't scale super well in the real world because the page could have multiple inputs.
 
 ```html
 <body>

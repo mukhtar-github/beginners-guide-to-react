@@ -2762,19 +2762,28 @@ function UsernameForm() {
 }
 ```
 
-Now, the reason that this is happening is because when you submit a form in the browser, *it automatically makes a post request to the current URL with the form data.* We could see that if we looked at our network tab. If you want to do some JavaScript stuff based on the user's submitted form, then we don't want the full page refresh. Instead, we can do our own JavaScript stuff.
+Now, the reason that this is happening is because when you submit a form in the browser, *it automatically makes a post request to the current URL with the form data.* We could see that if we looked at our network tab. If you want to do some JavaScript stuff based on the user's submitted form, then we don't want the full page refresh. Instead, we can do our own JavaScript stuff. The handleSubmit function as an *event handler will accept an event as the argument.* Then we can say event.preventDefault. With that, we will no longer get a full page refresh and we'll still get the submitted string logged to the console.
 
+```javascript
+function UsernameForm() {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submitted')
+  }
 
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
 
-
-
-
-
-
-
-
-
-
+Our next step is to get the value out of this input because we want to alert the value that the user entered. We need to get our username equals something and we'll say alert, "You entered username." We can get rid of that console log here. We can say Joe and you entered question mark. How are we going to get that username value? Well, one way we could do this, we could say document.querySelectorInput.value, save that. We say Joe, submit that and here we go, we get Joe. That's not going to work very well. It won't scale super well in the real world because the page could have multiple inputs.
 
 ```html
 <body>

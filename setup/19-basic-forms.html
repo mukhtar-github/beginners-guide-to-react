@@ -8,7 +8,7 @@
     function UsernameForm() {
       const handleSubmit = (e) => {
         e.preventDefault()
-        const username = '??'
+        const username = document.querySelector('input').value
         alert(`You entered: ${username}`)
       }
 

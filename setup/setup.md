@@ -2805,7 +2805,27 @@ function UsernameForm() {
 }
 ```
 
-How are we going to get that username value? Well, one way we could do this, we could say document.querySelectorInput.value, save that. We say Joe, submit that and here we go, we get Joe. That's not going to work very well. It won't scale super well in the real world because the page could have multiple inputs.
+How are we going to get that username value? Well, one way we could do this, we could say document.querySelector('input').value, save that. We say Joe, submit that and here we go, we get Joe. That's not going to work very well. It won't scale super well in the real world because the page could have multiple inputs. If we were to render multiples of these, then they could conflict with one another. Querying the entire document breaks the encapsulation of this component because it means that you can't use this component in the context of other components in an application. We don't want to query the document.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const username = document.querySelector('input').value
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
 
 ```html
 <body>

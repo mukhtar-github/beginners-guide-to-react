@@ -2827,7 +2827,28 @@ function UsernameForm() {
 }
 ```
 
-Another thing we can do is we can access the form element from the event. We could say console.logEvent.target and that is going to be our form element. We say Joe, submit that and we'll get the form element right there. That's great, but let's take a look at some of the properties on that form element. Chrome is rendering out this really cool DOM tree similar to what we see in the elements tab, but I want to see the properties that are on the form elements. I'm going to use console.dir, which will log out the properties of that elements.
+Another thing we can do is we can access the form element from the event. We could say console.log(event.target) and that is going to be our form element. We say Joe, submit that and we'll get the form element right there. That's great, but let's take a look at some of the properties on that form element. Chrome is rendering out this really cool DOM tree similar to what we see in the elements tab, but I want to see the properties that are on the form elements. I'm going to use console.dir, which will log out the properties of that elements.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(event.target)
+    const username = document.querySelector('input').value
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
 
 ```html
 <body>

@@ -2904,6 +2904,8 @@ I'm not super jazzed about relying implicitly on the order in which these form e
 }
 ```
 
+There's another thing that we can do here and that is by properly associating our label to the input by having an HTML for username input. Then, having an ID of username input right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility.
+
 ```html
 <body>
   <div id="root"></div>

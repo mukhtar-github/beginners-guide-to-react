@@ -10,7 +10,9 @@
         event.preventDefault()
         //console.log(event.target)
         console.dir(event.target)
-        const username = event.target[0].value
+        //const username = document.querySelector('input').value
+        //const username = event.target[0].value
+        const username = event.target.elements[0].value
         alert(`You entered: ${username}`)
       }
 

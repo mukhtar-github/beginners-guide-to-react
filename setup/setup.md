@@ -2904,7 +2904,7 @@ I'm not super jazzed about relying implicitly on the order in which these form e
 }
 ```
 
-There's another thing that we can do here and that is by properly associating our label to the input by having an HTML for username input. Then, having an ID of username input right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility. When I say Joe in here, hit submit, then we look at our form in our elements property. In addition to the zero and one indexes for each of these elements, we also get this usernameInput value here because the ID of this element inside of our form. You actually get the same thing using the name attribute as well. We look at our form elements, and we see that username input still exists right there.
+There's another thing that we can do here and that is by properly associating our *label* to the *input* by having an htmlFor=usernameInput. Then, having an id=usernameInput right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility. When I say Joe in here, hit submit, then we look at our form in our elements property. In addition to the zero and one indexes for each of these elements, we also get this usernameInput value here because the 'id' of this element inside of our form. You actually get the same thing using the name attribute as well. We look at our form elements, and we see that username input still exists right there.
 
 ```javascript
   return (
@@ -2925,6 +2925,33 @@ elements: HTMLFormControlsCollection(2)
 1: button
 usernameInput: input#usernameInput
 length: 2
+```
+
+Any elements that have a name or an ID will be attached by that name and ID to this element's property of the form node. You can reference those by those names and IDs. That's what we're going to prefer here. We'll say username = event.target -- that's our form -- .elements.usernameInput.value to get the value out of that username input.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    //console.log(event.target)
+    //log out the properties of the elements
+    console.dir(event.target)
+    //const username = document.querySelector('input').value
+    //const username = event.target[0].value
+    const username = event.target.elements[0].value
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
 ```
 
 ```html

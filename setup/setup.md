@@ -2904,7 +2904,7 @@ I'm not super jazzed about relying implicitly on the order in which these form e
 }
 ```
 
-There's another thing that we can do here and that is by properly associating our label to the input by having an HTML for username input. Then, having an ID of username input right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility. When I say Joe in here, hit submit, then we look at our form in our elements property. In addition to the zero and one indexes for each of these elements, we also get this usernameInput value here because the ID of this element inside of our form. You actually get the same thing using the name attribute as well.
+There's another thing that we can do here and that is by properly associating our label to the input by having an HTML for username input. Then, having an ID of username input right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility. When I say Joe in here, hit submit, then we look at our form in our elements property. In addition to the zero and one indexes for each of these elements, we also get this usernameInput value here because the ID of this element inside of our form. You actually get the same thing using the name attribute as well. We look at our form elements, and we see that username input still exists right there.
 
 ```javascript
   return (
@@ -2912,7 +2912,8 @@ There's another thing that we can do here and that is by properly associating ou
       <input /> {/*output - undefined*/}
       <div>
         <label htmlFor='usernameInput'>Username:</label>
-        <input id='usernameInput' type='text' />
+        {/*<input id='usernameInput' type='text' />*/}
+        <input name='usernameInput' type='text' />
       </div>
       <button type='submit'>Submit</button>
     </form>

@@ -2901,7 +2901,6 @@ I'm not super jazzed about relying implicitly on the order in which these form e
       <button type='submit'>Submit</button>
     </form>
   )
-}
 ```
 
 There's another thing that we can do here and that is by properly associating our *label* to the *input* by having an htmlFor=usernameInput. Then, having an id=usernameInput right here. Now the label and the input are properly associated. Meaning that I can click on the label and it will focus on the input, which is good for accessibility. When I say Joe in here, hit submit, then we look at our form in our elements property. In addition to the zero and one indexes for each of these elements, we also get this usernameInput value here because the 'id' of this element inside of our form. You actually get the same thing using the name attribute as well. We look at our form elements, and we see that username input still exists right there.
@@ -2918,7 +2917,7 @@ There's another thing that we can do here and that is by properly associating ou
       <button type='submit'>Submit</button>
     </form>
   )
-}
+
 //output of the properties of the elements
 elements: HTMLFormControlsCollection(2)
 0: input#usernameInput
@@ -2945,9 +2944,11 @@ function UsernameForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input /> {/*output - undefined*/}
       <div>
-        <label>Username:</label>
-        <input type='text' />
+        <label htmlFor='usernameInput'>Username:</label>
+        {/*<input id='usernameInput' type='text' />*/}
+        <input name='usernameInput' type='text' />
       </div>
       <button type='submit'>Submit</button>
     </form>
@@ -2955,7 +2956,36 @@ function UsernameForm() {
 }
 ```
 
-Another thing that we could do is make a ref for our usernameInput. We'll say usernameInputRef = React.useRef, and then we could say ref = usernameInputRef, and instead of this, we could say username = usernameInputRef.current.value. Our usernameInputRef.current will be the DOM node for the input, and we'll get the value from that. This will work as well.
+Another thing that we could do is make a ref for our usernameInput. We'll say usernameInputRef = React.useRef, and then we could say ref = {usernameInputRef}, and instead of this, we could say username = usernameInputRef.current.value. Our usernameInputRef.current will be the DOM node for the input, and we'll get the value from that. This will work as well.
+
+```javascript
+function UsernameForm() {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    //console.log(event.target)
+    //log out the properties of the elements
+    console.dir(event.target)
+    //const username = document.querySelector('input').value
+    //const username = event.target[0].value
+    //const username = event.target.elements[0].value
+    //const username = event.target.elements.usernameInput.value
+    const username = usernameInputRef.current.value
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/*<input />*/}
+      <div>
+        <label htmlFor='usernameInput'>Username:</label>
+        <input ref={usernameInputRef} id='usernameInput' type='text' />
+        {/*<input name='usernameInput' type='text' />*/}
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
 
 ```html
 <body>

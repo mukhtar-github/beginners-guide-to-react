@@ -2927,7 +2927,7 @@ usernameInput: input#usernameInput
 length: 2
 ```
 
-Any elements that have a name or an ID will be attached by that name and ID to this element's property of the form node. You can reference those by those names and IDs. That's what we're going to prefer here. We'll say username = event.target -- that's our form -- .elements.usernameInput.value to get the value out of that username input.
+Any elements that have a *name* or an *id* will be attached by that name and id to this element's property of the form node. You can reference those by those names and ids. That's what we're going to prefer here. We'll say username = event.target -- that's our form -- .elements.usernameInput.value to get the value out of that usernameInput. With that, we can say Joe and we get everything working exactly as we want without the implicitness of querying the entire document or relying on the order of the elements.
 
 ```javascript
 function UsernameForm() {
@@ -2938,7 +2938,8 @@ function UsernameForm() {
     console.dir(event.target)
     //const username = document.querySelector('input').value
     //const username = event.target[0].value
-    const username = event.target.elements[0].value
+    //const username = event.target.elements[0].value
+    const username = event.target.elements.usernameInput.value
     alert(`You entered: ${username}`)
   }
 
@@ -2953,6 +2954,8 @@ function UsernameForm() {
   )
 }
 ```
+
+Another thing that we could do is make a ref for our usernameInput. We'll say usernameInputRef = React.useRef, and then we could say ref = usernameInputRef, and instead of this, we could say username = usernameInputRef.current.value. Our usernameInputRef.current will be the DOM node for the input, and we'll get the value from that. This will work as well.
 
 ```html
 <body>

@@ -3029,3 +3029,51 @@ In review, what we had to do here was we created a *form* that has the single *i
 If you do want to have a *cancel* button or a *reset* button, then you want to specify the *type* is button, which I know is a little redundant, but if you don't specify a *type*, then the *type* will implicitly be *submit*, which would really confuse your users when they try to click *cancel*, so we specify that *type* is *submit*. We put in *submit* for the value here. Then instead of putting an onClick handler on the button, we put an onSubmit handler on the *form*. That way, any other way that the user tries to *submit* the *form* will call our *submit* handler.
 
 Then to avoid a full page refresh, we use event.preventDefault, and then we retrieve the user's *input* using *event target* to get the *form*, and then *elements* to get the *elements* of the *form* and *usernameInput* to retrieve the *input* by its *id*. Then we get the value from that *input* to get our *username*, and then we *alert* that to our users, or you could *submit* this to a *backend server*.
+
+## Make Dynamic Forms with React
+
+### setup/20-dynamic-forms.html
+
+Often, it can be useful to know what the user’s input is as they’re typing it and use that information to change what is rendered. This can be good for dynamic search or filter inputs, or triggering changes when a user checks a checkbox, or a myriad of other use cases. In this example, we’re going to dynamically show an error message if the user types something invalid so they don’t have to wait until they submit the form to know they’re doing something wrong.
+
+To do this we’ll store the input’s value in state and then use that state to derive an error message which will be displayed if there is an error.
+
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    function UsernameForm() {
+      const [username, setUsername] = React.useState('')
+      const isLowerCase = username === username.toLowerCase()
+      const error = isLowerCase ? null : 'Username must be lower case'
+
+      function handleSubmit(event) {
+        event.preventDefault()
+        alert(`You entered: ${username}`)
+      }
+
+      function handleChange(event) {
+        setUsername(event.target.value)
+      }
+
+      return (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="usernameInput">Username:</label>
+            <input id="usernameInput" type="text" onChange={handleChange} />
+          </div>
+          <div style={{color: 'red'}}>{error}</div>
+          <button disabled={Boolean(error)} type="submit">
+            Submit
+          </button>
+        </form>
+      )
+    }
+
+    ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+  </script>
+</body>
+```

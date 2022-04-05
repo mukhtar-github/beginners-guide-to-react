@@ -2987,6 +2987,12 @@ function UsernameForm() {
 }
 ```
 
+There are a couple of ways to do this, *and I'll go ahead and add username = document.querySelector('input').value. The reason that I removed that is I really want you to please not use this. It breaks encapsulation of our components.* That's one of the things that we really love about React, is that we can encapsulate logic within our components. I don't recommend this - (const username = event.target[0].value) method or this - (const username = event.target.elements[0].value) method, because those implicitly rely on the order in which the elements are rendered and could easily break if you change that order. Either one of these (const username = event.target.elements.usernameInput.value or const username = usernameInputRef.current.value) will work just fine.
+
+Personally, I think that if you don't need a *ref* for the input, that it's just easier to retrieve the input from the event.target.elements.usernameInput.value. It's recommended that you use *htmlFor* and *id* to associate *labels* to *inputs* anyway. Given that you already have to do that, this, I think, is the simplest way to get the value from the inputs in your form.
+
+With that in mind, let's go ahead and get rid of all of this. We get rid of that, clean this up, and remove the ref. If I were writing this form today, this is what it would look like.
+
 ```html
 <body>
   <div id="root"></div>
@@ -2994,6 +3000,7 @@ function UsernameForm() {
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+
     function UsernameForm() {
       function handleSubmit(event) {
         event.preventDefault()
@@ -3016,3 +3023,9 @@ function UsernameForm() {
   </script>
 </body>
 ```
+
+In review, what we had to do here was we created a form that has the single input and label associated to that input, and a button with the type of submit. It's really important that any button you put inside of a form has a type, because implicitly, it will have a type of submit. That's not entirely clear, especially if you say cancel for the contents with no specified type that gives this button any submit type, which is really confusing.
+
+If you do want to have a cancel button or a reset button, then you want to specify the type is button, which I know is a little redundant, but if you don't specify a type, then the type will implicitly be submit, which would really confuse your users when they try to click cancel, so we specify that type is submit. We put in submit for the value here. Then instead of putting an onClick handler on the button, we put an onSubmit handler on the form. That way, any other way that the user tries to submit the form will call our submit handler.
+
+Then to avoid a full page refresh, we use event.preventDefault, and then we retrieve the user's input using event target to get the form, and then elements to get the elements of the form and usernameInput to retrieve the input by its ID. Then we get the value from that input to get our username, and then we alert that to our users, or you could submit this to a backend server.

@@ -2861,7 +2861,7 @@ elements: HTMLFormControlsCollection(2)
 length: 2
 ```
 
-We'll say Joe, submit and here we go, we have our form. Here, there are a bunch of properties on here. We can see there's a zero and a one for input and button, so we could actually say username is event.target. We want zero.value, we save this and we get Joe and we get our, "You entered Joe," alert showing up.
+We'll say Joe, submit and here we go, we have our form. Here, there are a bunch of properties on here. We can see there's a zero and a one for input and button, so we could actually say username is event.target[0].value, we save this and we get Joe and we get our, "You entered Joe," alert showing up.
 
 ```html
 <body>

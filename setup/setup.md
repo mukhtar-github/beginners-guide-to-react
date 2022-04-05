@@ -2863,7 +2863,46 @@ length: 2
 
 We'll say Joe, submit and here we go, we have our form. Here, there are a bunch of properties on here. We can see there's a zero and a one for input and button, so we could actually say username is event.target[0].value, we save this and we get Joe and we get our, "You entered Joe," alert showing up. That works out nicely, but I'm going to get the username from another one of these properties. Let's see, we've got elements right here and elements has a zero and one. We could say event.target.elements[0].value and save that. That will work as well.
 
+```javascript
+function UsernameForm() {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    //console.log(event.target)
+    //log out the properties of the elements
+    console.dir(event.target)
+    //const username = document.querySelector('input').value
+    //const username = event.target[0].value
+    const username = event.target.elements[0].value
+    alert(`You entered: ${username}`)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
+
 I'm not super jazzed about relying implicitly on the order in which these form elements appear because if I were to had another input right here, then I'm going to be toast, "You entered undefined. I don't want to rely on that."
+
+```javascript
+  return (
+    <form onSubmit={handleSubmit}>
+      <input /> {/*output - undefined*/}
+      <div>
+        <label>Username:</label>
+        <input type='text' />
+      </div>
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+```
 
 ```html
 <body>

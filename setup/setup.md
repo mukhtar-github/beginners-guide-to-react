@@ -3034,9 +3034,9 @@ Then to avoid a full page refresh, we use event.preventDefault, and then we retr
 
 ### setup/20-dynamic-forms.html
 
-Often, it can be useful to know what the user’s input is as they’re typing it and use that information to change what is rendered. This can be good for dynamic search or filter inputs, or triggering changes when a user checks a checkbox, or a myriad of other use cases. In this example, we’re going to dynamically show an error message if the user types something invalid so they don’t have to wait until they submit the form to know they’re doing something wrong.
+Often, it can be useful to know what the user’s input is as they’re typing it and use that information to change what is rendered. This can be good for dynamic search or filter inputs, or triggering changes when a user checks a checkbox, or a myriad of other use cases. In this example, we’re going to dynamically show an error message if the user types something invalid so they don’t have to wait until they submit the form to know they’re doing something wrong. To do this we’ll store the input’s value in state and then use that state to derive an error message which will be displayed if there is an error.
 
-To do this we’ll store the input’s value in state and then use that state to derive an error message which will be displayed if there is an error.
+Let's say that this UsenameForm cannot have UPPER case characters. They can only have lower case characters. We could show the user an error when they hit the Submit button, but it would be a lot better user experience if we display an error message as they're making changes to this input field if they change it to something that's not allowed.
 
 ```html
 <body>

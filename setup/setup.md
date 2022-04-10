@@ -3038,6 +3038,13 @@ Often, it can be useful to know what the user’s input is as they’re typing i
 
 Let's say that this UsenameForm cannot have UPPER case characters. They can only have lower case characters. We could show the user an error when they hit the Submit button, but it would be a lot better user experience if we display an error message as they're making changes to this input field if they change it to something that's not allowed.
 
+We need to know what the user's typing as they're typing it, not just as they submit it, so we're going to add an onChange handler right here and here we'll call this handleChange. We'll make a function handleChange(), and that will take the event. Then we can use event.target.
+
+Because the target of this handleChange(event) is our input, then event.target is going to be the input(event.target).value is going to be the username. We need to store that username somewhere and trigger re-render of the UsenameForm so that it displays the error message if the username is typed incorrectly.
+
+
+
+
 ```html
 <body>
   <div id="root"></div>

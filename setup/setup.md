@@ -3062,7 +3062,7 @@ ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 
 We need to know what the user's typing as they're typing it, not just as they submit it, so we're going to add an onChange handler right here and here we'll call this handleChange. We'll make a function handleChange(), and that will take the event. Then we can use event.target.
 
-Because the target of this handleChange(event) is our input, then event.target is going to be the input(event.target).value is going to be the username. We need to store that username somewhere and trigger re-render of the UsenameForm so that it displays the error message if the username is typed incorrectly.
+Because the target of this handleChange(event) is our input, then event.target is going to be the input(event.target).value is going to be the username. We need to store that username somewhere and trigger re-render of the UsernameForm() so that it displays the error message if the username is typed incorrectly.
 
 ```javascript
 function UsernameForm() {
@@ -3074,6 +3074,34 @@ function UsernameForm() {
 
   function handleChange(event) {
     const username = event.target.value
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="usernameInput">Username:</label>
+        <input id="usernameInput" type="text" onchange={handleChange} />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+```
+
+Let's go ahead and add some state to this UsernameForm(). We'll say const [username, setUsername] = React.useState('') and we'll initialize that to an empty string. In here, we'll call setUsername with the event.target.value, and then we no longer need to get the username from the form input elements because we're always going to be keeping this username up-to-date with whatever the user's specifying. We can get rid of that, and now this username is just referencing that.
+
+```javascript
+function UsernameForm() {
+  const [username, setUsername] = React.useState('')
+  function handleSubmit(event) {
+    event.preventDefault()
+    alert(`You entered: ${username}`)
+  }
+
+  function handleChange(event) {
+    setUsername(event.target.value)
   }
 
   return (

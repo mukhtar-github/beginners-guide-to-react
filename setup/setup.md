@@ -3118,7 +3118,38 @@ function UsernameForm() {
 ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 ```
 
-Next, let's go ahead and determine whether this isLowerCase by saying username === username.toLowerCase(). If it's equal to its toLowerCase version of itself, then we know that it is lower case, and we know that we have an error if it's not lower case. If it is lower case, we'll just say the error is null, otherwise we'll say the Username must be lower case.
+Next, let's go ahead and determine whether this isLowerCase by saying username === username.toLowerCase(). If it's equal to its toLowerCase version of itself, then we know that it is lower case, and we know that we have an error if it's not lower case. If it is lower case, we'll just say the error is null, otherwise we'll say the Username must be lower case. Then we just need to display that error message. We'll copy that, come down here and make a 'div' here with a style = { color: 'red' } just for the fun of it. We'll put the error message right in there.
+
+We can also make the button disabled if there's an error. Disabled accepts a Boolean, so we'll just say Boolean_error. If error is truthy, then we'll pass a true value for disabled, and if there is no error or it's falsy, then we'll pass a false value for disabled. Let's save that. We get a refresh. If we type an upper-case character, then we'll get Username must be lower case, the Submit button is disabled. If we type a lower-case character, then we don't get any problem, until we get an upper-case character in there.
+
+```javascript
+function UsernameForm() {
+  const [username, setUsername] = React.useState('')
+  const isLowerCase = username === username.toLowerCase()
+  const error = isLowerCase ? null : 'Username must be lower case'
+  function handleSubmit(event) {
+    event.preventDefault()
+    alert(`You entered: ${username}`)
+  }
+
+  function handleChange(event) {
+    setUsername(event.target.value)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="usernameInput">Username:</label>
+        <input id="usernameInput" type="text" onchange={handleChange} />
+      </div>
+      <div style={{color: 'red'}}>{error}</div>
+      <button disabled={Boolean(error)} type="submit">Submit</button>
+    </form>
+  )
+}
+
+ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+```
 
 
 

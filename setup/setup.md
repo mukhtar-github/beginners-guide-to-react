@@ -3167,3 +3167,7 @@ If you ever need to know exactly what the user's typing as they're typing it, th
 ## Controlling Form Values with React
 
 ### setup/21-controlled-forms.html
+
+There are many situations where you want to programmatically control the value of a form field. Maybe you want to set the value of one field based on the user’s interactions with another element. Or maybe you want to change the user’s input as they’re typing it. In this example, we’ll be preventing the user from typing upper case characters into our field by turning our input from an “Uncontrolled field” to a “Controlled field.” You can learn more about Controlled fields and components from the React documentation.
+
+It's great that we're able to display an error message if there's an uppercase character and we disable the submit button, but it would be even cooler if we didn't allow the user to type uppercase characters in the first place. If they try to type an uppercase character, we just lowercase it for them. We could do that pretty easily by saying setUsername.toLowerCase. Now, the username that's stored inside of our state is going to be lowercase so we can do uppercase forever. When we hit submit, that's all going to be lowercase.

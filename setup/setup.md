@@ -3122,54 +3122,6 @@ Next, let's go ahead and determine whether this isLowerCase by saying username =
 
 We can also make the button disabled if there's an error. Disabled accepts a Boolean, so we'll just say Boolean_error. If error is truthy, then we'll pass a true value for disabled, and if there is no error or it's falsy, then we'll pass a false value for disabled. Let's save that. We get a refresh. If we type an upper-case character, then we'll get Username must be lower case, the Submit button is disabled. If we type a lower-case character, then we don't get any problem, until we get an upper-case character in there.
 
-```javascript
-function UsernameForm() {
-  const [username, setUsername] = React.useState('')
-  const isLowerCase = username === username.toLowerCase()
-  const error = isLowerCase ? null : 'Username must be lower case'
-  function handleSubmit(event) {
-    event.preventDefault()
-    alert(`You entered: ${username}`)
-  }
-
-  function handleChange(event) {
-    setUsername(event.target.value)
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="usernameInput">Username:</label>
-        <input id="usernameInput" type="text" onchange={handleChange} />
-      </div>
-      <div style={{color: 'red'}}>{error}</div>
-      <button disabled={Boolean(error)} type="submit">Submit</button>
-    </form>
-  )
-}
-
-ReactDOM.render(<UsernameForm />, document.getElementById('root'))
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```html
 <body>
   <div id="root"></div>
@@ -3209,3 +3161,5 @@ ReactDOM.render(<UsernameForm />, document.getElementById('root'))
   </script>
 </body>
 ```
+
+If you ever need to know exactly what the user's typing as they're typing it, then you can use the onChange event to get access to the value of the input and update that in the state of your component, then changes to that value will trigger a re-render of your component. That state value will be whatever the user's typed, allowing us to create this error message based on whether the username is lower case. We display that error message here in red in this 'div'. We disable the submit button if there is an error message.

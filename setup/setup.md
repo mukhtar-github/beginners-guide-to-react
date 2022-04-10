@@ -3170,4 +3170,38 @@ If you ever need to know exactly what the user's typing as they're typing it, th
 
 There are many situations where you want to programmatically control the value of a form field. Maybe you want to set the value of one field based on the user’s interactions with another element. Or maybe you want to change the user’s input as they’re typing it. In this example, we’ll be preventing the user from typing upper case characters into our field by turning our input from an “Uncontrolled field” to a “Controlled field.” You can learn more about Controlled fields and components from the React documentation.
 
-It's great that we're able to display an error message if there's an uppercase character and we disable the submit button, but it would be even cooler if we didn't allow the user to type uppercase characters in the first place. If they try to type an uppercase character, we just lowercase it for them. We could do that pretty easily by saying setUsername.toLowerCase. Now, the username that's stored inside of our state is going to be lowercase so we can do uppercase forever. When we hit submit, that's all going to be lowercase.
+It's great that we're able to display an error message if there's an uppercase character and we disable the submit button, but it would be even cooler if we didn't allow the user to type uppercase characters in the first place. If they try to type an uppercase character, we just lowercase it for them.
+
+```javascript
+function UsernameForm() {
+  const [username, setUsername] = React.useState('')
+  const isLowerCase = username === username.toLowerCase()
+  const error = isLowerCase ? null : 'Username must be lower case'
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    alert(`You entered: ${username}`)
+  }
+
+  function handleChange(event) {
+    setUsername(event.target.value)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="usernameInput">Username:</label>
+        <input id="usernameInput" type="text" onchange={handleChange} />
+      </div>
+      <div style={{color: 'red'}}>{error}</div>
+      <button disabled={Boolean(error)} type="submit">
+    </form>
+  )
+}
+
+ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+```
+
+We could do that pretty easily by saying setUsername.toLowerCase. Now, the username that's stored inside of our state is going to be lowercase so we can do uppercase forever. When we hit submit, that's all going to be lowercase. It's not exactly a great user experience to be able to type something here and have the end result be different from what I submitted. What we need to do is control the input value to be exactly the same thing that I have in my state because I'm programmatically changing the value that I get from the input to set the value that I store in my state.
+
+If I want to keep those two in sync, then I need to control the input's value. To do this is pretty simple, we simply add a 'value prop' here and we'll pass in the username. As soon as we pass this 'value prop' on to an input, we're communicating to React that React no longer needs to manage the 'state' of this input. Now we are going to control that 'state' and it should not change that value to anything other than what we enter in here which includes whatever the user's typing.

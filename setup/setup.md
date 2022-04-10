@@ -3065,20 +3065,29 @@ We need to know what the user's typing as they're typing it, not just as they su
 Because the target of this handleChange(event) is our input, then event.target is going to be the input(event.target).value is going to be the username. We need to store that username somewhere and trigger re-render of the UsenameForm so that it displays the error message if the username is typed incorrectly.
 
 ```javascript
-function handleChange(event) {
-        const username = event.target.value
-      }
+function UsernameForm() {
+  function handleSubmit(event) {
+    event.preventDefault()
+    const username = event.target.elements.usernameInput.value
+    alert(`You entered: ${username}`)
+  }
 
-      return (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="usernameInput">Username:</label>
-            <input id="usernameInput" type="text" onChange={handleChange} />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      )
-    }
+  function handleChange(event) {
+    const username = event.target.value
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="usernameInput">Username:</label>
+        <input id="usernameInput" type="text" onchange={handleChange} />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 ```
 
 

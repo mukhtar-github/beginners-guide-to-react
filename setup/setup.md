@@ -3118,6 +3118,8 @@ function UsernameForm() {
 ReactDOM.render(<UsernameForm />, document.getElementById('root'))
 ```
 
+Next, let's go ahead and determine whether this isLowerCase by saying username === username.toLowerCase(). If it's equal to its toLowerCase version of itself, then we know that it is lower case, and we know that we have an error if it's not lower case. If it is lower case, we'll just say the error is null, otherwise we'll say the Username must be lower case.
+
 
 
 

@@ -3324,6 +3324,36 @@ If we take a look at what things look like right now, we click on the bomb and o
 
 In the Console output, we have our App, and that is rendered right here, and then we have this 'div', which is rendered here, and then we have this 'div', which is rendered here, and then we have this bomb, which is rendered here, and that bomb is the thing that threw the error. It's giving us this tip. "Consider adding an error boundary to your tree to customize error handling behavior." That's just what we're going to do. Normally, I use the third-party library for this, but we're going to build our own little error boundary.
 
+Error boundaries have to be class components, and to create a class component with React, we're going to say class ErrorBoundary extends React.Component. In the body of our React class component, we're going to need a render method, and this is what's going to be rendered. It's basically the same thing as the body of our regular function components.
+
+```javascript
+class ErrorBoundary extends React.Component {
+  render() {
+    return this.props.children
+  }
+}
+
+function Bomb() {
+  throw new Error('💥 CABOOM 💥')
+}
+
+function App() {
+  const [explode, setExplode] = React.useState(false)
+  return (
+    <div>
+      <div>
+        <button onClick={() => setExplode(true)}>💣</button>
+      </div>
+      <div>
+        <ErrorBoundary>
+          {explode ? <Bomb /> : 'Push the button Max!'}
+        </ErrorBoundary>
+      </div>
+    </div>
+  )
+}
+ReactDOM.render(<App />, document.getElementById('root'))
+```
 
 
 

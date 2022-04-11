@@ -3326,6 +3326,8 @@ In the Console output, we have our App, and that is rendered right here, and the
 
 Error boundaries have to be class components, and to create a class component with React, we're going to say class ErrorBoundary extends React.Component. In the body of our React class component, we're going to need a render method, and this is what's going to be rendered. It's basically the same thing as the body of our regular function components.
 
+Here, we're not going to render anything special with this ErrorBoundary. We're simply going to return this.props.children, so the React elements we return for this ErrorBoundary are going to be the same React elements that are provided to this ErrorBoundary as children. Let's go ahead and put those right here inside of this 'div'.
+
 ```javascript
 class ErrorBoundary extends React.Component {
   render() {

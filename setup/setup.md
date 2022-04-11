@@ -3306,9 +3306,7 @@ function App() {
       <div>
         <button onClick={() => setExplode(true)}>💣</button>
       </div>
-      <div>
-        {explode ? <Bomb /> : 'Push the button Max!'}
-      </div>
+      <div>{explode ? <Bomb /> : 'Push the button Max!'}</div>
     </div>
   )
 }

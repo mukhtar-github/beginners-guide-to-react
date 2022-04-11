@@ -3311,7 +3311,18 @@ function App() {
   )
 }
 ReactDOM.render(<App />, document.getElementById('root'))
+
+//console output
+The above error occurred in the <Bomb> component:
+  in Bomb (created by App)
+  in div (created by App)
+  in div (created by App)
+  in App
 ```
+
+If we take a look at what things look like right now, we click on the bomb and our entire application goes away. We get this Uncaught Error: 'CABOOM' in our console, and if we scroll down here a little bit, React logs out a component stack trace so we can track down which component threw this error.
+
+In the Console output, we have our App, and that is rendered right here, and then we have this 'div', which is rendered here, and then we have this 'div', which is rendered here, and then we have this bomb, which is rendered here, and that bomb is the thing that threw the error. It's giving us this tip. "Consider adding an error boundary to your tree to customize error handling behavior." That's just what we're going to do. Normally, I use the third-party library for this, but we're going to build our own little error boundary.
 
 
 

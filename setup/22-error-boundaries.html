@@ -21,15 +21,6 @@
     //   }
     // }
 
-    function ErrorFallback({error}) {
-      return (
-        <div>
-          <p>Something went wrong:</p>
-          <pre>{error.message}</pre>
-        </div>
-      )
-    }
-
     function Bomb() {
       throw new Error('💥 CABOOM 💥')
     }
@@ -41,11 +32,7 @@
           <div>
             <button onClick={() => setExplode(true)}>💣</button>
           </div>
-          <div>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              {explode ? <Bomb /> : 'Push the button Max!'}
-            </ErrorBoundary>
-          </div>
+          <div>{explode ? <Bomb /> : 'Push the button Max!'}</div>
         </div>
       )
     }

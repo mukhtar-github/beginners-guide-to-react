@@ -3524,4 +3524,44 @@ It doesn’t take long working with React before you want to render a list of it
 
 In this lesson we’ll see a demo of this problem and understand a situation that can happen when we don’t handle it properly. We’re using inputs in this example, but the same thing can happen for your own components that maintain state. You definitely do not want to ignore this warning.
 
-Here we have an app that's managing some items. We can add items and remove items. We have a fixed set of items that can be added or removed, and we have a button to add additional items, which is disabled when we've added all of our items, and then we iterate over the items that we have and render a list item for each of those.
+Here we have an app that's managing some items. We can add items and remove items. We have a fixed set of items that can be added or removed, and we have a button to add additional items, which is disabled when we've added all of our items, and then we iterate over the items that we have and render a list item for each of those. Here we have remove buttons for each one of these, then the item name itself, and an input with that item in it. When we render this, we're going to get this waning that says, "Each child in a list should have a unique 'key' prop."
+
+```javascript
+const allItems = [
+  {id: 'a', value: 'apple'},
+  {id: 'o', value: 'orange'},
+  {id: 'g', value: 'grape'},
+  {id: 'p', value: 'pear'},
+]
+
+function App() {
+  const [items, setItems] = React.useState(allItems)
+
+  function addItem() {
+    setItems([...items, allItems.find(i => !items.includes(i))])
+  }
+
+  function removeItem(item) {
+    setItems(items.filter(i => i !== item))
+  }
+
+  return (
+    <div>
+      <button disabled={items.length >= allItems.length} onClick={addItem}>
+        add item
+      </button>
+      <ul style={{listStyle: 'none', paddingLeft: 0}}>
+        {items.map(item => (
+          <li>
+            <button onClick={() => removeItem(item)}>remove</button>{' '}
+            <label htmlFor={`${item.value}-input`}>{item.value}</label>{' '}
+            <input id={`${item.value}-input`} defaultValue={item.value} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```

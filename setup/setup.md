@@ -3357,9 +3357,47 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
- Now let's make this ErrorBoundary handle that error. The first thing that we're going to need is some state, so I'll say error: null, and then we'll have a static method called getDerivedStateFromError() that'll accept an error and then it'll return the state change that we want to make based on this error. We'll just return an object that has an error property and that's going to be assigned to the error that we're getting for this static method.
+ Now let's make this ErrorBoundary handle that error. The first thing that we're going to need is some state, so I'll say error: null', and then we'll have a 'static' method called 'getDerivedStateFromError()' that'll accept an error and then it'll return the 'state' change that we want to make based on this error. We'll just return an object that has an error property and that's going to be assigned to the error that we're getting for this 'static' method. When this happens, we're going to get a re-render. Let's grab that error from our state and then we can say if there's an error, then we'll return a 'div' that says, "Oh no!" Let's save that and when we click this, we're going to see "Oh no!"
 
+```javascript
+class ErrorBoundary extends React.Component {
+  state = {error: null}
+  static getDerivedStateFromError(error) {
+    return {error}
+  }
 
+  render() {
+    const {error} = this.state
+
+      if (error) {
+        return <div>Oh no!</div>
+      }
+
+    return this.props.children
+  }
+}
+
+function Bomb() {
+  throw new Error('💥 CABOOM 💥')
+}
+
+function App() {
+  const [explode, setExplode] = React.useState(false)
+  return (
+    <div>
+      <div>
+        <button onClick={() => setExplode(true)}>💣</button>
+      </div>
+      <div>
+        <ErrorBoundary>
+          {explode ? <Bomb /> : 'Push the button Max!'}
+        </ErrorBoundary>
+      </div>
+    </div>
+  )
+}
+ReactDOM.render(<App />, document.getElementById('root'))
+```
 
 
 

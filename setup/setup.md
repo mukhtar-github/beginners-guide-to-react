@@ -3571,3 +3571,45 @@ When we render this, we're going to get this warning that says, "Each child in a
 Don't be fooled by the syntax. There's nothing really magic going on here. What we're doing is we're taking an array of strings, we're mapping over that array of strings, and turning that array of strings into an array of React elements. Specifically, in our case, these are 'li' elements.
 
 That's the case where you need to have a 'key' prop for every React element in the array. We're seeing this warning because we don't. To fix this warning is pretty simple. We look at the items that we're iterating over. That is this array right here. Each one of those items has an id that uniquely identifies the item. We're going to use that id as the 'key' prop.
+
+```javascript
+const allItems = [
+  {id: 'a', value: 'apple'},
+  {id: 'o', value: 'orange'},
+  {id: 'g', value: 'grape'},
+  {id: 'p', value: 'pear'},
+]
+
+function App() {
+  const [items, setItems] = React.useState(allItems)
+
+  function addItem() {
+    setItems([...items, allItems.find(i => !items.includes(i))])
+  }
+
+  function removeItem(item) {
+    setItems(items.filter(i => i !== item))
+  }
+
+  return (
+    <div>
+      <button disabled={items.length >= allItems.length} onClick={addItem}>
+        add item
+      </button>
+      <ul style={{listStyle: 'none', paddingLeft: 0}}>
+        {items.map(item => (
+          <li key={item.id}>
+            <button onClick={() => removeItem(item)}>remove</button>{' '}
+            <label htmlFor={`${item.value}-input`}>{item.value}</label>{' '}
+            <input id={`${item.value}-input`} defaultValue={item.value} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+Here, we'll say 'key = {item.id}'. If we save this, we don't get that warning anymore. I'm not a huge fan of changing my code just to make warnings go away. I like to understand why that warning is there in the first place. That's why we have this contrived example for me to show you.

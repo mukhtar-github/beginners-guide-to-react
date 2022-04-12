@@ -3447,25 +3447,17 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 As I said, I never use class components even for error boundaries because I prefer to use a third-party library, which I'm going to include now and that is called React ErrorBoundary. With the React Error Boundary 'UMD Export', it exposes a global variable called ReactErrorBoundary and it has a property on there called ErrorBoundary. I'm going to simply assign that to ErrorBoundary.
 
+You'll be pleased to know that I don't have to change any of my code for this to work. It will to continue to work because we basically built a simple version of the ErrorBoundary from this library. The library is doing a fair a bit more than what we're doing here, which is why I recommend you do that instead, but the API is exactly the same.
 
+One other thing I want to demonstrate here is that this ErrorBoundary can be rendered anywhere in the tree. The location of the ErrorBoundary has a special significance. The ErrorBoundary can handle any errors that are thrown by its descendants. It's also important to note that the ErrorBoundary is going to render something in place of all of its descendants when there is an error.
 
+That means that while we can see the bomb still right here and the rest of our application, if we were to move this ErrorBoundary up to encompass our entire app and save that, when we click this button, then the entire app is replaced by our ErrorFallback component. This may or may not be desirable based on a specific use case, but it could be useful to have one error boundary rendered up here and then other error boundaries rendered throughout your application with more specific ErrorFallbacks.
 
+Here we can have "Something went wrong there," and that error is going to be handled by the nearest ErrorBoundary here. Then if something went wrong somewhere else in our application, then this top-level ErrorBoundary could handle that error. This gives us some fine-grained control over what part of the tree is going to be replaced by what's rendered by our error boundary.
 
+Another important thing to note is that our error boundary can only handle certain errors, specifically errors that are happening within the React call stack. It won't handle errors that are happening in event handlers or if there's an error in an asynchronous callback, like a Promise handler. It will only handle errors that happen within a React call stack like the render method or a React useEffect callback.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In the review, to handle React errors, you need to create an error boundary or, as I recommend, use react-error-boundary from npm. With this error boundary, you can wrap parts of your code. Any descendants of that error boundary will have its errors handled by the error boundary. With the error boundary from the react-error-boundary library, you can provide a FallbackComponent. That FallbackComponent will be rendered in the event of an error, allowing you to recover from the error or simply display an error message for the user to read.
 
 ```html
 <body>

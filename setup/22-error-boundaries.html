@@ -7,6 +7,11 @@
   <script type="text/babel">
     
 class ErrorBoundary extends React.Component {
+  state = {error: null}
+  static getDerivedStateFromError(error) {
+    return {error}
+  }
+
   render() {
     return this.props.children
   }

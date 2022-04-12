@@ -3403,6 +3403,8 @@ We'll still see errors logged to the console for our benefit, but the applicatio
 
 As the user of this error boundary component, I want to be able to provide to the error boundary the fallback component I want it to render when there's an error. I'm going to provide it the prop FallbackComponent. Here, I'll provide that component that I just created this ErrorFallback, paste that right in there. For our error boundary to accept and render that, we're going to have access to that fallback component on this.props. We can say this.props.fallbackComponent and we'll provide the prop error as error.
 
+You may recall that rendering custom components requires that the first character you use is capitalized, but the compiler also has a rule that if there are dots included in the component name, then those will also be treated as custom components, which is why this works. If we save this, we push the button and we're going to get, "Something went wrong. CABOOM." The app is still working, and we get all of the information logged to the console as well.
+
 ```javascript
 class ErrorBoundary extends React.Component {
   state = {error: null}
@@ -3442,6 +3444,8 @@ function App() {
 }
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
+
+As I said, I never use class components even for error boundaries because I prefer to use a third-party library, which I'm going to include now and that is called React ErrorBoundary. With the React Error Boundary 'UMD Export', it exposes a global variable called ReactErrorBoundary and it has a property on there called ErrorBoundary. I'm going to simply assign that to ErrorBoundary.
 
 
 

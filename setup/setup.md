@@ -3570,7 +3570,7 @@ When we render this, we're going to get this warning that says, "Each child in a
 
 Don't be fooled by the syntax. There's nothing really magic going on here. What we're doing is we're taking an array of strings, we're mapping over that array of strings, and turning that array of strings into an array of React elements. Specifically, in our case, these are 'li' elements.
 
-That's the case where you need to have a 'key' prop for every React element in the array. We're seeing this warning because we don't. To fix this warning is pretty simple. We look at the items that we're iterating over. That is this array right here. Each one of those items has an id that uniquely identifies the item. We're going to use that id as the 'key' prop.
+That's the case where you need to have a 'key' prop for every React element in the array. We're seeing this warning because we don't. To fix this warning is pretty simple. We look at the items that we're iterating over. That is this array right here. Each one of those items has an id that uniquely identifies the item. We're going to use that id as the 'key' prop. Here, we'll say 'key = {item.id}'. If we save this, we don't get that warning anymore.
 
 ```javascript
 const allItems = [
@@ -3612,4 +3612,6 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Here, we'll say 'key = {item.id}'. If we save this, we don't get that warning anymore. I'm not a huge fan of changing my code just to make warnings go away. I like to understand why that warning is there in the first place. That's why we have this contrived example for me to show you.
+I'm not a huge fan of changing my code just to make warnings go away. I like to understand why that warning is there in the first place. That's why we have this contrived example for me to show you. Here, we have a list of each one of these items, where the item itself is the label and then the default value for the input is the item as well. Then we can remove these and add them. As I removed them, if you watched carefully, you might have noticed an interesting bug.
+
+If I click on remove here and remove and remove and remove, everything works out just fine. If I remove from the beginning, now we're having orange being associated to the apple. Grape is associated to orange. Pear is associated to grape. That's interesting. If I remove from the middle here, now we have pear is associated to orange. Orange is associated to apple. Things are all kinds of messed up. This is the bug that the key prop helps you to avoid.

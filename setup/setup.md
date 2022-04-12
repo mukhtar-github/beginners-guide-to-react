@@ -3399,6 +3399,8 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
+We'll still see errors logged to the console for our benefit, but the application won't completely crash. React will simply re-render this ErrorBoundary with the error that was thrown and the ErrorBoundary gets to control what's being rendered. I'm going to go ahead and make a function component here called ErrorFallback(), which is going to be my generic fallback component for this application. We'll make this accept a prop called error. It will return a 'div' that has a 'p' tag with "Something went wrong:" and then a 'pre' tag with the error.message.
+
 
 
 

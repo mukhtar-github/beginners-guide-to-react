@@ -3403,7 +3403,45 @@ We'll still see errors logged to the console for our benefit, but the applicatio
 
 As the user of this error boundary component, I want to be able to provide to the error boundary the fallback component I want it to render when there's an error. I'm going to provide it the prop FallbackComponent. Here, I'll provide that component that I just created this ErrorFallback, paste that right in there. For our error boundary to accept and render that, we're going to have access to that fallback component on this.props. We can say this.props.fallbackComponent and we'll provide the prop error as error.
 
+```javascript
+class ErrorBoundary extends React.Component {
+  state = {error: null}
+  static getDerivedStateFromError(error) {
+    return {error}
+  }
 
+  render() {
+    const {error} = this.state
+
+      if (error) {
+        return <this.props.FallbackComponent error={error} />
+      }
+
+    return this.props.children
+  }
+}
+
+function Bomb() {
+  throw new Error('💥 CABOOM 💥')
+}
+
+function App() {
+  const [explode, setExplode] = React.useState(false)
+  return (
+    <div>
+      <div>
+        <button onClick={() => setExplode(true)}>💣</button>
+      </div>
+      <div>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {explode ? <Bomb /> : 'Push the button Max!'}
+        </ErrorBoundary>
+      </div>
+    </div>
+  )
+}
+ReactDOM.render(<App />, document.getElementById('root'))
+```
 
 
 

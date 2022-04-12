@@ -3524,7 +3524,7 @@ It doesn’t take long working with React before you want to render a list of it
 
 In this lesson we’ll see a demo of this problem and understand a situation that can happen when we don’t handle it properly. We’re using inputs in this example, but the same thing can happen for your own components that maintain state. You definitely do not want to ignore this warning.
 
-Here we have an app that's managing some items. We can add items and remove items. We have a fixed set of items that can be added or removed, and we have a button to add additional items, which is disabled when we've added all of our items, and then we iterate over the items that we have and render a list item for each of those. Here we have remove buttons for each one of these, then the item name itself, and an input with that item in it. When we render this, we're going to get this waning that says, "Each child in a list should have a unique 'key' prop."
+Here we have an app that's managing some items. We can add items and remove items. We have a fixed set of items that can be added or removed, and we have a button to add additional items, which is disabled when we've added all of our items, and then we iterate over the items that we have and render a list item for each of those. Here we have remove buttons for each one of these, then the item name itself, and an input with that item in it.
 
 ```javascript
 const allItems = [
@@ -3565,3 +3565,9 @@ function App() {
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
+
+When we render this, we're going to get this warning that says, "Each child in a list should have a unique 'key' prop." What that's talking about is any time you render an array of React elements, in our case we're rendering these 'li's, each one of those React elements must have a 'key' prop associated with it so that React can track these appropriately over time.
+
+Don't be fooled by the syntax. There's nothing really magic going on here. What we're doing is we're taking an array of strings, we're mapping over that array of strings, and turning that array of strings into an array of React elements. Specifically, in our case, these are 'li' elements.
+
+That's the case where you need to have a 'key' prop for every React element in the array. We're seeing this warning because we don't. To fix this warning is pretty simple. We look at the items that we're iterating over. That is this array right here. Each one of those items has an id that uniquely identifies the item. We're going to use that id as the 'key' prop.

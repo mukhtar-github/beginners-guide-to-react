@@ -3668,7 +3668,7 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Here's another little demo that I have at the bottom of this file. I'm just going to uncomment that. We'll save this. We'll get a refresh. In this example, we have those items. Every 1,000 milliseconds, we have this interval that shuffles those items and triggers a re-render with that shuffled version of the items. We randomize the items every time.
+Here's another little demo that I have at the bottom of this file. I'm just going to uncomment that. We'll save this. We'll get a refresh. In this example, we have those items. Every 1,000 milliseconds, we have this interval that shuffles those items and triggers a re-render with that shuffled version of the items. We randomize the items every time. We have three versions of this, one that renders those items as inputs without a key, another that renders those items with inputs with the key of index, and then the last that renders those items with an appropriate key.
 
 ```javascript
 <script type="text/babel">
@@ -3732,3 +3732,8 @@ Here's another little demo that I have at the bottom of this file. I'm just goin
   // ReactDOM.render(<FocusDemo />, document.getElementById('root'))
 </script>
 ```
+
+You'll notice that they're all updating correctly, meaning that they're all jumping around the screen as they should, but the focus is not updating correctly. I'm focused on apple right now. When that one moves, my focus doesn't go around with apple. Also, if I try to highlight one of these, then my highlight goes away as well. You'll notice that the With Key as Index suffers from the exact same problem. Even though it's not getting the warning in the console, you're still not fixing this bug. Only when you have a key in there will your focus travel around with the input that it's associated with, because React is able to determine where to move the focus as your component updates.
+
+In review, it's common in React to take an array and map that array to an array of elements and render that directly in your JSX. When you do that, it's important that you add a key to the root React element of each element in the array so that React can track changes over time and make sure that it preserves the state of each element in the array and its descendants.
+

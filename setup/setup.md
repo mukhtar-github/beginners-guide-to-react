@@ -3626,7 +3626,7 @@ That's why providing a unique key for each one of these items is going to fix th
 
 Hardcoding a specific key that's duplicated across these elements could lead to some very unexpected behavior, and we still experience that bug that we had before. The key that you provide for each element of this array of React elements needs to be unique to the item that you're rendering. Typically, that's going to be some sort of id, as in our case.
 
-Another mistake that I see people make sometimes is they try to use the 'index' as the key. While you get rid of the warning, you do not get rid of the bugs. That's because as React is comparing the previous version with the new version, what you're saying is the element that was at 'index' four is actually now at 'index' three, but React doesn't know that.
+Another mistake that I see people make sometimes is they try to use the 'index' as the key. While you get rid of the warning, you do not get rid of the bugs. That's because as React is comparing the previous version with the new version, what you're saying is the element that was at 'index' four is actually now at 'index' three, but React doesn't know that. It maintains the state for this input to be the same as the one that was at index three the last time rather than being the one that was in index four last time. It's important that you keep the key as something that's unique to the item that this element in the array is representing.
 
 ```javascript
 const allItems = [
@@ -3667,3 +3667,5 @@ function App() {
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
+
+Here's another little demo that I have at the bottom of this file. I'm just going to uncomment that. We'll save this. We'll get a refresh. In this example, we have those items. Every 1,000 milliseconds, we have this interval that shuffles those items and triggers a re-render with that shuffled version of the items. We randomize the items every time.

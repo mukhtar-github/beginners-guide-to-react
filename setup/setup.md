@@ -3621,3 +3621,49 @@ If you consider what happens when we click this 'remove button' or this 'add but
 This call to 'setItems' is going to trigger a re-render of our app. The app is going to come down here. We're going to create these React elements. We're going to iterate over this list(li) of items, which now has one less item than it had before. We're going to hand that off to React so that it can update the DOM appropriately. The way React updates the DOM is it has a reference to the JSX elements that you gave it the last time it rendered this app component. It compares those React elements with the new React elements that you just returned at this time. Then it updates the DOM accordingly.
 
 When you're giving it an array of React elements, unless React has some sort of identifier to know which element is which, it doesn't know whether you removed an element or maybe you added three and removed four or maybe you changed the order and just removed the first one. It doesn't have any insight into what it is that you did to this array of React elements between the last time it rendered and this time. Any time you're rendering an array of React elements, you need to give it a key so that it can determine whether elements were removed, added, or modified.
+
+That's why providing a unique key for each one of these items is going to fix this problem. Now, if we click remove on the grape, all of the inputs and their labels are correct. You'll notice also that if you try to provide some-key where it's the same key for each one of these, you're going to get a warning there because it encountered two children with the same key. Keys need to be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted -- the behavior is unsupported and could change in a future version.
+
+Hardcoding a specific key that's duplicated across these elements could lead to some very unexpected behavior, and we still experience that bug that we had before. The key that you provide for each element of this array of React elements needs to be unique to the item that you're rendering. Typically, that's going to be some sort of id, as in our case.
+
+Another mistake that I see people make sometimes is they try to use the 'index' as the key. While you get rid of the warning, you do not get rid of the bugs. That's because as React is comparing the previous version with the new version, what you're saying is the element that was at 'index' four is actually now at 'index' three, but React doesn't know that.
+
+```javascript
+const allItems = [
+  {id: 'a', value: 'apple'},
+  {id: 'o', value: 'orange'},
+  {id: 'g', value: 'grape'},
+  {id: 'p', value: 'pear'},
+]
+
+function App() {
+  const [items, setItems] = React.useState(allItems)
+
+  function addItem() {
+    setItems([...items, allItems.find(i => !items.includes(i))])
+  }
+
+  function removeItem(item) {
+    setItems(items.filter(i => i !== item))
+  }
+
+  return (
+    <div>
+      <button disabled={items.length >= allItems.length} onClick={addItem}>
+        add item
+      </button>
+      <ul style={{listStyle: 'none', paddingLeft: 0}}>
+        {items.map((item, index) => (
+          <li key={index}>
+            <button onClick={() => removeItem(item)}>remove</button>{' '}
+            <label htmlFor={`${item.value}-input`}>{item.value}</label>{' '}
+            <input id={`${item.value}-input`} defaultValue={item.value} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```

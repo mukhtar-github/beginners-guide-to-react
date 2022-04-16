@@ -3791,4 +3791,4 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Let's say that this Display component, which is a sibling to our FavoriteAnimal component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here.
+Let's say that this Display component, which is a sibling to our FavoriteAnimal component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here. We'll accept that as a prop, but how are we going to get access to that animal, if that state is living in our FavoriteAnimal component? These two are sibling components, so the FavoriteAnimal component can't pass the animal to the Display component.

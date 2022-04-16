@@ -3855,48 +3855,57 @@ One thing we're not quite as good at is pushing state back down or 'co-locating'
 
 Let's move it back up here. We no longer need to accept either one of these props and we can come down here, grab that. Remove both of these props. Then we'll paste that onChange event handler back into our FavoriteAnimal input onChange prop. With that, we've 'co-located' our state making it easier to maintain our application in the long term.
 
-```javascript
-function Name({name, onNameChange}) {
-  return (
-    <div>
-      <label>Name: </label>
-      <input value={name} onChange={onNameChange} />
-    </div>
-  )
-}
+```html
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
 
-function FavoriteAnimal() {
-  const [animal, setAnimal] = React.useState('')
-    return (
-      <div>
-        <label>Favorite Animal: </label>
-        <input
-          value={animal}
-          onChange={event => setAnimal(event.target.value)}
-        />
-      </div>
-    )
-}
+    function Name({name, onNameChange}) {
+      return (
+        <div>
+          <label>Name: </label>
+          <input value={name} onChange={onNameChange} />
+        </div>
+      )
+    }
 
-function Display({name}) {
-  return <div>{`Hey ${name}, you are great!`}</div>
-}
+    function FavoriteAnimal() {
+      const [animal, setAnimal] = React.useState('')
+        return (
+          <div>
+            <label>Favorite Animal: </label>
+            <input
+              value={animal}
+              onChange={event => setAnimal(event.target.value)}
+            />
+          </div>
+        )
+    }
 
-function App() {
-  const [name, setName] = React.useState('')
-  return (
-    <form>
-      <Name
-        name={name}
-        onNameChange={event => setName(event.target.value)}
-      />
-      <FavoriteAnimal />
-      <Display name={name} />
-    </form>
-  )
-}
+    function Display({name}) {
+      return <div>{`Hey ${name}, you are great!`}</div>
+    }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+    function App() {
+      const [name, setName] = React.useState('')
+      return (
+        <form>
+          <Name
+            name={name}
+            onNameChange={event => setName(event.target.value)}
+          />
+          <FavoriteAnimal />
+          <Display name={name} />
+        </form>
+      )
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'))
+  </script>
+</body>
 ```
 
 In review, what we did here was we explored how to lift a state and then push it back down with state co-location. Our App component here is rendering out some state which does need to be used by multiple elements. Our App is maintaining the name state. We also have this FavoriteAnimal which is maintaining its own state but then our Display component needed to have access to that state so we lifted the animal state up to the least common parent which was our App component.

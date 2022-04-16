@@ -4088,8 +4088,6 @@ Down here we can say if no 'Pokémon' then we'll return just a ... to indicate t
 </body>
 ```
 
-In review, to do anything asynchronous, that is a side effect that needs to happen inside a useEffect callback. For our Pokémon info, we accept that pokémonName and in our callback, if there's no pokémonName specified, then we'll simply return. Otherwise, we'll fetch the pokémonData with that pokémonName. Then when we get that data back, we'll update our own state to have that data that will trigger re-rendering of Pokémon info.
+In review, to do anything asynchronous, that is a side effect that needs to happen inside a 'useEffect callback'. For our 'Pokémon' info, we accept that 'pokémonName' and in our callback, if there's no 'pokémonName' specified, then we'll simply return. Otherwise, we'll fetch the 'pokémonData' with that 'pokémonName'. Then when we get that data back, we'll update our own state to have that data that will trigger re-rendering of 'Pokémon' info.
 
-We can return the stringified version of that pokémonData. We could apply an optimization here to make sure that this useEffect only runs when we want it to by putting pokémonName in here. That way, this useEffect will only rerun when the pokémonName changes. We could also add an if statement here for if there's no pokémonName supplied, then we could say return, submit a Pokémon. With that we get submit a Pokémon then we can type in something like Pikachu. Submit that and we'll get Pikachu's information loaded up.
-
-
+We can return the stringified version of that 'pokémonData'. We could apply an optimization here to make sure that this useEffect only runs when we want it to by putting 'pokémonName' in here. That way, this useEffect will only rerun when the 'pokémonName' changes. We could also add an if statement here for if there's no 'pokémonName' supplied, then we could say return, submit a 'Pokémon'. With that we get submit a 'Pokémon' then we can type in something like 'Pikachu'. Submit that and we'll get 'Pikachu's' information loaded up.

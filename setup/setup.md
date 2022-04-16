@@ -3988,9 +3988,9 @@ function fetchPokemon(name) {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Then when that promise resolves we're going to take the response parse it as JSON and when that's done, we'll get that response object and pluck the Pokémon off of the data in the response. We can call this function to get the information for this Pokémon that we get as a prop, but our render method here has to be synchronous.
+Then when that promise resolves we're going to take the response parse it as JSON and when that's done, we'll get that response object and pluck the 'Pokémon' off of the data in the response. We can call this function to get the information for this 'Pokémon' that we get as a prop, but our 'render' method here has to be synchronous.
 
-Our fetchPokémon function is asynchronous. Making HTTP request like this is a side effect so we're going to use the React useEffect hook. We'll say React.useEffect and the first thing that I want to say here is if there's no pokémonName, they haven't entered a Pokémon name yet or they submitted an empty one then we'll simply return. We don't need to make a request for that.
+Our 'fetchPokémon' function is asynchronous. Making HTTP request like this is a side effect, so we're going to use the React useEffect hook. We'll say React.useEffect and the first thing that I want to say here is if there's no 'pokémonName', they haven't entered a 'Pokémon' name yet or they submitted an empty one then we'll simply return. We don't need to make a request for that.
 
 
 ```html

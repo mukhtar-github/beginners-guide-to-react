@@ -3994,6 +3994,7 @@ Our 'fetchPokémon' function is asynchronous. Making HTTP request like this is a
 
 Otherwise, we'll call that 'fetchPokémon' with the 'pokémonName' and then in our success handler for this promise, we'll get the 'Pokémon' data and we can set some state. Let's go ahead and manage some state for this. We'll have use state for 'Pokémon' and we'll call 'setPokémon', and we'll initialize this to null. Down here, let's rename this from 'Pokémon' to 'pokémonData'. Then we can call 'setPokémon' with the 'pokémonData.'
 
+Down here we can say if no 'Pokémon' then we'll return just a ... to indicate the reloading. Otherwise we know we have the 'pokémonData' and so, we can render it right here. Let's JSON stringify this. I'll put that in a 'pre' so we get the right spacing. Say, JSON stringify 'Pokémon', null, two to get nice spacing for JSON. We'll save this. We have a ... right here. Because there's no 'Pokémon' then we can enter in 'Pikachu', submit that, and we get 'Pikachu's' information.
 
 ```html
 <body>
@@ -4086,3 +4087,9 @@ Otherwise, we'll call that 'fetchPokémon' with the 'pokémonName' and then in o
   </script>
 </body>
 ```
+
+In review, to do anything asynchronous, that is a side effect that needs to happen inside a useEffect callback. For our Pokémon info, we accept that pokémonName and in our callback, if there's no pokémonName specified, then we'll simply return. Otherwise, we'll fetch the pokémonData with that pokémonName. Then when we get that data back, we'll update our own state to have that data that will trigger re-rendering of Pokémon info.
+
+We can return the stringified version of that pokémonData. We could apply an optimization here to make sure that this useEffect only runs when we want it to by putting pokémonName in here. That way, this useEffect will only rerun when the pokémonName changes. We could also add an if statement here for if there's no pokémonName supplied, then we could say return, submit a Pokémon. With that we get submit a Pokémon then we can type in something like Pikachu. Submit that and we'll get Pikachu's information loaded up.
+
+

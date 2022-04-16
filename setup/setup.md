@@ -3747,4 +3747,48 @@ As a community we’re pretty good at doing this and it becomes natural over tim
 
 Here, we have a simple 'app' component where we are managing some name state so we can pass that to our 'name' component, and pass it to our 'display' component, so that we can render out, "Hey name. You are great." We also have a 'FavoriteAnimal' right here that's managing its own state and rendering the input with the value and onChange handler.
 
+```javascript
+function Name({name, onNameChange}) {
+  return (
+    <div>
+      <label>Name: </label>
+      <input value={name} onChange={onNameChange} />
+    </div>
+  )
+}
+
+function FavoriteAnimal() {
+  const [animal, setAnimal] = React.useState('')
+    return (
+      <div>
+        <label>Favorite Animal: </label>
+        <input
+          value={animal}
+          onChange={event => setAnimal(event.target.value)}
+        />
+      </div>
+    )
+}
+
+function Display({name}) {
+  return <div>{`Hey ${name}, you are great!`}</div>
+}
+
+function App() {
+  const [name, setName] = React.useState('')
+  return (
+    <form>
+      <Name
+        name={name}
+        onNameChange={event => setName(event.target.value)}
+      />
+      <FavoriteAnimal />
+      <Display name={name} />
+    </form>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
 Let's say that this Display component, which is a sibling to our FavoriteAnimal component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here.

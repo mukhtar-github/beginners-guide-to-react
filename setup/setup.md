@@ -3847,4 +3847,58 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-If we save that then everything should work. There we go. Great. Now we can say Mulan and Mulan's favorite animal is a 'Dragon'. What we did here is what's called lifting state. Typically, you want to have your state as close to the code that's using that state so that's why we have the state in this FavoriteAnimal component. When we had a use case for a sibling component to have access to that state, we have to lift to that state to the least common parent which was this App component.
+If we save that then everything should work. There we go. Great. Now we can say Mulan and Mulan's favorite animal is a 'Dragon'. What we did here is what's called 'lifting state'. Typically, you want to have your state as close to the code that's using that state so that's why we have the state in this 'FavoriteAnimal' component. When we had a use case for a sibling component to have access to that state, we have to 'lift' to that state to the 'least common parent' which was this 'App' component. We put it right there and then we passed that state in to the mechanism for updating state which is our 'setAnimal' function as props to the components that need it.
+
+Here for our 'FavoriteAnimal', we're passing the 'animal' prop and 'onAnimalChange' prop so we have a mechanism for updating that state. Then here for the 'Display', all it needs is the 'animal' so that's all that we passed. Once you learn how to do this, it becomes second nature.
+
+One thing we're not quite as good at is pushing state back down or 'co-locating' state. Let's say that our 'Display' use case gets changed and we no longer need to pass the 'animal' down. We're going to say, "You are great!" again. We no longer need this 'animal' prop. Often, people will actually just leave it right there without making any other changes but we need to remember that we no longer need to accept this 'animal' prop on this 'Display' where we're rendering it. Because the 'animal' state is only being used by a single component, that means we can move that state back into that component to get it co-located.
+
+Let's move it back up here. We no longer need to accept either one of these props and we can come down here, grab that. Remove both of these props. Then we'll paste that onChange event handler back into our FavoriteAnimal input onChange prop. With that, we've 'co-located' our state making it easier to maintain our application in the long term.
+
+```javascript
+function Name({name, onNameChange}) {
+  return (
+    <div>
+      <label>Name: </label>
+      <input value={name} onChange={onNameChange} />
+    </div>
+  )
+}
+
+function FavoriteAnimal() {
+  const [animal, setAnimal] = React.useState('')
+    return (
+      <div>
+        <label>Favorite Animal: </label>
+        <input
+          value={animal}
+          onChange={event => setAnimal(event.target.value)}
+        />
+      </div>
+    )
+}
+
+function Display({name}) {
+  return <div>{`Hey ${name}, you are great!`}</div>
+}
+
+function App() {
+  const [name, setName] = React.useState('')
+  return (
+    <form>
+      <Name
+        name={name}
+        onNameChange={event => setName(event.target.value)}
+      />
+      <FavoriteAnimal />
+      <Display name={name} />
+    </form>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+In review, what we did here was we explored how to lift a state and then push it back down with state co-location. Our App component here is rendering out some state which does need to be used by multiple elements. Our App is maintaining the name state. We also have this FavoriteAnimal which is maintaining its own state but then our Display component needed to have access to that state so we lifted the animal state up to the least common parent which was our App component.
+
+Then we passed that state and a mechanism for updating that state down to the components that needed those things. That was the lifting state part and then we did the reverse to push the state back down for state co-location by moving the state back to where it was before removing the state from the component that doesn't need it anymore, and removing the props that are no longer necessary. This enhances both the performance and the state management maintainability of our application.

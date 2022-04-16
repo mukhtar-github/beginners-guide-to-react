@@ -4091,3 +4091,11 @@ Down here we can say if no 'Pokémon' then we'll return just a ... to indicate t
 In review, to do anything asynchronous, that is a side effect that needs to happen inside a 'useEffect callback'. For our 'Pokémon' info, we accept that 'pokémonName' and in our callback, if there's no 'pokémonName' specified, then we'll simply return. Otherwise, we'll fetch the 'pokémonData' with that 'pokémonName'. Then when we get that data back, we'll update our own state to have that data that will trigger re-rendering of 'Pokémon' info.
 
 We can return the stringified version of that 'pokémonData'. We could apply an optimization here to make sure that this useEffect only runs when we want it to by putting 'pokémonName' in here. That way, this useEffect will only rerun when the 'pokémonName' changes. We could also add an if statement here for if there's no 'pokémonName' supplied, then we could say return, submit a 'Pokémon'. With that we get submit a 'Pokémon' then we can type in something like 'Pikachu'. Submit that and we'll get 'Pikachu's' information loaded up.
+
+## Handle HTTP Errors with React
+
+### setup/26-http-errors.html
+
+Unfortunately, sometimes a server request fails and we need to display a helpful error message to the user. In this lesson we’ll handle a promise rejection so we can collect that error information, and we’ll also learn how we can best display manage the state of our request so we have a deterministic render method to ensure we always show the user the proper information based on the current state of our React component.
+
+A common mistake people make is to create a state variable called isLoading and set that to true or false. Instead, we’ll be using a status variable which can be set to idle, pending, resolved, or rejected. You can learn more about why this is important from 'Stop using isLoading booleans'.

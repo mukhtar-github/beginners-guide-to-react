@@ -3971,8 +3971,8 @@ function fetchPokemon(name) {
   `
 
   return window
-  .fetch('https://graphql-pokemon.now.sh', {
-  // learn more about this API here: https://graphql-pokemon.now.sh/
+  .fetch('https://graphql-pokemon2.vercel.app', {
+  // learn more about this API here: https://graphql-pokemon2.vercel.app/
   method: 'POST',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
@@ -3992,7 +3992,7 @@ Then when that promise resolves we're going to take the response parse it as JSO
 
 Our 'fetchPokémon' function is asynchronous. Making HTTP request like this is a side effect, so we're going to use the React useEffect hook. We'll say React.useEffect and the first thing that I want to say here is if there's no 'pokémonName', they haven't entered a 'Pokémon' name yet or they submitted an empty one then we'll simply return. We don't need to make a request for that.
 
-Otherwise, we'll call that fetchPokémon with the pokémonName and then in our success handler for this promise, we'll get the Pokémon data and we can set some state. Let's go ahead and manage some state for this.
+Otherwise, we'll call that 'fetchPokémon' with the 'pokémonName' and then in our success handler for this promise, we'll get the 'Pokémon' data and we can set some state. Let's go ahead and manage some state for this. We'll have use state for 'Pokémon' and we'll call 'setPokémon', and we'll initialize this to null. Down here, let's rename this from 'Pokémon' to 'pokémonData'. Then we can call 'setPokémon' with the 'pokémonData.'
 
 
 ```html
@@ -4067,8 +4067,8 @@ Otherwise, we'll call that fetchPokémon with the pokémonName and then in our s
       `
 
       return window
-        .fetch('https://graphql-pokemon.now.sh', {
-          // learn more about this API here: https://graphql-pokemon.now.sh/
+        .fetch('https://graphql-pokemon2.vercel.app', {
+          // learn more about this API here: https://graphql-pokemon2.vercel.app/
           method: 'POST',
           headers: {
             'content-type': 'application/json;charset=UTF-8',

@@ -3920,9 +3920,73 @@ Most useful React applications involve interacting with a server to load and per
 
 In this lesson we’ll use a public GraphQL server that serves up pokemon data to load information for a given pokemon name. We’ll learn how to fetch that data inside a 'React.useEffect' callback and display the results when the request completes.
 
-Here we have an app that's managing a 'Pokémon' name state, and then we're rendering out a form, and we're rendering an input. Every time we submit our form, we're going to update the 'Pokémon' name to whatever the user typed in the input. When this is re-rendered, we're going to render the 'Pokémon' info with that 'Pokémon' name, and then the 'Pokémon' info should render our information based on that 'Pokémon'. If we type in 'Pikachu', then we should request in formation for 'Pikachu'.
+Here we have an app that's managing a 'Pokémon' name state, and then we're rendering out a form, and we're rendering an input. Every time we submit our form, we're going to update the 'Pokémon' name to whatever the user typed in the input. When this is re-rendered, we're going to render the 'Pokémon' info with that 'Pokémon' name, and then the 'Pokémon' info should render our information based on that 'Pokémon'.
 
-We need to get that information by fetching it from a server. We have this helper function here called 'fetch Pokémon' that creates a 'Pokémon GraphQL query'. Then we're using Window.fetch to fetch this public API that has 'Pokémon' information. We're making a post. We have our proper headers to accept JSON then we serialize and we specify our body is a JSON stringified version of our query. The variables for our query which is the name of the 'Pokémon'.
+```javascript
+function PokemonInfo({pokemonName}) {
+  return <div>Need to request info for: {pokemonName}</div>
+}
+
+function App() {
+  const [pokemonName, setPokemonName] = React.useState('')
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    setPokemonName(event.target.elements.pokemonName.value)
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="pokemonName">Pokemon Name</label>
+        <div>
+          <input id="pokemonName" />
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <hr />
+      <PokemonInfo pokemonName={pokemonName} />
+    </div>
+  )
+}
+
+function fetchPokemon(name) {
+  const pokemonQuery = `
+    query ($name: String) {
+      pokemon(name: $name) {
+        id
+        number
+        name
+        attacks {
+          special {
+            name
+            type
+            damage
+          }
+        }
+      }
+    }
+  `
+
+  return window
+  .fetch('https://graphql-pokemon.now.sh', {
+  // learn more about this API here: https://graphql-pokemon.now.sh/
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json;charset=UTF-8',
+  },
+  body: JSON.stringify({
+    query: pokemonQuery,
+    variables: {name}}),
+  })
+  .then(r => r.json())
+  .then(response => response.data.pokemon)
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+If we type in 'Pikachu', then we should request in formation for 'Pikachu'. We need to get that information by fetching it from a server. We have this helper function here called 'fetch Pokémon' that creates a 'Pokémon GraphQL query'. Then we're using Window.fetch to fetch this public API that has 'Pokémon' information. We're making a post. We have our proper headers to accept JSON then we serialize and we specify our body is a JSON stringified version of our query. The variables for our query which is the name of the 'Pokémon'.
 
 
 ```html

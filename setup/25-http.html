@@ -6,9 +6,19 @@
   <script type="text/babel">
 
     function PokemonInfo({pokemonName}) {
-      if (!pokemonName) {
-        return
-      }
+      const [pokemon, setPokemon] = React.useState(null)
+      
+      React.useEffect(() => {
+        if (!pokemonName) {
+          return
+        }
+
+        fetchPokemon(pokemonName).then(
+          pokemonData => {
+            setPokemon(pokemonData)
+          }
+        )
+      })
       return <div>Need to request info for: {pokemonName}</div>
       // const [pokemon, setPokemon] = React.useState(null)
 

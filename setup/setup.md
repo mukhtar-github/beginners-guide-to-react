@@ -3791,11 +3791,11 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Let's say that this 'Display' component, which is a sibling to our 'FavoriteAnimal' component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here. We'll accept that as a prop, but how are we going to get access to that animal, if that state is living in our 'FavoriteAnimal' component? These two are sibling components, so the 'FavoriteAnimal' component can't pass the animal to the 'Display' component.
+Let's say that this 'Display' component, which is a sibling to our 'FavoriteAnimal' component actually needs to know what the 'animal' is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then 'animal' right here. We'll accept that as a prop, but how are we going to get access to that 'animal', if that state is living in our 'FavoriteAnimal' component? These two are sibling components, so the 'FavoriteAnimal' component can't pass the 'animal' to the 'Display' component.
 
- Let's keep on going. We're going to need to accept an animal, and that's going to come from somewhere. We're not sure where yet. From the looks of things, we're going to need to do the same thing to our animal state that we're doing with our name state. That is specifically we need to lift the state from the 'FavoriteAnimal' component to the App component which is the least common parent between these two components.
+ Let's keep on going. We're going to need to accept an 'animal', and that's going to come from somewhere. We're not sure where yet. From the looks of things, we're going to need to do the same thing to our 'animal' state that we're doing with our 'name' state. That is specifically we need to lift the state from the 'FavoriteAnimal' component to the App component which is the least common parent between these two components.
 
- Let's do that. I'm just going to grab this and I'll move that down to right here. Now the 'FavoriteAnimal' doesn't have access to Animal or setAnimal. I'm going to accept animal and onAnimalChange. We'll do the same thing that we did for our name component. OnAnimalChange will be passed to the onChange prop onAnimalChange. The animal gets passed along to the input. Then we come down here to the 'FavoriteAnimal' and we need to pass the animal and onAnimalChange. We'll paste in what we had before. Now, our 'Display' has access to the animal.
+ Let's do that. I'm just going to grab this and I'll move that down to right here. Now the 'FavoriteAnimal' doesn't have access to Animal or setAnimal. I'm going to accept animal and onAnimalChange. We'll do the same thing that we did for our 'name' component. OnAnimalChange will be passed to the onChange prop onAnimalChange. The 'animal' gets passed along to the input. Then we come down here to the 'FavoriteAnimal' and we need to pass the 'animal' and onAnimalChange. We'll paste in what we had before. Now, our 'Display' has access to the 'animal'.
 
  ```javascript
 function Name({name, onNameChange}) {
@@ -3832,8 +3832,14 @@ function App() {
         name={name}
         onNameChange={event => setName(event.target.value)}
       />
-      <FavoriteAnimal animal={animal} onAnimalChange={event => setAnimal(event.target.value)} />
-      <Display name={name} animal={animal} />
+      <FavoriteAnimal
+        animal={animal}
+        onAnimalChange={event => setAnimal(event.target.value)}
+      />
+      <Display
+        name={name}
+        animal={animal}
+      />
     </form>
   )
 }

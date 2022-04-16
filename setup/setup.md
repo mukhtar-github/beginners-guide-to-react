@@ -3922,6 +3922,8 @@ In this lesson we’ll use a public GraphQL server that serves up pokemon data t
 
 Here we have an app that's managing a 'Pokémon' name state, and then we're rendering out a form, and we're rendering an input. Every time we submit our form, we're going to update the 'Pokémon' name to whatever the user typed in the input. When this is re-rendered, we're going to render the 'Pokémon' info with that 'Pokémon' name, and then the 'Pokémon' info should render our information based on that 'Pokémon'.
 
+If we type in 'Pikachu', then we should request in formation for 'Pikachu'. We need to get that information by fetching it from a server. We have this helper function here called 'fetch Pokémon' that creates a 'Pokémon GraphQL query'. Then we're using Window.fetch to fetch this public API that has 'Pokémon' information. We're making a post. We have our proper headers to accept JSON then we serialize and we specify our body is a JSON stringified version of our query. The variables for our query which is the name of the 'Pokémon'.
+
 ```javascript
 function PokemonInfo({pokemonName}) {
   return <div>Need to request info for: {pokemonName}</div>
@@ -3986,7 +3988,9 @@ function fetchPokemon(name) {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-If we type in 'Pikachu', then we should request in formation for 'Pikachu'. We need to get that information by fetching it from a server. We have this helper function here called 'fetch Pokémon' that creates a 'Pokémon GraphQL query'. Then we're using Window.fetch to fetch this public API that has 'Pokémon' information. We're making a post. We have our proper headers to accept JSON then we serialize and we specify our body is a JSON stringified version of our query. The variables for our query which is the name of the 'Pokémon'.
+Then when that promise resolves we're going to take the response parse it as JSON and when that's done, we'll get that response object and pluck the Pokémon off of the data in the response. We can call this function to get the information for this Pokémon that we get as a prop, but our render method here has to be synchronous.
+
+Our fetchPokémon function is asynchronous. Making HTTP request like this is a side effect so we're going to use the React useEffect hook. We'll say React.useEffect and the first thing that I want to say here is if there's no pokémonName, they haven't entered a Pokémon name yet or they submitted an empty one then we'll simply return. We don't need to make a request for that.
 
 
 ```html

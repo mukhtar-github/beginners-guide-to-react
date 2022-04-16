@@ -3744,3 +3744,7 @@ In review, it's common in React to take an array and map that array to an array 
 A common question from React beginners is how to share state between two sibling components. The answer is to 'Lift the state' which basically amounts to finding the lowest common parent shared between the two components and placing the state management there, and then passing the state and a mechanism for updating that state down into the components that need it.
 
 As a community we’re pretty good at doing this and it becomes natural over time. One thing that we typically have trouble remembering to do is to push state back down (or 'colocate state'). In this lesson we’ll learn how to lift state up and push state back down.
+
+Here, we have a simple 'app' component where we are managing some name state so we can pass that to our 'name' component, and pass it to our 'display' component, so that we can render out, "Hey name. You are great." We also have a 'FavoriteAnimal' right here that's managing its own state and rendering the input with the value and onChange handler.
+
+Let's say that this Display component, which is a sibling to our FavoriteAnimal component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here.

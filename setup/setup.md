@@ -3737,3 +3737,10 @@ You'll notice that they're all updating correctly, meaning that they're all jump
 
 In review, it's common in React to take an array and map that array to an array of elements and render that directly in your JSX. When you do that, it's important that you add a key to the root React element of each element in the array so that React can track changes over time and make sure that it preserves the state of each element in the array and its descendants.
 
+## Lifting and colocating React State
+
+### setup/24-lifting-and-colocating.html
+
+A common question from React beginners is how to share state between two sibling components. The answer is to 'Lift the state' which basically amounts to finding the lowest common parent shared between the two components and placing the state management there, and then passing the state and a mechanism for updating that state down into the components that need it.
+
+As a community we’re pretty good at doing this and it becomes natural over time. One thing that we typically have trouble remembering to do is to push state back down (or 'colocate state'). In this lesson we’ll learn how to lift state up and push state back down.

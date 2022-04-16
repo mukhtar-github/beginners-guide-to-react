@@ -3791,8 +3791,54 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Let's say that this Display component, which is a sibling to our FavoriteAnimal component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here. We'll accept that as a prop, but how are we going to get access to that animal, if that state is living in our FavoriteAnimal component? These two are sibling components, so the FavoriteAnimal component can't pass the animal to the Display component.
+Let's say that this 'Display' component, which is a sibling to our 'FavoriteAnimal' component actually needs to know what the animal is, because instead of, "You are great," we want to say, "Your favorite animal is..." and then animal right here. We'll accept that as a prop, but how are we going to get access to that animal, if that state is living in our 'FavoriteAnimal' component? These two are sibling components, so the 'FavoriteAnimal' component can't pass the animal to the 'Display' component.
 
- Let's keep on going. We're going to need to accept an animal, and that's going to come from somewhere. We're not sure where yet. From the looks of things, we're going to need to do the same thing to our animal state that we're doing with our name state. That is specifically we need to lift the state from the FavoriteAnimal component to the App component which is the least common parent between these two components.
+ Let's keep on going. We're going to need to accept an animal, and that's going to come from somewhere. We're not sure where yet. From the looks of things, we're going to need to do the same thing to our animal state that we're doing with our name state. That is specifically we need to lift the state from the 'FavoriteAnimal' component to the App component which is the least common parent between these two components.
 
- Let's do that. I'm just going to grab this and I'll move that down to right here. Now the FavoriteAnimal doesn't have access to Animal or setAnimal. I'm going to accept animal and onAnimalChange. We'll do the same thing that we did for our name component. OnAnimalChange will be passed to the onChange prop onAnimalChange. The animal gets passed along to the input. Then we come down here to the FavoriteAnimal and we need to pass the animal and onAnimalChange.
+ Let's do that. I'm just going to grab this and I'll move that down to right here. Now the 'FavoriteAnimal' doesn't have access to Animal or setAnimal. I'm going to accept animal and onAnimalChange. We'll do the same thing that we did for our name component. OnAnimalChange will be passed to the onChange prop onAnimalChange. The animal gets passed along to the input. Then we come down here to the 'FavoriteAnimal' and we need to pass the animal and onAnimalChange. We'll paste in what we had before. Now, our 'Display' has access to the animal.
+
+ ```javascript
+function Name({name, onNameChange}) {
+  return (
+    <div>
+      <label>Name: </label>
+      <input value={name} onChange={onNameChange} />
+    </div>
+  )
+}
+
+function FavoriteAnimal({animal, onAnimalChange}) {
+  return (
+    <div>
+      <label>Favorite Animal: </label>
+      <input
+        value={animal}
+        onChange={onAnimalChange}
+      />
+    </div>
+  )
+}
+
+function Display({name, animal}) {
+  return <div>{`Hey ${name}, your favorite animal is ${animal}!`}</div>
+}
+
+function App() {
+  const [name, setName] = React.useState('')
+  const [animal, setAnimal] = React.useState('')
+  return (
+    <form>
+      <Name
+        name={name}
+        onNameChange={event => setName(event.target.value)}
+      />
+      <FavoriteAnimal animal={animal} onAnimalChange={event => setAnimal(event.target.value)} />
+      <Display name={name} animal={animal} />
+    </form>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+If we save that then everything should work. There we go. Great. Now we can say Mulan and Mulan's favorite animal is a 'Dragon'. What we did here is what's called lifting state. Typically, you want to have your state as close to the code that's using that state so that's why we have the state in this FavoriteAnimal component. When we had a use case for a sibling component to have access to that state, we have to lift to that state to the least common parent which was this App component.

@@ -3911,3 +3911,11 @@ Let's move it back up here. We no longer need to accept either one of these prop
 In review, what we did here was we explored how to lift a state and then push it back down with state co-location. Our App component here is rendering out some state which does need to be used by multiple elements. Our App is maintaining the name state. We also have this FavoriteAnimal which is maintaining its own state but then our Display component needed to have access to that state so we lifted the animal state up to the least common parent which was our App component.
 
 Then we passed that state and a mechanism for updating that state down to the components that needed those things. That was the lifting state part and then we did the reverse to push the state back down for state co-location by moving the state back to where it was before removing the state from the component that doesn't need it anymore, and removing the props that are no longer necessary. This enhances both the performance and the state management maintainability of our application.
+
+## Make HTTP Requests with React
+
+### setup/25-http.html
+
+Most useful React applications involve interacting with a server to load and persist data. To do this on the web, we use HTTP requests with 'the browser’s built-in fetch API' (or you may use some other open source library that’s built on top of this API). HTTP requests like this are inherently asynchronous in nature and they’re also side-effects so we’ll need to manage not only starting the request, but also what we should show the user while the request is “in flight.”
+
+In this lesson we’ll use a public GraphQL server that serves up pokemon data to load information for a given pokemon name. We’ll learn how to fetch that data inside a 'React.useEffect' callback and display the results when the request completes.

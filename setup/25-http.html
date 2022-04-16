@@ -19,7 +19,12 @@
           }
         )
       })
-      return <div>Need to request info for: {pokemonName}</div>
+
+      if (!pokemon) {
+        return '...'
+      }
+
+      return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
       // const [pokemon, setPokemon] = React.useState(null)
 
       // React.useEffect(() => {

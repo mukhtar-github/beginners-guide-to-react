@@ -3992,6 +3992,8 @@ Then when that promise resolves we're going to take the response parse it as JSO
 
 Our 'fetchPokémon' function is asynchronous. Making HTTP request like this is a side effect, so we're going to use the React useEffect hook. We'll say React.useEffect and the first thing that I want to say here is if there's no 'pokémonName', they haven't entered a 'Pokémon' name yet or they submitted an empty one then we'll simply return. We don't need to make a request for that.
 
+Otherwise, we'll call that fetchPokémon with the pokémonName and then in our success handler for this promise, we'll get the Pokémon data and we can set some state. Let's go ahead and manage some state for this.
+
 
 ```html
 <body>

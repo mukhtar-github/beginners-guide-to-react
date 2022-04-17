@@ -39,7 +39,9 @@
         return '...'
       }
 
-      return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+      if (status === 'resolved') {
+        return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+      }
     }
 
     function App() {

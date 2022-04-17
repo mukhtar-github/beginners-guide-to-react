@@ -5,42 +5,26 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     function PokemonInfo({pokemonName}) {
-      const [status, setStatus] = React.useState('idle')
       const [pokemon, setPokemon] = React.useState(null)
-      const [error, setError] = React.useState(null)
 
       React.useEffect(() => {
         if (!pokemonName) {
           return
         }
-        setStatus('pending')
-        fetchPokemon(pokemonName).then(
-          pokemonData => {
-            setStatus('resolved')
-            setPokemon(pokemonData)
-          },
-          errorData => {
-            setStatus('rejected')
-            setError(errorData)
-          },
-        )
+        fetchPokemon(pokemonName).then(pokemonData => {
+          setPokemon(pokemonData)
+        })
       }, [pokemonName])
 
-      if (status === 'idle') {
+      if (!pokemonName) {
         return 'Submit a pokemon'
       }
 
-      if (status === 'rejected') {
-        return 'Oh no...'
-      }
-
-      if (status === 'pending') {
+      if (!pokemon) {
         return '...'
       }
 
-      if (status === 'resolved') {
-        return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
-      }
+      return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
     }
 
     function App() {
@@ -85,8 +69,8 @@
       `
 
       return window
-        .fetch('https://graphql-pokemon.now.sh', {
-          // learn more about this API here: https://graphql-pokemon.now.sh/
+        .fetch('https://graphql-pokemon2.vercel.app', {
+          // learn more about this API here: https://graphql-pokemon2.vercel.app/
           method: 'POST',
           headers: {
             'content-type': 'application/json;charset=UTF-8',

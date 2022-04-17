@@ -4293,3 +4293,16 @@ Then we'll see "Oh, no." when it's been rejected. We'll fix our typo right here.
 Let's go ahead and review. We added some error handling by creating some error state management. We added an error handler to our promise chain. If we get some error data, then we're going to set that error data so that we can render something useful to the user indicating that there's been a problem.
 
 To avoid some state bugs, we added a status state so that we could start out with idle. When we start fetching the Pokémon, we can set it to pending. When we get the Pokémon, we can set it to resolved, or if there's a failure in getting the Pokémon, then we set it to rejected. That helps us to avoid bugs.
+
+## Install and use React DevTools
+
+**It’s dangerous to go alone**. Here take this: React DevTools. The React Developer Tools extension is extremely useful in developing and debugging React applications. In this lesson we’ll get it installed and play around with some of the features. Definitely take some time to play around with the DevTools on your own. You’ll be using these a lot.
+
+- You can modify the values in your state hooks using the dev tools.
+- You can edit prop values in the dev tools.
+- The bug button logs the component's information to the console.
+- The eye shaped inspect button takes you to the component's matching DOM element.
+- The timer button is for React suspence. You can use it to suspend a component.
+- In the options menu, there is a components tab that you can use to filter out components in your app.
+- In the options menu, there is a profiler tab that you can use to debug performance issues in your app.
+- You can record using the profiler and see all the commits made. You are given useful information on components such as their reason for rerendering.

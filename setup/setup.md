@@ -4102,6 +4102,41 @@ A common mistake people make is to create a state variable called isLoading and 
 
 Now what would happen if there was some sort of server error or maybe we made the request incorrectly? Let's take a look here. Let's go down to our query. We'll make a typo. We'll say, "Nam" instead of "Name." We'll save that. When I type in here, I can say, "Mew" and then submit. As a user, I'm just going to see this "...". That's not going to be useful at all. Let's see what's going on here in our developer tools. I'll go ahead and refresh.
 
+```javascript
+function fetchPokemon(name) {
+  const pokemonQuery = `
+    query ($name: String) {
+      pokemon(name: $name) {
+        id
+        number
+        nam
+        attacks {
+          special {
+            name
+            type
+            damage
+          }
+        }
+      }
+    }
+  `
+// Network Preview
+{
+    "errors": [
+        {
+            "message": "Cannot query field \"nam\" on type \"Pokemon\". Did you mean \"name\"?",
+            "locations": [
+                {
+                    "line": 6,
+                    "column": 13
+                }
+            ],
+            "stack": "GraphQLError: Cannot query field \"nam\" on type \"Pokemon\". Did you mean \"name\"?\n    at Object.
+        }
+    ]
+}
+```
+
 ```html
 <body>
   <div id="root"></div>

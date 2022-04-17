@@ -4176,7 +4176,9 @@ function PokemonInfo({pokemonName}) {
 
 The problem that we'll face now is that if the user does try again and the server is successful, the way that we have our code structured is not going to work with that. What I'm going to do is I'm going to add a new state here for status. We'll have setStatus. We'll initialize that status to 'idle', meaning right now the Pokemon info is not doing anything useful. Then we can say that the 'idle' status is when we want to render 'Submit a pokemon'.
 
-If the status is 'idle', then we'll say, 'Submit a pokemon' When we start fetching a new Pokémon, then we can say, "setStatus pending." Then we can have this represent if the status is pending, then we want to return a "..." to indicate to the user that we're pending. When we have a successful request, then we can say, "setStatus to resolved." If we're resolved, then we want to return the Pokémon data. If the status is resolved, then we'll return the Pokémon data in a pre tag here.
+If the status is 'idle', then we'll say, 'Submit a pokemon' When we start fetching a new Pokémon, then we can say, "setStatus pending." Then we can have this represent if the status is pending, then we want to return a "..." to indicate to the user that we're pending. When we have a successful request, then we can say, "setStatus to resolved."
+
+If we're resolved, then we want to return the Pokémon data. If the status is resolved, then we'll return the Pokémon data in a pre tag here. Then if there's an error, we'll say, "setStatus rejected." Down here, we'll say, "Status is rejected." Then we'll render, "Oh, no..."
 
 
 

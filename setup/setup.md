@@ -4137,8 +4137,42 @@ function fetchPokemon(name) {
 }
 ```
 
-The specific error is beside the point. We just need to show the user something a little bit more useful than leaving them in a loading state forever. Let's come back up here before we fix our code. Let's add some state for the error state. We'll say setError. We'll initialize that to 'null'. Then we'll say if there's an error, then we'll return, "Oh, no..." In a real application, maybe you'd be a little bit more helpful than that. Let's add an error handler here as a second argument to our then call. This will be our error data.
+The specific error is beside the point. We just need to show the user something a little bit more useful than leaving them in a loading state forever. Let's come back up here before we fix our code. Let's add some state for the error state. We'll say setError. We'll initialize that to 'null'. Then we'll say if there's an error, then we'll return, "Oh, no..." In a real application, maybe you'd be a little bit more helpful than that.
 
+Let's add an error handler here as a second argument to our then call. This will be our error data. We'll say setError with the error data. Then we could submit that. We'll type the Pokémon name again. We see, "Oh, no..." Now we need to try again.
+
+```javascript
+function PokemonInfo({pokemonName}) {
+  const [pokemon, setPokemon] = React.useState(null)
+  const [error, setError] = React.useState(null)
+
+  React.useEffect(() => {
+    if (!pokemonName) {
+      return
+    }
+
+    fetchPokemon(pokemonName).then(pokemonData => {
+      setPokemon(pokemonData)
+    }, errorData => {
+      setError(errorData)
+    })
+  }, [pokemonName])
+
+  if (!pokemonName) {
+    return 'Submit a pokemon'
+  }
+
+  if (error) {
+    return 'Oh no...'
+  }
+
+  if (!pokemon) {
+    return '...'
+  }
+
+  return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+}
+```
 
 ```html
 <body>

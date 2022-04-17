@@ -4100,7 +4100,7 @@ Unfortunately, sometimes a server request fails and we need to display a helpful
 
 A common mistake people make is to create a state variable called isLoading and set that to true or false. Instead, we’ll be using a status variable which can be set to idle, pending, resolved, or rejected. You can learn more about why this is important from 'Stop using isLoading booleans'.
 
-Now what would happen if there was some sort of server error or maybe we made the request incorrectly? Let's take a look here. Let's go down to our query. We'll make a typo. We'll say, "Nam" instead of "Name." We'll save that. When I type in here, I can say, "Mew" and then submit. As a user, I'm just going to see this "...". That's not going to be useful at all. Let's see what's going on here in our developer tools. I'll go ahead and refresh.
+Now what would happen if there was some sort of server error or maybe we made the request incorrectly? Let's take a look here. Let's go down to our query. We'll make a typo. We'll say, "Nam" instead of "Name." We'll save that. When I type in here, I can say, "Mew" and then submit. As a user, I'm just going to see this "...". That's not going to be useful at all. Let's see what's going on here in our developer tools. I'll go ahead and refresh. We'll type Mew again. Let's clear out our network tab. Then we hit submit. We're going to get a network error indicating that we cannot query field nam on type Pokémon. It gives a suggestion for, "Did you mean name?"
 
 ```javascript
 function fetchPokemon(name) {
@@ -4136,6 +4136,9 @@ function fetchPokemon(name) {
     ]
 }
 ```
+
+The specific error is beside the point. We just need to show the user something a little bit more useful than leaving them in a loading state forever. Let's come back up here before we fix our code. Let's add some state for the error state. We'll say setError. We'll initialize that to 'null'. Then we'll say if there's an error, then we'll return, "Oh, no..." In a real application, maybe you'd be a little bit more helpful than that. Let's add an error handler here as a second argument to our then call. This will be our error data.
+
 
 ```html
 <body>

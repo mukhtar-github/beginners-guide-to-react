@@ -4176,11 +4176,11 @@ function PokemonInfo({pokemonName}) {
 
 The problem that we'll face now is that if the user does try again and the server is successful, the way that we have our code structured is not going to work with that. What I'm going to do is I'm going to add a new state here for status. We'll have setStatus. We'll initialize that status to 'idle', meaning right now the Pokemon info is not doing anything useful. Then we can say that the 'idle' status is when we want to render 'Submit a pokemon'.
 
-If the status is 'idle', then we'll say, 'Submit a pokemon' When we start fetching a new Pokémon, then we can say, "setStatus pending." Then we can have this represent if the status is pending, then we want to return a "..." to indicate to the user that we're pending. When we have a successful request, then we can say, "setStatus to resolved."
+If the status is 'idle', then we'll say, 'Submit a pokemon' When we start fetching a new Pokémon, then we can say, "setStatus pending." Then we can have this represent if the status is pending, then we want to return a "..." to indicate to the user that we're pending. When we have a successful request, then we can say, "setStatus to resolved." If we're resolved, then we want to return the Pokémon data.
 
-If we're resolved, then we want to return the Pokémon data. If the status is resolved, then we'll return the Pokémon data in a pre tag here. Then if there's an error, we'll say, "setStatus rejected." Down here, we'll say, "Status is rejected." Then we'll render, "Oh, no..."
+If the status is resolved, then we'll return the Pokémon data in a pre tag here. Then if there's an error, we'll say, "setStatus rejected." Down here, we'll say, "Status is rejected." Then we'll render, "Oh, no..." Now our render method is very predictable. We always know when our component is going to render what. If I try to type in Mew again, we're going to see, "Submit a Pokémon first." We'll see "..." while it's pending.
 
-
+Then we'll see "Oh, no." when it's been rejected. We'll fix our typo right here. We'll save that. Now we see "Submit a Pokémon" because we're idle. We'll type in Mew. Hit submit. We get that "..." Then we see Mew's details. If we try another Pokémon, then we'll see a "..." We'll see that Pokémon's details.
 
 ```html
 <body>
@@ -4289,3 +4289,7 @@ If we're resolved, then we want to return the Pokémon data. If the status is re
   </script>
 </body>
 ```
+
+Let's go ahead and review. We added some error handling by creating some error state management. We added an error handler to our promise chain. If we get some error data, then we're going to set that error data so that we can render something useful to the user indicating that there's been a problem.
+
+To avoid some state bugs, we added a status state so that we could start out with idle. When we start fetching the Pokémon, we can set it to pending. When we get the Pokémon, we can set it to resolved, or if there's a failure in getting the Pokémon, then we set it to rejected. That helps us to avoid bugs.
